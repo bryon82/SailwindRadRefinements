@@ -1,12 +1,13 @@
 ﻿
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace RadRefinements
 {
     internal class SwapSlot : MonoBehaviour
     {
-        private static GPButtonInventorySlot slot;
+        internal static GPButtonInventorySlot slot;
         internal static GoPointer goPntr;
         public static SwapSlot instance;
 
@@ -32,7 +33,7 @@ namespace RadRefinements
                     return;
                 }
 
-                // insert to swap slot
+                // insert into swap slot
                 Plugin.logger.LogDebug($"Inserting {component.name} into swap slot.");
                 slot.currentItem = component;
                 item.held = null;
@@ -75,6 +76,27 @@ namespace RadRefinements
             item.OnPickup();
             //goPntr.PickUpItem(item); // used internals above to remove sound effect
             goPntr.transform.parent.GetComponent<LookUI>().SetPrivateField("currentButton", item.gameObject); 
+        }
+
+        internal static bool IsItemHeld()
+        {
+            return goPntr.GetHeldItem() != null;
+        }
+
+        internal void WithdrawFromSwapSlot()
+        {
+            var storedItem = slot.currentItem;
+            Plugin.logger.LogDebug($"Withdrawing {storedItem.name} from inventory slot.");
+            goPntr.PickUpItem(storedItem);
+            StartCoroutine(GrabItem(storedItem));
+        }
+
+        internal void SwapSlotToOpenInvSlot()
+        {
+            var openInvSlot = GPButtonInventorySlot.inventorySlots.FirstOrDefault(s => s.currentItem == null);
+            slot.currentItem.GetItemRigidbody().EnterInventorySlot(openInvSlot.transform);
+            openInvSlot.currentItem = slot.currentItem;
+            slot.currentItem = null;
         }
     }
 }

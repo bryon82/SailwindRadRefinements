@@ -18,7 +18,7 @@ namespace RadRefinements
 
             [HarmonyPostfix]
             [HarmonyPatch("LateUpdate")]
-            public static void LateUpdate()
+            public static void ToggleQuickMap()
             {
                 if (!Plugin.enableQuickMap.Value)
                     return;
@@ -26,6 +26,35 @@ namespace RadRefinements
                 if (Input.GetKeyDown(Plugin.quickMapButton.Value))
                 {
                     ViewMap.ToggleMap();
+                }
+            }
+
+            [HarmonyPostfix]
+            [HarmonyPatch("LateUpdate")]
+            public static void ToggleQuickSlot()
+            {
+                if (!Plugin.enableQuickSlots.Value)
+                    return;
+
+                if (Input.GetKeyDown(Plugin.quickSlot1Button.Value))
+                {
+                    QuickSlots.ToggleInventoryItem(0);
+                }
+                if (Input.GetKeyDown(Plugin.quickSlot2Button.Value))
+                {
+                    QuickSlots.ToggleInventoryItem(1);
+                }
+                if (Input.GetKeyDown(Plugin.quickSlot3Button.Value))
+                {
+                    QuickSlots.ToggleInventoryItem(2);
+                }
+                if (Input.GetKeyDown(Plugin.quickSlot4Button.Value))
+                {
+                    QuickSlots.ToggleInventoryItem(3);
+                }
+                if (Input.GetKeyDown(Plugin.quickSlot5Button.Value))
+                {
+                    QuickSlots.ToggleInventoryItem(4);
                 }
             }
         }

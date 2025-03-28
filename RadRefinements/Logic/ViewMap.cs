@@ -16,44 +16,17 @@ namespace RadRefinements
 
         public static int mapSlotIndex = 4;
 
-        public static GPButtonInventorySlot GetMapSlot()
+        public static bool GetMapSlotIndex()
         {
             var slot = 
                 GPButtonInventorySlot.inventorySlots
                 .FirstOrDefault(s => s.currentItem && MapNames.Contains(s.currentItem.name));
             
             if (!slot)
-                return null;
+                return false;
 
             mapSlotIndex = slot.slotIndex;
-            return slot;
-        }
-
-        public static void DisplayMap(PickupableItem heldItem, GoPointer goPointer)
-        {
-            if (!Plugin.enableInventorySwap.Value && heldItem)
-                return;
-            
-            if (heldItem && heldItem.big)
-                return;            
-
-            var mapSlot = GetMapSlot();
-            if (!mapSlot)
-                return;
-            var mapName = mapSlot.currentItem.name;            
-            Plugin.logger.LogDebug($"Displaying map: {mapName}");            
-
-            if (!heldItem)
-            {
-                mapSlot.OnActivate(goPointer);
-            }
-            else
-            {
-                mapSlot.OnItemClick(heldItem);
-            }
-            var map = goPointer.GetHeldItem().GetComponent<ShipItemFoldable>();
-            if (map.amount > 0f)
-                map.InvokePrivateMethod("Unfold");
+            return true;
         }
 
         public static void ToggleMap()
@@ -64,15 +37,19 @@ namespace RadRefinements
             var mapName = heldItem?.GetComponent<ShipItem>()?.name;
             if (heldItem && MapNames.Contains(mapName))
             {
-                Debug.Log($"Stowing map: {mapName}");
-                GPButtonInventorySlot.inventorySlots[mapSlotIndex].OnActivate();
-                GPButtonInventorySlot.inventorySlots[mapSlotIndex].OnItemClick(goPointer.GetHeldItem());                
-                goPointer.GetHeldItem().OnDrop();
-                goPointer.DropItem();
+                Debug.Log($"Stowing map: {mapName}");                
+                QuickSlots.StowItem(mapSlotIndex, heldItem, goPointer);
             }
             else
             {
-                DisplayMap(heldItem, goPointer);
+                var mapSlotIndexFound = GetMapSlotIndex();
+                if (!mapSlotIndexFound)
+                    return;
+                Plugin.logger.LogDebug($"Displaying map: {GPButtonInventorySlot.inventorySlots[mapSlotIndex].currentItem.name}");
+                QuickSlots.GetInventoryItem(mapSlotIndex, heldItem, goPointer);
+                var map = goPointer.GetHeldItem().GetComponent<ShipItemFoldable>();
+                if (map.amount > 0f)
+                    map.InvokePrivateMethod("Unfold");
             }
         }
     }
