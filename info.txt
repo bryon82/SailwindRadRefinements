@@ -1,0 +1,15 @@
+115 map ocean
+116 map A
+117 map E
+118 map M
+119 map L
+
+[Info   : Unity Log] Withdrawing item
+[Info   : Unity Log] 100 mug wood(Clone) ENTERING embark col.
+[Info   : Unity Log] 100 mug wood(Clone): EnterBoat
+
+[Info   : Unity Log] ui sound. last pointed at was null / new is inventory_slot_1
+[Info   : Unity Log] GPButtonInventory: OnActivate()
+[Info   : Unity Log] Inserting item.
+[Info   : Unity Log] 100 mug wood(Clone): ExitBoat
+[Info   : Unity Log] OnItemClick from cursor pointer
