@@ -23,6 +23,7 @@ All but clock local time text are defaulted to true.
 
 ### Requires
 * [BepInEx 5.4.23](https://github.com/BepInEx/BepInEx/releases)
+* [ModSaveBackups 1.1.1](https://thunderstore.io/c/sailwind/p/RadDude/ModSaveBackups/)
 
 ### Installation
-Place the RadFixes.dll into the Sailwind/BepInEx/Plugins folder.
+Place the RadRefinements.dll into the Sailwind/BepInEx/Plugins folder.

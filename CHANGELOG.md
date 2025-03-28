@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.1] - 2025-03-28
+
+### Updated
+
+- Updated to check for ModSaveBackups dependency.
+
 ## [v1.0.0] - 2025-03-28
 
 ### Added

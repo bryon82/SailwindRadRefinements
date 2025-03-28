@@ -8,11 +8,15 @@ using UnityEngine;
 namespace RadRefinements
 {
     [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)]
+    [BepInDependency(MODSAVEBACKUPS_GUID, MODSAVEBACKUPS_VERSION)]
     public class Plugin : BaseUnityPlugin
     {
         public const string PLUGIN_GUID = "com.raddude82.radrefinements";
         public const string PLUGIN_NAME = "RadRefinements";
-        public const string PLUGIN_VERSION = "1.0.0";
+        public const string PLUGIN_VERSION = "1.0.1";
+
+        public const string MODSAVEBACKUPS_GUID = "com.raddude82.modsavebackups";
+        public const string MODSAVEBACKUPS_VERSION = "1.1.1";
 
         internal static Plugin instance;
         internal static ManualLogSource logger;
