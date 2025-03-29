@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.2] - 2025-03-29
+
+### Updated
+
+- Added cardinal direction text option to compass reading text with options for level of cardinal directions
+
 ## [v1.0.1] - 2025-03-28
 
 ### Updated
