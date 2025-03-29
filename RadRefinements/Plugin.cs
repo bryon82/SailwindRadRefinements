@@ -13,7 +13,7 @@ namespace RadRefinements
     {
         public const string PLUGIN_GUID = "com.raddude82.radrefinements";
         public const string PLUGIN_NAME = "RadRefinements";
-        public const string PLUGIN_VERSION = "1.0.1";
+        public const string PLUGIN_VERSION = "1.0.2";
 
         public const string MODSAVEBACKUPS_GUID = "com.raddude82.modsavebackups";
         public const string MODSAVEBACKUPS_VERSION = "1.1.1";
@@ -31,7 +31,9 @@ namespace RadRefinements
         internal static ConfigEntry<KeyCode> quickSlot4Button;
         internal static ConfigEntry<KeyCode> quickSlot5Button;
         internal static ConfigEntry<bool> enableQuadrantText;
-        internal static ConfigEntry<bool> enableCompassText;
+        internal static ConfigEntry<bool> enableCompassDegreesText;
+        internal static ConfigEntry<bool> enableCompassCardinalText;        
+        internal static ConfigEntry<int> compassCardinalPrecisionLevel;
         internal static ConfigEntry<float> compassViewableDistance;
         internal static ConfigEntry<bool> enableClockGlobalText;
         internal static ConfigEntry<bool> enableClockLocalText;
@@ -52,7 +54,9 @@ namespace RadRefinements
             quickSlot4Button = Config.Bind("Inventory Settings", "Quick slot 4 button", KeyCode.Alpha4, "Key that retrieves from or stows to inventory slot 4");
             quickSlot5Button = Config.Bind("Inventory Settings", "Quick slot 5 button", KeyCode.Alpha5, "Key that retrieves from or stows to inventory slot 5");
             enableQuadrantText = Config.Bind("Item Text Settings", "Enable quadrant reading text", true, "Enables the text that shows the quadrant reading value.");
-            enableCompassText = Config.Bind("Item Text Settings", "Enable compass reading text", true, "Enables the text that shows the compass reading value.");
+            enableCompassDegreesText = Config.Bind("Item Text Settings", "Enable compass reading degrees text", true, "Enables the text that shows the compass reading value in degrees.");
+            enableCompassCardinalText = Config.Bind("Item Text Settings", "Enable compass reading cardinal text", true, "Enables the text that shows the compass reading value in cardinal directions.");
+            compassCardinalPrecisionLevel = Config.Bind("Item Text Settings", "Number of compass ordinal directions", 16, new ConfigDescription("Number of ordinal directions given in the compass reading.", new AcceptableValueList<int>(4, 8, 16, 32)));
             compassViewableDistance = Config.Bind("Item Text Settings", "Compass viewable distance", 3f, "Sets the how close player needs to be to see compass reading text");
             enableClockGlobalText = Config.Bind("Item Text Settings", "Enable clock global time text", true, "Enables the text that shows the global time on the clock.");
             enableClockLocalText = Config.Bind("Item Text Settings", "Enable clock local time text", true, "Enables the text that shows the clock time on the clock.");
