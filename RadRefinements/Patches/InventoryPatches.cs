@@ -95,5 +95,18 @@ namespace RadRefinements
             }
         }
 
+        [HarmonyPatch(typeof(CrateInventoryUI))]
+        public class CrateInventoryUIPatches
+        {
+            [HarmonyPostfix]
+            [HarmonyPatch("Update")]
+            public static void AddItemDescription(CrateInventoryButton[] ___buttons)
+            {
+                foreach (var button in ___buttons)
+                {
+                    button.description = button.GetPrivateField<ShipItem>("currentItem")?.description ?? "";
+                }
+            }
+        }
     }
 }

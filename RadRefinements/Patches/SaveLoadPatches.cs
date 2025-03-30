@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using ModSaveBackups;
 using System;
+using UnityEngine;
 
 namespace RadRefinements
 {   
@@ -16,7 +17,7 @@ namespace RadRefinements
             {
                 var saveContainer = new RadRefinementsSaveContainer();
 
-                saveContainer.swapSlotSlot = SwapSlot.slot;
+                saveContainer.swapSlotHasItem = SwapSlot.slot.currentItem != null;
                 saveContainer.mapSlotIndex = ViewMap.mapSlotIndex;
 
                 ModSave.Save(Plugin.instance.Info, saveContainer);
@@ -35,7 +36,7 @@ namespace RadRefinements
 
             ViewMap.mapSlotIndex = saveContainer.mapSlotIndex;
 
-            if (saveContainer.swapSlotSlot.currentItem != null)
+            if (saveContainer.swapSlotHasItem)
             {
                 Plugin.logger.LogWarning("Loaded game with item in swap slot, moving it to held or open inventory slot");
                 if (SwapSlot.IsItemHeld())
@@ -53,7 +54,7 @@ namespace RadRefinements
     [Serializable]
     public class RadRefinementsSaveContainer
     {
-        public GPButtonInventorySlot swapSlotSlot;
+        public bool swapSlotHasItem;
         public int mapSlotIndex;
     }
     
