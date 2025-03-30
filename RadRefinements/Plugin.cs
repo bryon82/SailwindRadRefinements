@@ -13,7 +13,7 @@ namespace RadRefinements
     {
         public const string PLUGIN_GUID = "com.raddude82.radrefinements";
         public const string PLUGIN_NAME = "RadRefinements";
-        public const string PLUGIN_VERSION = "1.0.2";
+        public const string PLUGIN_VERSION = "1.0.3";
 
         public const string MODSAVEBACKUPS_GUID = "com.raddude82.modsavebackups";
         public const string MODSAVEBACKUPS_VERSION = "1.1.1";
@@ -30,6 +30,7 @@ namespace RadRefinements
         internal static ConfigEntry<KeyCode> quickSlot3Button;
         internal static ConfigEntry<KeyCode> quickSlot4Button;
         internal static ConfigEntry<KeyCode> quickSlot5Button;
+        internal static ConfigEntry<bool> enableCrateItemDescription;
         internal static ConfigEntry<bool> enableQuadrantText;
         internal static ConfigEntry<bool> enableCompassDegreesText;
         internal static ConfigEntry<bool> enableCompassCardinalText;        
@@ -53,6 +54,7 @@ namespace RadRefinements
             quickSlot3Button = Config.Bind("Inventory Settings", "Quick slot 3 button", KeyCode.Alpha3, "Key that retrieves from or stows to inventory slot 3");
             quickSlot4Button = Config.Bind("Inventory Settings", "Quick slot 4 button", KeyCode.Alpha4, "Key that retrieves from or stows to inventory slot 4");
             quickSlot5Button = Config.Bind("Inventory Settings", "Quick slot 5 button", KeyCode.Alpha5, "Key that retrieves from or stows to inventory slot 5");
+            enableCrateItemDescription = Config.Bind("Inventory Settings", "Enable crate item description", true, "Allows you to see the text you would see when looking at the item out of the crate.");
             enableQuadrantText = Config.Bind("Item Text Settings", "Enable quadrant reading text", true, "Enables the text that shows the quadrant reading value.");
             enableCompassDegreesText = Config.Bind("Item Text Settings", "Enable compass reading degrees text", true, "Enables the text that shows the compass reading value in degrees.");
             enableCompassCardinalText = Config.Bind("Item Text Settings", "Enable compass reading cardinal text", true, "Enables the text that shows the compass reading value in cardinal directions.");

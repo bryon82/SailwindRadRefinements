@@ -102,6 +102,9 @@ namespace RadRefinements
             [HarmonyPatch("Update")]
             public static void AddItemDescription(CrateInventoryButton[] ___buttons)
             {
+                if (!Plugin.enableCrateItemDescription.Value)
+                    return;
+
                 foreach (var button in ___buttons)
                 {
                     button.description = button.GetPrivateField<ShipItem>("currentItem")?.description ?? "";

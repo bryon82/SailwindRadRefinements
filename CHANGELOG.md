@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.3] - 2025-03-30
+
+### Added
+
+- Item descriptions when looked at in a crate
+
+### Fixed
+
+- Save serialization bug
+
 ## [v1.0.2] - 2025-03-29
 
 ### Added
