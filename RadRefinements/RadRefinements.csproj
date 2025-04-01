@@ -81,8 +81,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)$(AssemblyName).VS.props" />
+  <ItemGroup>
+    <_CopyItemsAbout Include="$(SolutionDir)\About\**\*.*" />
+  </ItemGroup>
   <Target Name="AfterBuild">
-    <Delete Files="$(BepInExPluginsDirectory)\$(ModName).dll" />
-    <Copy SourceFiles="$(ProjectDir)\bin\Debug\$(ModName).dll" DestinationFolder="$(BepInExPluginsDirectory)" ContinueOnError="true" />
+    <RemoveDir Directories="$(BepInExPluginsDirectory)\$(ModName)" />
+    <Copy SourceFiles="$(ProjectDir)\bin\Debug\$(ModName).dll" DestinationFolder="$(BepInExPluginsDirectory)\$(ModName)" ContinueOnError="true" />
+    <Copy SourceFiles="@(_CopyItemsAbout)" DestinationFolder="$(BepInExPluginsDirectory)\$(ModName)\About\%(RecursiveDir)" ContinueOnError="true" />
   </Target>
 </Project>

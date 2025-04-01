@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.5] - 2025-03-31
+
+### Added
+
+- Option to view compass reading text while holding compass
+- Files for MVC support
+
 ## [v1.0.3] - 2025-03-30
 
 ### Added

@@ -38,22 +38,24 @@ namespace RadRefinements
                 if ((!Plugin.enableCompassDegreesText.Value && !Plugin.enableCompassCardinalText.Value) || !GameState.playing || GameState.currentlyLoading || __instance.name != "compass")
                     return;
                                 
-                var textMesh = __instance.transform.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "compass_reading_text");                
-                if (__instance.held != null ||
+                var text = __instance.transform.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "compass_reading_text");                
+                if ((__instance.held != null && !Plugin.enableCompassReadingHeld.Value)||
                     !__instance.sold ||
                     __instance.gameObject.layer == 5 ||
                     __instance.currentActualBoat == null ||
                     Vector3.Distance(Refs.observerMirror.transform.position, __instance.transform.position) > Plugin.compassViewableDistance.Value)
-                {                    
-                    textMesh.gameObject.SetActive(false);
+                {
+                    text.gameObject.SetActive(false);
                     return;
                 }
 
                 var angleToPlayer = Vector3.SignedAngle(-__instance.transform.forward, Refs.observerMirror.transform.position - __instance.transform.position, Vector3.up);
-                textMesh.localEulerAngles = new Vector3(0, angleToPlayer, 0);
+                angleToPlayer = __instance.held != null ? 0f : angleToPlayer;
+                text.localEulerAngles = new Vector3(0, angleToPlayer, 0);
+                text.GetComponent<TextMesh>().fontSize = __instance.held != null ? 25 : 55;
 
-                textMesh.GetComponent<TextMesh>().text = GetReading(__instance.transform.eulerAngles.y);
-                textMesh.gameObject.SetActive(true);
+                text.GetComponent<TextMesh>().text = GetReading(__instance.transform.eulerAngles.y);
+                text.gameObject.SetActive(true);
             }
 
             private static string GetReading(float reading)
