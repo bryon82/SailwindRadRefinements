@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.6] - 2025-04-04
+
+### Added
+
+- Disable reading text while looking through spyglass.
+
+### Fixed
+
+- NRE during save file load.
+
+### Removed
+
+- MVC files, no longer needed.
+
 ## [v1.0.5] - 2025-03-31
 
 ### Added
