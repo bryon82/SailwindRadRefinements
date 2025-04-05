@@ -34,16 +34,24 @@ namespace RadRefinements
             [HarmonyPostfix]
             [HarmonyPatch("ExtraLateUpdate")]
             public static void AddReading(ShipItemCompass __instance)
-            {                
-                if ((!Plugin.enableCompassDegreesText.Value && !Plugin.enableCompassCardinalText.Value) || !GameState.playing || GameState.currentlyLoading || __instance.name != "compass")
+            {
+                if ((!Plugin.enableCompassDegreesText.Value && !Plugin.enableCompassCardinalText.Value) ||
+                    !GameState.playing ||
+                    GameState.currentlyLoading ||
+                    GameState.loadingBoatLocalItems ||
+                    __instance.name != "compass")
                     return;
-                                
-                var text = __instance.transform.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "compass_reading_text");                
-                if ((__instance.held != null && !Plugin.enableCompassReadingHeld.Value)||
+
+                var text = __instance.transform.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "compass_reading_text");
+                if (text == null)
+                    return;
+
+                if ((__instance.held != null && !Plugin.enableCompassReadingHeld.Value) ||
                     !__instance.sold ||
                     __instance.gameObject.layer == 5 ||
                     __instance.currentActualBoat == null ||
-                    Vector3.Distance(Refs.observerMirror.transform.position, __instance.transform.position) > Plugin.compassViewableDistance.Value)
+                    Vector3.Distance(Refs.observerMirror.transform.position, __instance.transform.position) > Plugin.compassViewableDistance.Value ||
+                    SpyglassPatches.heldAndUp)
                 {
                     text.gameObject.SetActive(false);
                     return;
@@ -53,7 +61,6 @@ namespace RadRefinements
                 angleToPlayer = __instance.held != null ? 0f : angleToPlayer;
                 text.localEulerAngles = new Vector3(0, angleToPlayer, 0);
                 text.GetComponent<TextMesh>().fontSize = __instance.held != null ? 25 : 55;
-
                 text.GetComponent<TextMesh>().text = GetReading(__instance.transform.eulerAngles.y);
                 text.gameObject.SetActive(true);
             }
@@ -71,7 +78,7 @@ namespace RadRefinements
                 }
 
                 return $"{CompassRose.GetAbbreviatedDirection(reading, Plugin.compassCardinalPrecisionLevel.Value)}\n{Math.Round(reading)}°";
-            }            
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ namespace RadRefinements
             public static void AddTextMesh(ShipItemQuadrant __instance)
             {
                 var textObject = GameObject.Instantiate(DayLogs.instance.transform.parent.GetChild(0).GetChild(1));
-                textObject.name = "quadrant_reading_text";                
+                textObject.name = "quadrant_reading_text";
                 textObject.SetParent(__instance.transform.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "dial"));
                 textObject.gameObject.layer = 2;
                 textObject.localEulerAngles = new Vector3(0, 90f, 270f);
@@ -31,19 +31,22 @@ namespace RadRefinements
             [HarmonyPatch("ExtraLateUpdate")]
             public static void AddReading(ShipItemQuadrant __instance)
             {
-                if (!Plugin.enableQuadrantText.Value || !GameState.playing || GameState.currentlyLoading) 
+                if (!Plugin.enableQuadrantText.Value || !GameState.playing || GameState.currentlyLoading || GameState.loadingBoatLocalItems) 
                     return;
 
-                var textMesh = __instance.transform.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "quadrant_reading_text");
+                var text = __instance.transform.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "quadrant_reading_text");
+                if (text == null)
+                    return;
+
                 if (!__instance.GetPrivateField<bool>("inspecting") || __instance.GetPrivateField<bool>("rotating"))
                 {
-                    textMesh.gameObject.SetActive(false);
+                    text.gameObject.SetActive(false);
                     return;
                 }
                 var dial = __instance.GetPrivateField<Transform>("dial");
-                var reading = Math.Round(dial.localEulerAngles.x, 2);                    
-                textMesh.GetComponent<TextMesh>().text = $"{reading}°";
-                textMesh.gameObject.SetActive(true);                   
+                var reading = Math.Round(dial.localEulerAngles.x, 2);
+                text.GetComponent<TextMesh>().text = $"{reading}°";
+                text.gameObject.SetActive(true);
             }
         }
     }

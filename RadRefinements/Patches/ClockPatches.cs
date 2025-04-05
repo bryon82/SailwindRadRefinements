@@ -38,23 +38,30 @@ namespace RadRefinements
             [HarmonyPatch("ExtraLateUpdate")]
             public static void AddReading(ShipItemClock __instance)
             {
-                if ((!Plugin.enableClockGlobalText.Value && !Plugin.enableClockLocalText.Value) || !GameState.playing || GameState.currentlyLoading) 
+                if ((!Plugin.enableClockGlobalText.Value && !Plugin.enableClockLocalText.Value) ||
+                    !GameState.playing ||
+                    GameState.currentlyLoading ||
+                    GameState.loadingBoatLocalItems) 
                     return;
 
-                var textMesh = __instance.transform.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "clock_reading_text");
+                var text = __instance.transform.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "clock_reading_text");
+                if (text == null)
+                    return;
+
                 if (__instance.held != null ||
                     !__instance.sold ||
                     __instance.gameObject.layer == 5 ||
                     __instance.currentActualBoat == null ||
                     Vector3.Distance(Refs.observerMirror.transform.position, __instance.transform.position) > Plugin.clockViewableDistance.Value ||
-                    Vector3.Angle(-__instance.transform.forward, Refs.observerMirror.transform.position - __instance.transform.position) > 85f)
-                {                    
-                    textMesh.gameObject.SetActive(false);
+                    Vector3.Angle(-__instance.transform.forward, Refs.observerMirror.transform.position - __instance.transform.position) > 85f ||
+                    SpyglassPatches.heldAndUp)
+                {
+                    text.gameObject.SetActive(false);
                     return;
                 }
 
-                textMesh.GetComponent<TextMesh>().text = GetReading();
-                textMesh.gameObject.SetActive(true);
+                text.GetComponent<TextMesh>().text = GetReading();
+                text.gameObject.SetActive(true);
             }
         }
 
