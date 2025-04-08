@@ -2,7 +2,7 @@
 
 namespace RadRefinements
 {
-    internal static class Helper
+    internal static class Extensions
     {
         public static T GetPrivateField<T>(this object obj, string field)
         {

@@ -15,6 +15,11 @@ QOL refinements for Sailwind.
 * On compasses, text that shows the direction the compass is facing in cardinal directions and/or degrees. 
 * On quadrants when inspecting, text that shows the angle read.
 
+## Other Refinements
+
+* You can break an empty crate, tobacco box, candle box, or standard size barrel into firewood with a knife.
+* When looking at a crate that has been opened, you can see how many items are in the crate.
+
 ## Configurable
 
 * Enable or disable: inventory swap, quick map, quick slots, crate item description, clock global time text, clock local time text, compass reading while held,  compass cardinal direction text, compass degrees text, quadrant text. 
@@ -30,6 +35,6 @@ All but clock local time text are defaulted to true.
 
 ### Installation
 
-**If upgrading from version 1.0.3 or lower remove RadRefinements.dll from Sailwind/BepInEx/plugins.**
+If updating, remove RadRefinements folders and/or RadRefinements.dll files from previous installations.  
 
-Place the entire unzipped RadRefinements folder into the Sailwind/BepInEx/Plugins folder.
+Extract the downloaded zip. Inside the extracted RadRefinements-\<version\> folder copy the RadRefinements folder into the Sailwind/BepInEx/Plugins folder.
