@@ -2,53 +2,50 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.7] - 2025-04-08
+
+### Added
+- The ability to break up an empty crate, tobacco box, candle box, or standard size barrel into firewood with a knife
+- Item quantity to crate look text
+
 ## [v1.0.6] - 2025-04-04
 
 ### Added
-
 - Disable reading text while looking through spyglass.
 
 ### Fixed
-
 - NRE during save file load.
 
 ### Removed
-
 - MVC files, no longer needed.
 
 ## [v1.0.5] - 2025-03-31
 
 ### Added
-
 - Option to view compass reading text while holding compass
 - Files for MVC support
 
 ## [v1.0.3] - 2025-03-30
 
 ### Added
-
 - Item descriptions when looked at in a crate
 
 ### Fixed
-
 - Save serialization bug
 
 ## [v1.0.2] - 2025-03-29
 
 ### Added
-
 - Added cardinal direction text option to compass reading text with options for level of cardinal directions
 
 ## [v1.0.1] - 2025-03-28
 
 ### Updated
-
 - Updated to check for ModSaveBackups dependency.
 
 ## [v1.0.0] - 2025-03-28
 
 ### Added
-
 - The ability to swap the item held with the one in the selected inventory slot.
 - A quick map button which withdraws and stows the leftmost map in your inventory slots.
 - Quick slot buttons which withdraws from and stows to the selected inventory slot.
