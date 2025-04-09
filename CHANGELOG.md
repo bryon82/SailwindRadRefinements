@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.8] - 2025-04-09
+
+### Added
+- Control text showing that you can cut a container to turn it into firewood
+- Configuration options to enable/disable the crate inventory count text and the ability to turn containers into firewood
+- Configuration option to disable the hint text for items. Currently only the knife and fishing hooks.
+
 ## [v1.0.7] - 2025-04-08
 
 ### Added

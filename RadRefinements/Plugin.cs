@@ -13,7 +13,7 @@ namespace RadRefinements
     {
         public const string PLUGIN_GUID = "com.raddude82.radrefinements";
         public const string PLUGIN_NAME = "RadRefinements";
-        public const string PLUGIN_VERSION = "1.0.7";
+        public const string PLUGIN_VERSION = "1.0.8";
 
         public const string MODSAVEBACKUPS_GUID = "com.raddude82.modsavebackups";
         public const string MODSAVEBACKUPS_VERSION = "1.1.1";
@@ -40,6 +40,9 @@ namespace RadRefinements
         internal static ConfigEntry<bool> enableClockGlobalText;
         internal static ConfigEntry<bool> enableClockLocalText;
         internal static ConfigEntry<float> clockViewableDistance;
+        internal static ConfigEntry<bool> enableWoodFromContainers;
+        internal static ConfigEntry<bool> enableCrateInvCountText;
+        internal static ConfigEntry<bool> removeItemHints;
 
         private void Awake()
         {
@@ -65,6 +68,10 @@ namespace RadRefinements
             enableClockGlobalText = Config.Bind("Item Text Settings", "Enable clock global time text", true, "Enables the text that shows the global time on the clock.");
             enableClockLocalText = Config.Bind("Item Text Settings", "Enable clock local time text", true, "Enables the text that shows the clock time on the clock.");
             clockViewableDistance = Config.Bind("Item Text Settings", "Clock viewable distance", 7f, "Sets the how close player needs to be to see clock time text");
+            enableWoodFromContainers = Config.Bind("Other Settings", "Enable wood from breaking containers", true, "Allows you to get firewood by breaking containers with a knife.");
+            enableCrateInvCountText = Config.Bind("Other Settings", "Enable crate inventory count text", true, "Enables the look text that shows the number of items in a crate.");
+            removeItemHints = Config.Bind("Other Settings", "Remove item hints", false, "Removes the hint text that appears when you look at a common items (e.g., knife, fishing hook).");
+
 
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PLUGIN_GUID);
             this.gameObject.AddComponent<Enumerators>();
