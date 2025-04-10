@@ -13,7 +13,7 @@ namespace RadRefinements
     {
         public const string PLUGIN_GUID = "com.raddude82.radrefinements";
         public const string PLUGIN_NAME = "RadRefinements";
-        public const string PLUGIN_VERSION = "1.0.8";
+        public const string PLUGIN_VERSION = "1.0.9";
 
         public const string MODSAVEBACKUPS_GUID = "com.raddude82.modsavebackups";
         public const string MODSAVEBACKUPS_VERSION = "1.1.1";
@@ -43,6 +43,7 @@ namespace RadRefinements
         internal static ConfigEntry<bool> enableWoodFromContainers;
         internal static ConfigEntry<bool> enableCrateInvCountText;
         internal static ConfigEntry<bool> removeItemHints;
+        internal static ConfigEntry<bool> enableFishMovement;
 
         private void Awake()
         {
@@ -71,7 +72,7 @@ namespace RadRefinements
             enableWoodFromContainers = Config.Bind("Other Settings", "Enable wood from breaking containers", true, "Allows you to get firewood by breaking containers with a knife.");
             enableCrateInvCountText = Config.Bind("Other Settings", "Enable crate inventory count text", true, "Enables the look text that shows the number of items in a crate.");
             removeItemHints = Config.Bind("Other Settings", "Remove item hints", false, "Removes the hint text that appears when you look at a common items (e.g., knife, fishing hook).");
-
+            enableFishMovement = Config.Bind("Other Settings", "Enable fish movement", true, "Enables fish movement when fish caught. Fish will move around instead of just sitting still.");
 
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PLUGIN_GUID);
             this.gameObject.AddComponent<Enumerators>();

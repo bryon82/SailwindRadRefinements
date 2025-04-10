@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.9] - 2025-04-10
+
+### Added
+- Fish move when caught instead of remaining motionless.
+- Configuration option to enable/disable fish movement.
+
 ## [v1.0.8] - 2025-04-09
 
 ### Added
