@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using UnityEngine;
 
 namespace RadRefinements
@@ -20,7 +15,7 @@ namespace RadRefinements
         public void OnTriggerEnter(Collider other)
         {
             ShipItem component = other.GetComponent<ShipItem>();
-            if (component is null)
+            if (component == null)
                 return;
 
             Plugin.logger.LogDebug("KnifeCollider: entering wood col: " + component.name);
