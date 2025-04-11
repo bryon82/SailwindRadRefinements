@@ -39,8 +39,7 @@ namespace RadRefinements.Patches
                     return;
 
                 var fishMovement = __instance.gameObject.AddComponent<FishMovement>();
-                fishMovement.fish = __instance;
-                Plugin.logger.LogDebug("Added FishMovement component");                
+                fishMovement.fish = __instance;              
             }
         }
 

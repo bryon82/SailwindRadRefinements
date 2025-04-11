@@ -13,7 +13,7 @@ namespace RadRefinements
     {
         public const string PLUGIN_GUID = "com.raddude82.radrefinements";
         public const string PLUGIN_NAME = "RadRefinements";
-        public const string PLUGIN_VERSION = "1.0.9";
+        public const string PLUGIN_VERSION = "1.0.10";
 
         public const string MODSAVEBACKUPS_GUID = "com.raddude82.modsavebackups";
         public const string MODSAVEBACKUPS_VERSION = "1.1.1";
@@ -75,7 +75,6 @@ namespace RadRefinements
             enableFishMovement = Config.Bind("Other Settings", "Enable fish movement", true, "Enables fish movement when fish caught. Fish will move around instead of just sitting still.");
 
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PLUGIN_GUID);
-            this.gameObject.AddComponent<Enumerators>();
         }
     }    
 }

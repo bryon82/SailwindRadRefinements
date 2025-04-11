@@ -23,23 +23,26 @@ namespace RadRefinements.Patches
                 var good = pointedAtItem.gameObject.GetComponent<Good>();
                 if ((bool)pointedAtItem &&
                     pointedAtItem.sold &&
-                    (Knife.woodPiecesPerContainer.ContainsKey(pointedAtItem.name) ||
-                    (good != null && Knife.woodPiecesPerContainer.ContainsKey(good.sizeDescription))))
+                    (KnifeWood.woodPiecesPerContainer.ContainsKey(pointedAtItem.name) ||
+                    (good != null && KnifeWood.woodPiecesPerContainer.ContainsKey(good.sizeDescription))))
                 {
                     ___animating = true;
                     ___heldRotationOffset = 0f;
                     ___cutTimer = 0.25f;
-                    Knife.CutContainer(pointedAtItem.GetComponent<ShipItem>());
+                    var knifeWood = __instance.GetComponent<KnifeWood>();
+                    knifeWood.CutContainer(pointedAtItem.GetComponent<ShipItem>());
                 }                
             }
 
             [HarmonyPostfix]
             [HarmonyPatch("OnLoad")]
-            public static void RemoveHint(ShipItemKnife __instance)
+            public static void OnLoadPatch(ShipItemKnife __instance)
             {
-                if (!Plugin.removeItemHints.Value || !__instance.sold)
-                    return;
-                __instance.description = "";
+                if (Plugin.removeItemHints.Value && __instance.sold)                    
+                    __instance.description = "";
+
+                __instance.gameObject.AddComponent<KnifeWood>();
+
             }
         }
 
@@ -69,10 +72,11 @@ namespace RadRefinements.Patches
                 ___showingIcon = false;
 
                 var good = button.gameObject.GetComponent<Good>();
-                if ((Knife.woodPiecesPerContainer.ContainsKey(button.name) ||
-                    (good != null && Knife.woodPiecesPerContainer.ContainsKey(good.sizeDescription))) &&
-                    (bool)___pointer.GetHeldItem() &&
-                    (bool)___pointer.GetHeldItem().GetComponent<ShipItemKnife>())
+                var shipItem = button.gameObject.GetComponent<ShipItem>();
+                if ((bool)___pointer.GetHeldItem() &&
+                    (bool)___pointer.GetHeldItem().GetComponent<ShipItemKnife>() &&
+                    ((shipItem != null && KnifeWood.woodPiecesPerContainer.ContainsKey(shipItem.name)) ||
+                    (good != null && KnifeWood.woodPiecesPerContainer.ContainsKey(good.sizeDescription))))
                 {   
                     ___textRIcon.gameObject.SetActive(true);
                     ___showingIcon = true;

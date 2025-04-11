@@ -11,24 +11,25 @@ namespace RadRefinements
             { "31 templefish (A)", 10f },
             { "32 sunspot fish (A)", 13f },
             { "46 tuna (A)", 20f },
-            { "35 shimmertail (E)", 20f },
-            { "33 salmon (E)", 25f },
+            { "35 shimmertail (E)", 18f },
+            { "33 salmon (E)", 26f },
             { "34 eel (E)", 30f },
-            { "38 blackfin hunter (M)", 22f },
-            { "36 trout (M)", 28f },
-            { "37 north fish (M)", 25f },
-            { "141 swamp fish 1 (snapper", 20f },
+            { "38 blackfin hunter (M)", 20f },
+            { "36 trout (M)", 25f },
+            { "37 north fish (M)", 22f },
+            { "141 swamp fish 1 (snapper", 21f }, // its named with the missing closing paren
             { "142 swamp fish 2 (bubbler)", 15f },
             { "148 swamp fish 3", 28f },
         };
         
         private float t;
-        private float force = 0f;
+        private float force;
         internal FishingRodFish fish;
 
         private void Awake()
         {
-            t = 0f;            
+            t = 0f;
+            force = 0f;
         }
 
         private void Update()
@@ -57,7 +58,6 @@ namespace RadRefinements
                 if (fishForces.ContainsKey(fish.currentFish.name))
                 {
                     force = fishForces[fish.currentFish.name];
-                    Plugin.logger.LogDebug($"{fish.currentFish.name} force {force}");
                 }
                 else
                 {
@@ -68,7 +68,6 @@ namespace RadRefinements
 
             if (t <= 0f)
             {
-                Plugin.logger.LogDebug($"Flip");
                 force = -force;
                 t = 10f + Random.Range(0, 0.3f * force);
             }
