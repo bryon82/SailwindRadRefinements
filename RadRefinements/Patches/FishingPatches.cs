@@ -32,14 +32,14 @@ namespace RadRefinements.Patches
         private class FishingRodFishPatches
         {            
             [HarmonyPostfix]
-            [HarmonyPatch("CatchFish")]
+            [HarmonyPatch("Awake")]
             public static void SetFishMovement(FishingRodFish __instance)
             {
-                if (!Plugin.enableFishMovement.Value || __instance.currentFish is null)
+                if (!Plugin.enableFishMovement.Value)
                     return;
-
+                
                 var fishMovement = __instance.gameObject.AddComponent<FishMovement>();
-                fishMovement.fish = __instance;              
+                fishMovement.fish = __instance;                                            
             }
         }
 

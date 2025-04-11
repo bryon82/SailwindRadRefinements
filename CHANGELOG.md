@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 ## [v1.0.11] - 2025-04-10
 
 ### Fixed
+- Bug that caused multiple FishMovement components
+
+## [v1.0.11] - 2025-04-10
+
+### Fixed
 - Bug that caused NREs when cutting containers
 
 ## [v1.0.10] - 2025-04-10

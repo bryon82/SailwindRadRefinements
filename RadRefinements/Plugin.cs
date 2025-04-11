@@ -13,7 +13,7 @@ namespace RadRefinements
     {
         public const string PLUGIN_GUID = "com.raddude82.radrefinements";
         public const string PLUGIN_NAME = "RadRefinements";
-        public const string PLUGIN_VERSION = "1.0.11";
+        public const string PLUGIN_VERSION = "1.0.12";
 
         public const string MODSAVEBACKUPS_GUID = "com.raddude82.modsavebackups";
         public const string MODSAVEBACKUPS_VERSION = "1.1.1";
