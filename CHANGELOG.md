@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v1.0.11] - 2025-04-10
+## [v1.0.13] - 2025-04-12
+
+### Added
+- Text that shows all the items in a crates inventory and their respective counts. Text will only show when assigned key is held down
+- Configuration option for the key to show inventory counts
+
+## [v1.0.12] - 2025-04-10
 
 ### Fixed
 - Bug that caused multiple FishMovement components

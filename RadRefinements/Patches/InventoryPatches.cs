@@ -20,10 +20,10 @@ namespace RadRefinements
             [HarmonyPatch("LateUpdate")]
             public static void ToggleQuickMap()
             {
-                if (!Plugin.enableQuickMap.Value)
+                if (!Plugin.enableQuickMap.Value || GameState.wasInSettingsMenu)
                     return;
 
-                if (Input.GetKeyDown(Plugin.quickMapButton.Value))
+                if (Input.GetKeyDown(Plugin.quickMapKey.Value))
                 {
                     ViewMap.ToggleMap();
                 }
@@ -33,26 +33,26 @@ namespace RadRefinements
             [HarmonyPatch("LateUpdate")]
             public static void ToggleQuickSlot()
             {
-                if (!Plugin.enableQuickSlots.Value)
+                if (!Plugin.enableQuickSlots.Value || GameState.wasInSettingsMenu)
                     return;
 
-                if (Input.GetKeyDown(Plugin.quickSlot1Button.Value))
+                if (Input.GetKeyDown(Plugin.quickSlot1Key.Value))
                 {
                     QuickSlots.ToggleInventoryItem(0);
                 }
-                if (Input.GetKeyDown(Plugin.quickSlot2Button.Value))
+                if (Input.GetKeyDown(Plugin.quickSlot2Key.Value))
                 {
                     QuickSlots.ToggleInventoryItem(1);
                 }
-                if (Input.GetKeyDown(Plugin.quickSlot3Button.Value))
+                if (Input.GetKeyDown(Plugin.quickSlot3Key.Value))
                 {
                     QuickSlots.ToggleInventoryItem(2);
                 }
-                if (Input.GetKeyDown(Plugin.quickSlot4Button.Value))
+                if (Input.GetKeyDown(Plugin.quickSlot4Key.Value))
                 {
                     QuickSlots.ToggleInventoryItem(3);
                 }
-                if (Input.GetKeyDown(Plugin.quickSlot5Button.Value))
+                if (Input.GetKeyDown(Plugin.quickSlot5Key.Value))
                 {
                     QuickSlots.ToggleInventoryItem(4);
                 }

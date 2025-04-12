@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logic\Crate.cs" />
     <Compile Include="Logic\FishMovement.cs" />
     <Compile Include="Logic\KnifeWood.cs" />
     <Compile Include="Logic\KnifeWoodCollider.cs" />
