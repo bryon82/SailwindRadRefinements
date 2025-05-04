@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using BepInEx;
+using HarmonyLib;
 using System.Linq;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace RadRefinements.Patches
             [HarmonyPatch("UpdateLookText")]
             public static void AddNumItemsText(ShipItemCrate __instance, Good ___goodC, CrateInventory ___crateInventory)
             {
-                if (!Plugin.enableCrateInvCountText.Value ||
+                if (!RR_Plugin.enableCrateInvCountText.Value ||
                     !__instance.sold ||
                     __instance.amount > 0 ||
                     !(bool)___crateInventory ||
@@ -24,11 +25,11 @@ namespace RadRefinements.Patches
                 }
 
                 string inventoryText = string.Empty;
-                if (Input.GetKey(Plugin.crateInvCountTextKey.Value))
+                if (Input.GetKey(RR_Plugin.crateInvCountTextKey.Value))
                     inventoryText = Crate.GetCrateInventory(__instance);
 
                 __instance.lookText = 
-                    string.IsNullOrEmpty(inventoryText) ?
+                    inventoryText.IsNullOrWhiteSpace() ?
                     $"{__instance.lookText}\n{___crateInventory.containedItems.Count()} items" : 
                     inventoryText;
             }

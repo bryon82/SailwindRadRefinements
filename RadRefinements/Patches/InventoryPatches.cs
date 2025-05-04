@@ -13,17 +13,17 @@ namespace RadRefinements
             [HarmonyPatch("RegisterPointer")]
             public static void GetPointer(GoPointer goPointer)
             {
-                SwapSlot.goPntr = goPointer;
+                RR_SwapSlot.goPntr = goPointer;
             }
 
             [HarmonyPostfix]
             [HarmonyPatch("LateUpdate")]
             public static void ToggleQuickMap()
             {
-                if (!Plugin.enableQuickMap.Value || GameState.wasInSettingsMenu)
+                if (!RR_Plugin.enableQuickMap.Value || GameState.wasInSettingsMenu)
                     return;
 
-                if (Input.GetKeyDown(Plugin.quickMapKey.Value))
+                if (Input.GetKeyDown(RR_Plugin.quickMapKey.Value))
                 {
                     ViewMap.ToggleMap();
                 }
@@ -33,26 +33,26 @@ namespace RadRefinements
             [HarmonyPatch("LateUpdate")]
             public static void ToggleQuickSlot()
             {
-                if (!Plugin.enableQuickSlots.Value || GameState.wasInSettingsMenu)
+                if (!RR_Plugin.enableQuickSlots.Value || GameState.wasInSettingsMenu)
                     return;
 
-                if (Input.GetKeyDown(Plugin.quickSlot1Key.Value))
+                if (Input.GetKeyDown(RR_Plugin.quickSlot1Key.Value))
                 {
                     QuickSlots.ToggleInventoryItem(0);
                 }
-                if (Input.GetKeyDown(Plugin.quickSlot2Key.Value))
+                if (Input.GetKeyDown(RR_Plugin.quickSlot2Key.Value))
                 {
                     QuickSlots.ToggleInventoryItem(1);
                 }
-                if (Input.GetKeyDown(Plugin.quickSlot3Key.Value))
+                if (Input.GetKeyDown(RR_Plugin.quickSlot3Key.Value))
                 {
                     QuickSlots.ToggleInventoryItem(2);
                 }
-                if (Input.GetKeyDown(Plugin.quickSlot4Key.Value))
+                if (Input.GetKeyDown(RR_Plugin.quickSlot4Key.Value))
                 {
                     QuickSlots.ToggleInventoryItem(3);
                 }
-                if (Input.GetKeyDown(Plugin.quickSlot5Key.Value))
+                if (Input.GetKeyDown(RR_Plugin.quickSlot5Key.Value))
                 {
                     QuickSlots.ToggleInventoryItem(4);
                 }
@@ -71,7 +71,6 @@ namespace RadRefinements
                 if (!swapSlotMade)
                 {
                     swapSlotMade = true;
-                    Plugin.logger.LogDebug("Creating swap slot.");
                     var inventory_parent = __instance.transform.parent;
                     var swapSlot = Object.Instantiate(inventory_parent.GetChild(0), inventory_parent);
                     swapSlot.name = "inventory_slot_swap";
@@ -80,7 +79,7 @@ namespace RadRefinements
                     Object.Destroy(swapSlot.GetComponent<SphereCollider>());
                     Object.Destroy(swapSlot.GetComponent<GPButtonInventorySlot>());
                     Object.Destroy(swapSlot.GetComponent<Outline>());
-                    swapSlot.gameObject.AddComponent<SwapSlot>();
+                    swapSlot.gameObject.AddComponent<RR_SwapSlot>();
                 }
             }
 
@@ -88,10 +87,10 @@ namespace RadRefinements
             [HarmonyPatch("OnItemClick")]
             public static void OnItemClickSwapItems(PickupableItem heldItem, ShipItem ___currentItem, GPButtonInventorySlot __instance)
             {
-                if (!Plugin.enableInventorySwap.Value || !(bool)___currentItem)
+                if (!RR_Plugin.enableInventorySwap.Value || !(bool)___currentItem)
                     return;
 
-                SwapSlot.instance.SwapItems(heldItem, __instance);
+                RR_SwapSlot.Instance.SwapItems(heldItem, __instance);
             }
         }
 
@@ -102,7 +101,7 @@ namespace RadRefinements
             [HarmonyPatch("Update")]
             public static void AddItemDescription(CrateInventoryButton[] ___buttons)
             {
-                if (!Plugin.enableCrateItemDescription.Value)
+                if (!RR_Plugin.enableCrateItemDescription.Value)
                     return;
 
                 foreach (var button in ___buttons)

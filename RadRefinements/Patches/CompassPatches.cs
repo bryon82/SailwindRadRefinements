@@ -35,7 +35,7 @@ namespace RadRefinements
             [HarmonyPatch("ExtraLateUpdate")]
             public static void AddReading(ShipItemCompass __instance)
             {
-                if ((!Plugin.enableCompassDegreesText.Value && !Plugin.enableCompassCardinalText.Value) ||
+                if ((!RR_Plugin.enableCompassDegreesText.Value && !RR_Plugin.enableCompassCardinalText.Value) ||
                     !GameState.playing ||
                     GameState.currentlyLoading ||
                     GameState.loadingBoatLocalItems ||
@@ -46,11 +46,11 @@ namespace RadRefinements
                 if (text == null)
                     return;
 
-                if ((__instance.held != null && !Plugin.enableCompassReadingHeld.Value) ||
+                if ((__instance.held != null && !RR_Plugin.enableCompassReadingHeld.Value) ||
                     !__instance.sold ||
                     __instance.gameObject.layer == 5 ||
                     __instance.currentActualBoat == null ||
-                    Vector3.Distance(Refs.observerMirror.transform.position, __instance.transform.position) > Plugin.compassViewableDistance.Value ||
+                    Vector3.Distance(Refs.observerMirror.transform.position, __instance.transform.position) > RR_Plugin.compassViewableDistance.Value ||
                     SpyglassPatches.heldAndUp)
                 {
                     text.gameObject.SetActive(false);
@@ -67,17 +67,17 @@ namespace RadRefinements
 
             private static string GetReading(float reading)
             {
-                if (!Plugin.enableCompassCardinalText.Value)
+                if (!RR_Plugin.enableCompassCardinalText.Value)
                 {
                     return $"{Math.Round(reading)}°";
                 }
 
-                if (!Plugin.enableCompassDegreesText.Value)
+                if (!RR_Plugin.enableCompassDegreesText.Value)
                 {
-                    return CompassRose.GetAbbreviatedDirection(reading, Plugin.compassCardinalPrecisionLevel.Value);
+                    return CompassRose.GetAbbreviatedDirection(reading, RR_Plugin.compassCardinalPrecisionLevel.Value);
                 }
 
-                return $"{CompassRose.GetAbbreviatedDirection(reading, Plugin.compassCardinalPrecisionLevel.Value)}\n{Math.Round(reading)}°";
+                return $"{CompassRose.GetAbbreviatedDirection(reading, RR_Plugin.compassCardinalPrecisionLevel.Value)}\n{Math.Round(reading)}°";
             }
         }
     }

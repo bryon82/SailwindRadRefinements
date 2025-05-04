@@ -1,19 +1,27 @@
 ﻿
+using BepInEx.Logging;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
 
 namespace RadRefinements
 {
-    internal class SwapSlot : MonoBehaviour
+    internal class RR_SwapSlot : MonoBehaviour
     {
+        public static RR_SwapSlot Instance { get; private set; }
+        private static readonly ManualLogSource logger = RR_Plugin.logger;
+
         internal static GPButtonInventorySlot slot;
-        internal static GoPointer goPntr;
-        public static SwapSlot instance;
+        internal static GoPointer goPntr;        
 
         private void Awake()
         {
-            instance = this;
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
             slot = new GPButtonInventorySlot();
         }
 
@@ -34,7 +42,7 @@ namespace RadRefinements
                 }
 
                 // insert into swap slot
-                Plugin.logger.LogDebug($"Inserting {component.name} into swap slot.");
+                logger.LogDebug($"Inserting {component.name} into swap slot.");
                 slot.currentItem = component;
                 item.held = null;
                 component.GetComponent<Collider>().enabled = false;
@@ -47,12 +55,12 @@ namespace RadRefinements
 
                 // withdraw from inventory slot                
                 var storedItem = invSlot.currentItem;
-                Plugin.logger.LogDebug($"Withdrawing {storedItem.name} from inventory slot.");
+                logger.LogDebug($"Withdrawing {storedItem.name} from inventory slot.");
                 goPntr.PickUpItem(storedItem);
                 StartCoroutine(GrabItem(storedItem));
 
                 // move from swap slot to inventory slot
-                Plugin.logger.LogDebug($"Moving {slot.currentItem.name} from swap slot to inventory slot.");
+                logger.LogDebug($"Moving {slot.currentItem.name} from swap slot to inventory slot.");
                 Debug.Log("Inserting item.");
                 slot.currentItem.GetItemRigidbody().EnterInventorySlot(invSlot.transform);
                 invSlot.currentItem = slot.currentItem;
@@ -60,7 +68,7 @@ namespace RadRefinements
                 //invSlot.InsertItem(slot.currentItem); // used internals above to lower sound effect volume
                 slot.currentItem = null;
 
-                Plugin.logger.LogDebug("Items Swapped");
+                logger.LogDebug("Items Swapped");
             }
         }
 
@@ -86,7 +94,7 @@ namespace RadRefinements
         internal void WithdrawFromSwapSlot()
         {
             var storedItem = slot.currentItem;
-            Plugin.logger.LogDebug($"Withdrawing {storedItem.name} from inventory slot.");
+            logger.LogDebug($"Withdrawing {storedItem.name} from inventory slot.");
             goPntr.PickUpItem(storedItem);
             StartCoroutine(GrabItem(storedItem));
         }

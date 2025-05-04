@@ -16,32 +16,32 @@ namespace RadRefinements.Patches
                 ref float ___heldRotationOffset,
                 ref float ___cutTimer)
             {
-                if (!Plugin.enableWoodFromContainers.Value || !__instance.sold)
+                if (!RR_Plugin.enableWoodFromContainers.Value || !__instance.sold)
                     return;
-                
+
                 var pointedAtItem = __instance.held.GetPointedAtItem();
                 var good = pointedAtItem.gameObject.GetComponent<Good>();
                 if ((bool)pointedAtItem &&
                     pointedAtItem.sold &&
-                    (KnifeWood.woodPiecesPerContainer.ContainsKey(pointedAtItem.name) ||
-                    (good != null && KnifeWood.woodPiecesPerContainer.ContainsKey(good.sizeDescription))))
+                    (RR_KnifeWood.woodPiecesPerContainer.ContainsKey(pointedAtItem.name) ||
+                    (good != null && RR_KnifeWood.woodPiecesPerContainer.ContainsKey(good.sizeDescription))))
                 {
                     ___animating = true;
                     ___heldRotationOffset = 0f;
                     ___cutTimer = 0.25f;
-                    var knifeWood = __instance.GetComponent<KnifeWood>();
+                    var knifeWood = __instance.GetComponent<RR_KnifeWood>();
                     knifeWood.CutContainer(pointedAtItem.GetComponent<ShipItem>());
-                }                
+                }
             }
 
             [HarmonyPostfix]
             [HarmonyPatch("OnLoad")]
             public static void OnLoadPatch(ShipItemKnife __instance)
             {
-                if (Plugin.removeItemHints.Value && __instance.sold)                    
+                if (RR_Plugin.removeItemHints.Value && __instance.sold)
                     __instance.description = "";
 
-                __instance.gameObject.AddComponent<KnifeWood>();
+                __instance.gameObject.AddComponent<RR_KnifeWood>();
 
             }
         }
@@ -61,7 +61,7 @@ namespace RadRefinements.Patches
                 TextMesh ___controlsText,
                 TextMesh ___extraText)
             {
-                if (!Plugin.enableWoodFromContainers.Value)
+                if (!RR_Plugin.enableWoodFromContainers.Value)
                     return true;
 
                 ___extraText.text = button.lookText;
@@ -75,13 +75,13 @@ namespace RadRefinements.Patches
                 var shipItem = button.gameObject.GetComponent<ShipItem>();
                 if ((bool)___pointer.GetHeldItem() &&
                     (bool)___pointer.GetHeldItem().GetComponent<ShipItemKnife>() &&
-                    ((shipItem != null && KnifeWood.woodPiecesPerContainer.ContainsKey(shipItem.name)) ||
-                    (good != null && KnifeWood.woodPiecesPerContainer.ContainsKey(good.sizeDescription))))
-                {   
+                    ((shipItem != null && RR_KnifeWood.woodPiecesPerContainer.ContainsKey(shipItem.name)) ||
+                    (good != null && RR_KnifeWood.woodPiecesPerContainer.ContainsKey(good.sizeDescription))))
+                {
                     ___textRIcon.gameObject.SetActive(true);
                     ___showingIcon = true;
                     ___controlsText.text = "\ncut";
-                    return false;                    
+                    return false;
                 }
 
                 return true;

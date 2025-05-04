@@ -5,17 +5,17 @@ using UnityEngine;
 
 namespace RadRefinements
 {
-    internal class KnifeWood : MonoBehaviour
+    internal class RR_KnifeWood : MonoBehaviour
     {
-        private KnifeWoodCollider knifeWoodCol;
+        private RR_KnifeWoodCollider knifeWoodCol;
 
         internal static Dictionary<string, int> woodPiecesPerContainer =
             new Dictionary<string, int>
             {
                 { "small crate", 4 },
-                { "standard crate", 8 },
-                { "large crate", 12 },
-                { "very large crate", 16 },
+                { "standard crate", 6 },
+                { "large crate", 8 },
+                { "very large crate", 10 },
                 { "standard barrel", 6 },
                 { "firewood", 4 },
                 { "fishing hooks", 4 },
@@ -27,7 +27,7 @@ namespace RadRefinements
                 { "white tobacco", 2 },
             };
 
-        public void RegisterKnifeWoodCol(KnifeWoodCollider col)
+        public void RegisterKnifeWoodCol(RR_KnifeWoodCollider col)
         {
             knifeWoodCol = col;
         }

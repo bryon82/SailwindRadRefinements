@@ -1,12 +1,13 @@
-﻿using HarmonyLib;
+﻿using BepInEx.Logging;
+using HarmonyLib;
 using ModSaveBackups;
 using System;
-using UnityEngine;
 
 namespace RadRefinements
 {   
     internal class SaveLoadPatches
     {
+        private static readonly ManualLogSource logger = RR_Plugin.logger;
 
         [HarmonyPatch(typeof(SaveLoadManager))]
         private class SaveLoadManagerPatches
@@ -15,12 +16,13 @@ namespace RadRefinements
             [HarmonyPatch("SaveModData")]
             public static void DoSaveGamePatch()
             {
-                var saveContainer = new RadRefinementsSaveContainer();
+                var saveContainer = new RadRefinementsSaveContainer
+                {
+                    swapSlotHasItem = RR_SwapSlot.slot.currentItem != null,
+                    mapSlotIndex = ViewMap.MapSlotIndex
+                };
 
-                saveContainer.swapSlotHasItem = SwapSlot.slot.currentItem != null;
-                saveContainer.mapSlotIndex = ViewMap.mapSlotIndex;
-
-                ModSave.Save(Plugin.instance.Info, saveContainer);
+                ModSave.Save(RR_Plugin.Instance.Info, saveContainer);
             }
         }
 
@@ -28,24 +30,24 @@ namespace RadRefinements
         [HarmonyPatch("LoadModData")]
         public static void LoadModDataPatch()
         {
-            if (!ModSave.Load(Plugin.instance.Info, out RadRefinementsSaveContainer saveContainer))
+            if (!ModSave.Load(RR_Plugin.Instance.Info, out RadRefinementsSaveContainer saveContainer))
             {
-                Plugin.logger.LogWarning("Save file loading failed. If this is the first time loading this save with this mod, this is normal.");
+                logger.LogWarning("Save file loading failed. If this is the first time loading this save with this mod, this is normal.");
                 return;
             }
 
-            ViewMap.mapSlotIndex = saveContainer.mapSlotIndex;
+            ViewMap.MapSlotIndex = saveContainer.mapSlotIndex;
 
             if (saveContainer.swapSlotHasItem)
             {
-                Plugin.logger.LogWarning("Loaded game with item in swap slot, moving it to held or open inventory slot");
-                if (SwapSlot.IsItemHeld())
+                logger.LogWarning("Loaded game with item in swap slot, moving it to held or open inventory slot");
+                if (RR_SwapSlot.IsItemHeld())
                 {
-                    SwapSlot.instance.SwapSlotToOpenInvSlot();
+                    RR_SwapSlot.Instance.SwapSlotToOpenInvSlot();
                 }
                 else
                 {
-                    SwapSlot.instance.WithdrawFromSwapSlot();
+                    RR_SwapSlot.Instance.WithdrawFromSwapSlot();
                 }
             }
         }

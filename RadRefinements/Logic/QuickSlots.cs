@@ -4,7 +4,7 @@
     {
         public static void GetInventoryItem(int slotIndex, PickupableItem heldItem, GoPointer goPointer)
         {
-            if (heldItem && (heldItem.big || !Plugin.enableInventorySwap.Value))
+            if (heldItem && (heldItem.big || !RR_Plugin.enableInventorySwap.Value))
                 return;
 
             var quickSlot = GPButtonInventorySlot.inventorySlots[slotIndex];
@@ -29,7 +29,7 @@
 
         public static void ToggleInventoryItem(int slotIndex)
         {
-            var goPointer = SwapSlot.goPntr;
+            var goPointer = RR_SwapSlot.goPntr;
             var heldItem = goPointer.GetHeldItem();
 
             if (heldItem)

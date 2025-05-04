@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.14] - next release
+
+### Added
+- Faster fish will increase tension on the fishing line.
+
 ## [v1.0.13] - 2025-04-12
 
 ### Added

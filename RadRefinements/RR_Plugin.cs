@@ -9,16 +9,16 @@ namespace RadRefinements
 {
     [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)]
     [BepInDependency(MODSAVEBACKUPS_GUID, MODSAVEBACKUPS_VERSION)]
-    public class Plugin : BaseUnityPlugin
+    public class RR_Plugin : BaseUnityPlugin
     {
         public const string PLUGIN_GUID = "com.raddude82.radrefinements";
         public const string PLUGIN_NAME = "RadRefinements";
-        public const string PLUGIN_VERSION = "1.0.13";
+        public const string PLUGIN_VERSION = "1.0.14";
 
         public const string MODSAVEBACKUPS_GUID = "com.raddude82.modsavebackups";
         public const string MODSAVEBACKUPS_VERSION = "1.1.1";
 
-        internal static Plugin instance;
+        internal static RR_Plugin Instance { get; set; }
         internal static ManualLogSource logger;
 
         internal static ConfigEntry<bool> enableInventorySwap;
@@ -48,7 +48,12 @@ namespace RadRefinements
 
         private void Awake()
         {
-            instance = this;
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
             logger = Logger;
 
             enableInventorySwap = Config.Bind("Inventory Settings", "Enable inventory swap", true, "Allows you to swap the item you are holding with the item in your selected inventory slot.");

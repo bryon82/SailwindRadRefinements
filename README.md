@@ -20,7 +20,7 @@ QOL refinements for Sailwind.
 * When looking at a crate that has been opened, you can see how many items are in the crate or hold down assigned key (default E) to see all items and how many there are.
 * When looking at an item in a crate, see that item's description.
 * Remove hint text for the knife and fishing hook. This is disabled by default and must be turned on in the config.
-* Fish move when caught instead of remaining motionless. 
+* Fish move when caught instead of remaining motionless. Their speed will depend on their species, faster fish will have more tension on the line.
 
 ## Configurable
 

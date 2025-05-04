@@ -1,8 +1,7 @@
-﻿using System;
+﻿using BepInEx;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UnityEngine;
 
 namespace RadRefinements
 {
@@ -21,11 +20,11 @@ namespace RadRefinements
             foreach (var item in containedItems)
             {
                 var key = item.description;
-                key = key.Contains('<') ? key.Substring(0, key.IndexOf('<')) : key;                
+                key = key.Contains('<') ? key.Substring(0, key.IndexOf('<')) : key;
                 key = key.Contains('%') ? item.name : key;
                 key = item.name.Equals("fishing hook") ? item.name : key;
                 key = item.name.Equals("knife") ? item.name : key;
-                key = string.IsNullOrEmpty(key) ? item.name : key;
+                key = key.IsNullOrWhiteSpace() ? item.name : key;
                 if (!invDict.ContainsKey(key))
                 {
                     invDict[key] = 1;
