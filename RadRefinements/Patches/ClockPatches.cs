@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using static RadRefinements.Configs;
 
 namespace RadRefinements
 {
@@ -38,7 +39,7 @@ namespace RadRefinements
             [HarmonyPatch("ExtraLateUpdate")]
             public static void AddReading(ShipItemClock __instance)
             {
-                if ((!RR_Plugin.enableClockGlobalText.Value && !RR_Plugin.enableClockLocalText.Value) ||
+                if ((!enableClockGlobalText.Value && !enableClockLocalText.Value) ||
                     !GameState.playing ||
                     GameState.currentlyLoading ||
                     GameState.loadingBoatLocalItems) 
@@ -52,9 +53,9 @@ namespace RadRefinements
                     !__instance.sold ||
                     __instance.gameObject.layer == 5 ||
                     __instance.currentActualBoat == null ||
-                    Vector3.Distance(Refs.observerMirror.transform.position, __instance.transform.position) > RR_Plugin.clockViewableDistance.Value ||
+                    Vector3.Distance(Refs.observerMirror.transform.position, __instance.transform.position) > clockViewableDistance.Value ||
                     Vector3.Angle(-__instance.transform.forward, Refs.observerMirror.transform.position - __instance.transform.position) > 85f ||
-                    SpyglassPatches.heldAndUp)
+                    SpyglassPatches.HeldAndUp)
                 {
                     text.gameObject.SetActive(false);
                     return;
@@ -70,9 +71,9 @@ namespace RadRefinements
             var globalTime = Sun.sun.globalTime;
             var localTime = Sun.sun.localTime;
 
-            if (!RR_Plugin.enableClockLocalText.Value)
+            if (!enableClockLocalText.Value)
                 return GetTime(globalTime);
-            if (!RR_Plugin.enableClockGlobalText.Value)
+            if (!enableClockGlobalText.Value)
                 return GetTime(localTime);
 
             return $"{GetTime(globalTime)}\n\n\n\n{GetTime(localTime)}";

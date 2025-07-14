@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using UnityEngine;
+using static RadRefinements.Configs;
 
 namespace RadRefinements.Patches
 {
@@ -16,15 +17,17 @@ namespace RadRefinements.Patches
                 ref float ___heldRotationOffset,
                 ref float ___cutTimer)
             {
-                if (!RR_Plugin.enableWoodFromContainers.Value || !__instance.sold)
+                if (!enableWoodFromContainers.Value || !__instance.sold)
                     return;
 
                 var pointedAtItem = __instance.held.GetPointedAtItem();
                 var good = pointedAtItem.gameObject.GetComponent<Good>();
-                if ((bool)pointedAtItem &&
+                var canCut = (bool)pointedAtItem &&
                     pointedAtItem.sold &&
                     (RR_KnifeWood.woodPiecesPerContainer.ContainsKey(pointedAtItem.name) ||
-                    (good != null && RR_KnifeWood.woodPiecesPerContainer.ContainsKey(good.sizeDescription))))
+                    (good != null && RR_KnifeWood.woodPiecesPerContainer.ContainsKey(good.sizeDescription)));
+
+                if (canCut)
                 {
                     ___animating = true;
                     ___heldRotationOffset = 0f;
@@ -38,11 +41,10 @@ namespace RadRefinements.Patches
             [HarmonyPatch("OnLoad")]
             public static void OnLoadPatch(ShipItemKnife __instance)
             {
-                if (RR_Plugin.removeItemHints.Value && __instance.sold)
+                if (removeItemHints.Value && __instance.sold)
                     __instance.description = "";
 
                 __instance.gameObject.AddComponent<RR_KnifeWood>();
-
             }
         }
 
@@ -61,7 +63,7 @@ namespace RadRefinements.Patches
                 TextMesh ___controlsText,
                 TextMesh ___extraText)
             {
-                if (!RR_Plugin.enableWoodFromContainers.Value)
+                if (!enableWoodFromContainers.Value)
                     return true;
 
                 ___extraText.text = button.lookText;
@@ -73,10 +75,12 @@ namespace RadRefinements.Patches
 
                 var good = button.gameObject.GetComponent<Good>();
                 var shipItem = button.gameObject.GetComponent<ShipItem>();
-                if ((bool)___pointer.GetHeldItem() &&
+                var canCut = (bool)___pointer.GetHeldItem() &&
                     (bool)___pointer.GetHeldItem().GetComponent<ShipItemKnife>() &&
                     ((shipItem != null && RR_KnifeWood.woodPiecesPerContainer.ContainsKey(shipItem.name)) ||
-                    (good != null && RR_KnifeWood.woodPiecesPerContainer.ContainsKey(good.sizeDescription))))
+                    (good != null && RR_KnifeWood.woodPiecesPerContainer.ContainsKey(good.sizeDescription)));
+
+                if (canCut)
                 {
                     ___textRIcon.gameObject.SetActive(true);
                     ___showingIcon = true;

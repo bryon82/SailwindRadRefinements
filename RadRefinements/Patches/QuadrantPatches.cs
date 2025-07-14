@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using static RadRefinements.Configs;
 
 namespace RadRefinements
 {
@@ -34,7 +35,7 @@ namespace RadRefinements
             [HarmonyPatch("ExtraLateUpdate")]
             public static void AddReading(ShipItemQuadrant __instance)
             {
-                if (!RR_Plugin.enableQuadrantText.Value || !GameState.playing || GameState.currentlyLoading || GameState.loadingBoatLocalItems) 
+                if (!enableQuadrantText.Value || !GameState.playing || GameState.currentlyLoading || GameState.loadingBoatLocalItems) 
                     return;
 
                 var text = __instance.transform.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "quadrant_reading_text");

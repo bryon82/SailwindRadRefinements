@@ -1,14 +1,12 @@
-﻿using BepInEx.Logging;
-using HarmonyLib;
+﻿using HarmonyLib;
 using ModSaveBackups;
 using System;
+using static RadRefinements.RR_Plugin;
 
 namespace RadRefinements
 {   
     internal class SaveLoadPatches
     {
-        private static readonly ManualLogSource logger = RR_Plugin.logger;
-
         [HarmonyPatch(typeof(SaveLoadManager))]
         private class SaveLoadManagerPatches
         {
@@ -18,11 +16,11 @@ namespace RadRefinements
             {
                 var saveContainer = new RadRefinementsSaveContainer
                 {
-                    swapSlotHasItem = RR_SwapSlot.slot.currentItem != null,
+                    swapSlotHasItem = RR_SwapSlot.Slot.currentItem != null,
                     mapSlotIndex = ViewMap.MapSlotIndex
                 };
 
-                ModSave.Save(RR_Plugin.Instance.Info, saveContainer);
+                ModSave.Save(Instance.Info, saveContainer);
             }
         }
 
@@ -30,9 +28,9 @@ namespace RadRefinements
         [HarmonyPatch("LoadModData")]
         public static void LoadModDataPatch()
         {
-            if (!ModSave.Load(RR_Plugin.Instance.Info, out RadRefinementsSaveContainer saveContainer))
+            if (!ModSave.Load(Instance.Info, out RadRefinementsSaveContainer saveContainer))
             {
-                logger.LogWarning("Save file loading failed. If this is the first time loading this save with this mod, this is normal.");
+                LogWarning("Save file loading failed. If this is the first time loading this save with this mod, this is normal.");
                 return;
             }
 
@@ -40,7 +38,7 @@ namespace RadRefinements
 
             if (saveContainer.swapSlotHasItem)
             {
-                logger.LogWarning("Loaded game with item in swap slot, moving it to held or open inventory slot");
+                LogWarning("Loaded game with item in swap slot, moving it to held or open inventory slot");
                 if (RR_SwapSlot.IsItemHeld())
                 {
                     RR_SwapSlot.Instance.SwapSlotToOpenInvSlot();
@@ -58,6 +56,5 @@ namespace RadRefinements
     {
         public bool swapSlotHasItem;
         public int mapSlotIndex;
-    }
-    
+    }    
 }

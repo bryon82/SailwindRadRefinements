@@ -88,6 +88,7 @@
     <Compile Include="Patches\ClockPatches.cs" />
     <Compile Include="Patches\CompassPatches.cs" />
     <Compile Include="Patches\CratePatches.cs" />
+    <Compile Include="Patches\ElixirPatches.cs" />
     <Compile Include="Patches\FishingPatches.cs" />
     <Compile Include="Patches\HeldItemPatches.cs" />
     <Compile Include="Patches\InventoryPatches.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="RR_Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\CompassRose.cs" />
+    <Compile Include="Utilities\Configs.cs" />
     <Compile Include="Utilities\Extensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

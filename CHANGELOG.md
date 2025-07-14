@@ -2,35 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v1.0.14] - next release
+## [v1.0.14] - 2025-07-14
 
 ### Added
 - Faster fish will increase tension on the fishing line.
+- Distinct colors to Energy Elixir (blue) and Snake Oil (brown).
+- Configuration options to enable/disable new features.
 
 ## [v1.0.13] - 2025-04-12
 
 ### Added
-- Text that shows all the items in a crates inventory and their respective counts. Text will only show when assigned key is held down
-- Configuration option for the key to show inventory counts
+- Text that shows all the items in a crates inventory and their respective counts. Text will only show when assigned key is held down.
+- Configuration option for the key to show inventory counts.
 
 ## [v1.0.12] - 2025-04-10
 
 ### Fixed
-- Bug that caused multiple FishMovement components
+- Bug that caused multiple FishMovement components.
 
 ## [v1.0.11] - 2025-04-10
 
 ### Fixed
-- Bug that caused NREs when cutting containers
+- Bug that caused NREs when cutting containers.
 
 ## [v1.0.10] - 2025-04-10
 
 ### Fixed
-- Bug that made the cut control text not show when looking at some cuttable containers
-- Bug that caused NREs when cutting fruit
+- Bug that made the cut control text not show when looking at some cuttable containers.
+- Bug that caused NREs when cutting fruit.
 
 ### Removed
-- Debug logging that was used for testing
+- Debug logging that was used for testing.
 
 ## [v1.0.9] - 2025-04-10
 
@@ -41,15 +43,15 @@ All notable changes to this project will be documented in this file.
 ## [v1.0.8] - 2025-04-09
 
 ### Added
-- Control text showing that you can cut a container to turn it into firewood
-- Configuration options to enable/disable the crate inventory count text and the ability to turn containers into firewood
-- Configuration option to disable the hint text for items. Currently only the knife and fishing hooks
+- Control text showing that you can cut a container to turn it into firewood.
+- Configuration options to enable/disable the crate inventory count text and the ability to turn containers into firewood.
+- Configuration option to disable the hint text for items. Currently only the knife and fishing hooks.
 
 ## [v1.0.7] - 2025-04-08
 
 ### Added
-- The ability to break up an empty crate, tobacco box, candle box, or standard size barrel into firewood with a knife
-- Item quantity to crate look text
+- The ability to break up an empty crate, tobacco box, candle box, or standard size barrel into firewood with a knife.
+- Item quantity to crate look text.
 
 ## [v1.0.6] - 2025-04-04
 
@@ -65,21 +67,21 @@ All notable changes to this project will be documented in this file.
 ## [v1.0.5] - 2025-03-31
 
 ### Added
-- Option to view compass reading text while holding compass
-- Files for MVC support
+- Option to view compass reading text while holding compass.
+- Files for MVC support.
 
 ## [v1.0.3] - 2025-03-30
 
 ### Added
-- Item descriptions when looked at in a crate
+- Item descriptions when looked at in a crate.
 
 ### Fixed
-- Save serialization bug
+- Save serialization bug.
 
 ## [v1.0.2] - 2025-03-29
 
 ### Added
-- Added cardinal direction text option to compass reading text with options for level of cardinal directions
+- Added cardinal direction text option to compass reading text with options for level of cardinal directions.
 
 ## [v1.0.1] - 2025-03-28
 

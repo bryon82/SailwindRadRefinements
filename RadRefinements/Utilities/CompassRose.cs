@@ -9,7 +9,7 @@ namespace RadRefinements
             if (precision == 4)
             {
                 string[] directions = { "North", "East", "South", "West", "North" };
-                int index = (int)Math.Round(degrees / 90.0) % 4;
+                var index = (int)Math.Round(degrees / 90.0) % 4;
                 return directions[index];
             }
             else if (precision == 8)
@@ -18,7 +18,7 @@ namespace RadRefinements
                         "North", "Northeast", "East", "Southeast",
                         "South", "Southwest", "West", "Northwest", "North"
                     };
-                int index = (int)Math.Round(degrees / 45.0) % 8;
+                var index = (int)Math.Round(degrees / 45.0) % 8;
                 return directions[index];
             }
             else if (precision == 16)
@@ -29,7 +29,7 @@ namespace RadRefinements
                         "South", "South-southwest", "Southwest", "West-southwest",
                         "West", "West-northwest", "Northwest", "North-northwest", "North"
                     };
-                int index = (int)Math.Round(degrees / 22.5) % 16;
+                var index = (int)Math.Round(degrees / 22.5) % 16;
                 return directions[index];
             }
             else // precision == 32
@@ -44,7 +44,7 @@ namespace RadRefinements
                         "West", "West by north", "West-northwest", "Northwest by west",
                         "Northwest", "Northwest by north", "North-northwest", "North by west", "North"
                     };
-                int index = (int)Math.Round(degrees / 11.25) % 32;
+                var index = (int)Math.Round(degrees / 11.25) % 32;
                 return directions[index];
             }
         }

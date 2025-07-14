@@ -4,7 +4,7 @@ namespace RadRefinements
 {
     internal class SpyglassPatches
     {
-        internal static bool heldAndUp = false;
+        internal static bool HeldAndUp { get; private set; } = false;
 
         [HarmonyPatch(typeof(ShipItemSpyglass))]
         private static class ShipItemSpyglassPatches
@@ -15,11 +15,11 @@ namespace RadRefinements
             {
                 if (__instance.sold && ___heldRotationOffset == -22f)
                 {
-                    heldAndUp = true;
+                    HeldAndUp = true;
                 }
                 else
                 {
-                    heldAndUp = false;
+                    HeldAndUp = false;
                 }
             }
 
@@ -29,11 +29,11 @@ namespace RadRefinements
             {
                 if (__instance.sold && ___heldRotationOffset == 0f)
                 {
-                    heldAndUp = true;
+                    HeldAndUp = true;
                 }
                 else
                 {
-                    heldAndUp = false;
+                    HeldAndUp = false;
                 }
             }
 
@@ -41,14 +41,14 @@ namespace RadRefinements
             [HarmonyPatch("OnEnterInventory")]
             public static void EnableItemReadingsInventory()
             {
-                heldAndUp = false;
+                HeldAndUp = false;
             }
 
             [HarmonyPostfix]
             [HarmonyPatch("OnDrop")]
             public static void EnableItemReadingsDrop()
             {
-                heldAndUp = false;
+                HeldAndUp = false;
             }
         }
     }

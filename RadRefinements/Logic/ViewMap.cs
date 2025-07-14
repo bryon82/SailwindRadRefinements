@@ -1,11 +1,10 @@
-﻿using BepInEx.Logging;
-using System.Linq;
+﻿using System.Linq;
+using static RadRefinements.RR_Plugin;
 
 namespace RadRefinements
 {
     internal class ViewMap
     {
-        private static readonly ManualLogSource logger = RR_Plugin.logger;
 
         public static string[] MapNames = 
         {
@@ -39,13 +38,13 @@ namespace RadRefinements
 
         public static void ToggleMap()
         {
-            var goPointer = RR_SwapSlot.goPntr;
+            var goPointer = RR_SwapSlot.GoPntr;
             var heldItem = goPointer.GetHeldItem();
 
             var mapName = heldItem?.GetComponent<ShipItem>()?.name;
             if (heldItem && MapNames.Contains(mapName))
             {
-                logger.LogDebug($"Stowing map: {mapName}");                
+                LogDebug($"Stowing map: {mapName}");                
                 QuickSlots.StowItem(_mapSlotIndex, heldItem, goPointer);
             }
             else
@@ -53,7 +52,7 @@ namespace RadRefinements
                 var mapSlotIndexFound = GetMapSlotIndex();
                 if (!mapSlotIndexFound)
                     return;
-                logger.LogDebug($"Displaying map: {GPButtonInventorySlot.inventorySlots[_mapSlotIndex].currentItem.name}");
+                LogDebug($"Displaying map: {GPButtonInventorySlot.inventorySlots[_mapSlotIndex].currentItem.name}");
                 QuickSlots.GetInventoryItem(_mapSlotIndex, heldItem, goPointer);
                 var map = goPointer.GetHeldItem().GetComponent<ShipItemFoldable>();
                 if (map.amount > 0f)

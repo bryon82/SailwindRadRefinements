@@ -1,6 +1,7 @@
 ﻿using cakeslice;
 using HarmonyLib;
 using UnityEngine;
+using static RadRefinements.Configs;
 
 namespace RadRefinements
 {
@@ -13,17 +14,17 @@ namespace RadRefinements
             [HarmonyPatch("RegisterPointer")]
             public static void GetPointer(GoPointer goPointer)
             {
-                RR_SwapSlot.goPntr = goPointer;
+                RR_SwapSlot.GoPntr = goPointer;
             }
 
             [HarmonyPostfix]
             [HarmonyPatch("LateUpdate")]
             public static void ToggleQuickMap()
             {
-                if (!RR_Plugin.enableQuickMap.Value || GameState.wasInSettingsMenu)
+                if (!enableQuickMap.Value || GameState.wasInSettingsMenu)
                     return;
 
-                if (Input.GetKeyDown(RR_Plugin.quickMapKey.Value))
+                if (Input.GetKeyDown(quickMapKey.Value))
                 {
                     ViewMap.ToggleMap();
                 }
@@ -33,26 +34,26 @@ namespace RadRefinements
             [HarmonyPatch("LateUpdate")]
             public static void ToggleQuickSlot()
             {
-                if (!RR_Plugin.enableQuickSlots.Value || GameState.wasInSettingsMenu)
+                if (!enableQuickSlots.Value || GameState.wasInSettingsMenu)
                     return;
 
-                if (Input.GetKeyDown(RR_Plugin.quickSlot1Key.Value))
+                if (Input.GetKeyDown(quickSlot1Key.Value))
                 {
                     QuickSlots.ToggleInventoryItem(0);
                 }
-                if (Input.GetKeyDown(RR_Plugin.quickSlot2Key.Value))
+                if (Input.GetKeyDown(quickSlot2Key.Value))
                 {
                     QuickSlots.ToggleInventoryItem(1);
                 }
-                if (Input.GetKeyDown(RR_Plugin.quickSlot3Key.Value))
+                if (Input.GetKeyDown(quickSlot3Key.Value))
                 {
                     QuickSlots.ToggleInventoryItem(2);
                 }
-                if (Input.GetKeyDown(RR_Plugin.quickSlot4Key.Value))
+                if (Input.GetKeyDown(quickSlot4Key.Value))
                 {
                     QuickSlots.ToggleInventoryItem(3);
                 }
-                if (Input.GetKeyDown(RR_Plugin.quickSlot5Key.Value))
+                if (Input.GetKeyDown(quickSlot5Key.Value))
                 {
                     QuickSlots.ToggleInventoryItem(4);
                 }
@@ -87,7 +88,7 @@ namespace RadRefinements
             [HarmonyPatch("OnItemClick")]
             public static void OnItemClickSwapItems(PickupableItem heldItem, ShipItem ___currentItem, GPButtonInventorySlot __instance)
             {
-                if (!RR_Plugin.enableInventorySwap.Value || !(bool)___currentItem)
+                if (!enableInventorySwap.Value || !(bool)___currentItem)
                     return;
 
                 RR_SwapSlot.Instance.SwapItems(heldItem, __instance);
@@ -101,7 +102,7 @@ namespace RadRefinements
             [HarmonyPatch("Update")]
             public static void AddItemDescription(CrateInventoryButton[] ___buttons)
             {
-                if (!RR_Plugin.enableCrateItemDescription.Value)
+                if (!enableCrateItemDescription.Value)
                     return;
 
                 foreach (var button in ___buttons)

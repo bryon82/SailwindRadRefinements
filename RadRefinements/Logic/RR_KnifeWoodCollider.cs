@@ -1,13 +1,12 @@
-﻿using BepInEx.Logging;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
+using static RadRefinements.RR_Plugin;
 
 namespace RadRefinements
 {
     internal class RR_KnifeWoodCollider : MonoBehaviour
     {
-        private static readonly ManualLogSource logger = RR_Plugin.logger;
-        public ShipItem currentWood;
+        public ShipItem CurrentWood { get; private set; }
 
         private void Awake()
         {
@@ -16,11 +15,11 @@ namespace RadRefinements
 
         public void OnTriggerEnter(Collider other)
         {
-            ShipItem component = other.GetComponent<ShipItem>();
+            var component = other.GetComponent<ShipItem>();
             if (component == null)
                 return;
 
-            logger.LogDebug("KnifeCollider: entering wood col: " + component.name);
+            LogDebug("KnifeCollider: entering wood col: " + component.name);
             if ((component is ShipItemBottle && component.health <= 0) ||
             (component is ShipItemCrate &&
             component.gameObject
@@ -28,16 +27,14 @@ namespace RadRefinements
                 ?.GetPrivateField<CrateInventory>("crateInventory")
                 ?.containedItems.Count() <= 0))
             {
-                currentWood = component;
+                CurrentWood = component;
             }
         }
 
         public void OnTriggerExit(Collider other)
         {
-            if (other.GetComponent<ShipItem>() == currentWood)
-            {
-                currentWood = null;
-            }
+            if (other.GetComponent<ShipItem>() == CurrentWood)            
+                CurrentWood = null;            
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Crest;
 using HarmonyLib;
 using UnityEngine;
+using static RadRefinements.Configs;
 
 namespace RadRefinements.Patches
 {
@@ -13,7 +14,7 @@ namespace RadRefinements.Patches
             [HarmonyPatch("OnLoad")]
             public static void OnLoadRemoveDescription(ShipItem __instance)
             {
-                if (!RR_Plugin.removeItemHints.Value || !__instance.sold || !(__instance is ShipItemFishingHook))
+                if (!removeItemHints.Value || !__instance.sold || !(__instance is ShipItemFishingHook))
                     return;
                 
                 __instance.description = "";                
@@ -23,7 +24,7 @@ namespace RadRefinements.Patches
             [HarmonyPatch("EnterBoat")]
             public static void EnterBoatRemoveDescription(ShipItem __instance)
             {
-                if (!RR_Plugin.removeItemHints.Value || !__instance.sold || !(__instance is ShipItemFishingHook))
+                if (!removeItemHints.Value || !__instance.sold || !(__instance is ShipItemFishingHook))
                     return;
 
                 __instance.description = "";
@@ -37,7 +38,7 @@ namespace RadRefinements.Patches
             [HarmonyPatch("Awake")]
             public static void SetFishMovement(FishingRodFish __instance)
             {
-                if (!RR_Plugin.enableFishMovement.Value)
+                if (!enableFishMovement.Value)
                     return;
                 
                 var fishMovement = __instance.gameObject.AddComponent<RR_FishMovement>();
@@ -67,10 +68,11 @@ namespace RadRefinements.Patches
                 ref bool ___shakePong,
                 ref float ___snapTimer)
             {
-                if (!___rod.sold)
-                {
-                    return false;
-                }
+                if (!enableFishTension.Value)
+                    return true;
+                
+                if (!___rod.sold)                
+                    return false;                
 
                 if (__instance.currentFish != null)
                 {

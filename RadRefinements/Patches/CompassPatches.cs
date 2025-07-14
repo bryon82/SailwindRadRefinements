@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using static RadRefinements.Configs;
 
 namespace RadRefinements
 {
@@ -35,7 +36,7 @@ namespace RadRefinements
             [HarmonyPatch("ExtraLateUpdate")]
             public static void AddReading(ShipItemCompass __instance)
             {
-                if ((!RR_Plugin.enableCompassDegreesText.Value && !RR_Plugin.enableCompassCardinalText.Value) ||
+                if ((!enableCompassDegreesText.Value && !enableCompassCardinalText.Value) ||
                     !GameState.playing ||
                     GameState.currentlyLoading ||
                     GameState.loadingBoatLocalItems ||
@@ -46,12 +47,12 @@ namespace RadRefinements
                 if (text == null)
                     return;
 
-                if ((__instance.held != null && !RR_Plugin.enableCompassReadingHeld.Value) ||
+                if ((__instance.held != null && !enableCompassReadingHeld.Value) ||
                     !__instance.sold ||
                     __instance.gameObject.layer == 5 ||
                     __instance.currentActualBoat == null ||
-                    Vector3.Distance(Refs.observerMirror.transform.position, __instance.transform.position) > RR_Plugin.compassViewableDistance.Value ||
-                    SpyglassPatches.heldAndUp)
+                    Vector3.Distance(Refs.observerMirror.transform.position, __instance.transform.position) > compassViewableDistance.Value ||
+                    SpyglassPatches.HeldAndUp)
                 {
                     text.gameObject.SetActive(false);
                     return;
@@ -67,17 +68,17 @@ namespace RadRefinements
 
             private static string GetReading(float reading)
             {
-                if (!RR_Plugin.enableCompassCardinalText.Value)
+                if (!enableCompassCardinalText.Value)
                 {
                     return $"{Math.Round(reading)}°";
                 }
 
-                if (!RR_Plugin.enableCompassDegreesText.Value)
+                if (!enableCompassDegreesText.Value)
                 {
-                    return CompassRose.GetAbbreviatedDirection(reading, RR_Plugin.compassCardinalPrecisionLevel.Value);
+                    return CompassRose.GetAbbreviatedDirection(reading, compassCardinalPrecisionLevel.Value);
                 }
 
-                return $"{CompassRose.GetAbbreviatedDirection(reading, RR_Plugin.compassCardinalPrecisionLevel.Value)}\n{Math.Round(reading)}°";
+                return $"{CompassRose.GetAbbreviatedDirection(reading, compassCardinalPrecisionLevel.Value)}\n{Math.Round(reading)}°";
             }
         }
     }

@@ -1,13 +1,13 @@
-﻿using BepInEx.Logging;
-using Crest;
+﻿using Crest;
 using System.Collections.Generic;
 using UnityEngine;
+using static RadRefinements.RR_Plugin;
 
 namespace RadRefinements
 {
     internal class RR_FishMovement : MonoBehaviour
     {
-        public struct FishProperties
+        public readonly struct FishProperties
         {
             public float Force { get; }
             public float Tension { get; }
@@ -18,8 +18,6 @@ namespace RadRefinements
                 Tension = tension;
             }
         }
-
-        private static readonly ManualLogSource logger = RR_Plugin.logger;
 
         private static readonly Dictionary<string, FishProperties> _fishData = new Dictionary<string, FishProperties>
         {
@@ -38,7 +36,7 @@ namespace RadRefinements
             { "140 gold albacore", new FishProperties(32f, 0.7f) },
         };
 
-        private float _t;
+        private float _timer;
         private float _fishForce;
         private FishingRodFish _fish;
 
@@ -50,7 +48,7 @@ namespace RadRefinements
 
         private void Awake()
         {
-            _t = 0f;
+            _timer = 0f;
             _fishForce = 0f;
         }
 
@@ -85,21 +83,21 @@ namespace RadRefinements
                 else
                 {
                     _fishForce = 10f;
-                    logger.LogWarning($"{_fish.currentFish.name} not found");
+                    LogWarning($"{_fish.currentFish.name} not found");
                 }
             }
 
-            if (_t <= 0f)
+            if (_timer <= 0f)
             {
                 _fishForce = -_fishForce;
-                _t = 10f + Random.Range(0, 0.3f * _fishForce);
+                _timer = 10f + Random.Range(0, 0.3f * _fishForce);
             }
             floater.SetPrivateField("_buoyancyCoeff", 1f);
             bobber.AddRelativeForce(Vector3.right * _fishForce);
             bobber.AddRelativeForce(Vector3.forward * Random.Range(0f, 5f));
             bobber.AddRelativeForce(Vector3.up * Random.Range(-3f, 0));
 
-            _t -= 2f * Time.deltaTime;
+            _timer -= 2f * Time.deltaTime;
         }
 
         public static float FishTension(string fishName)
@@ -110,7 +108,7 @@ namespace RadRefinements
             }
             else
             {
-                logger.LogWarning($"{fishName} not found in fish data.");
+                LogWarning($"{fishName} not found in fish data.");
                 return 0.95f;
             }
         }

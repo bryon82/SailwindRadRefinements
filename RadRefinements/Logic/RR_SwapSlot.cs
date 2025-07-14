@@ -1,18 +1,15 @@
-﻿
-using BepInEx.Logging;
-using System.Collections;
+﻿using System.Collections;
 using System.Linq;
 using UnityEngine;
+using static RadRefinements.RR_Plugin;
 
 namespace RadRefinements
 {
     internal class RR_SwapSlot : MonoBehaviour
     {
         public static RR_SwapSlot Instance { get; private set; }
-        private static readonly ManualLogSource logger = RR_Plugin.logger;
-
-        internal static GPButtonInventorySlot slot;
-        internal static GoPointer goPntr;        
+        internal static GPButtonInventorySlot Slot { get; private set; }
+        internal static GoPointer GoPntr { get; set; }        
 
         private void Awake()
         {
@@ -22,12 +19,12 @@ namespace RadRefinements
                 return;
             }
             Instance = this;
-            slot = new GPButtonInventorySlot();
+            Slot = new GPButtonInventorySlot();
         }
 
         public void SwapItems(PickupableItem item, GPButtonInventorySlot invSlot)
         {
-            ShipItem component = item.GetComponent<ShipItem>();
+            var component = item.GetComponent<ShipItem>();
             if (!component.sold)
             {
                 return;
@@ -35,19 +32,19 @@ namespace RadRefinements
 
             if ((bool)component && !component.big)
             {
-                ShipItemBottle component2 = item.GetComponent<ShipItemBottle>();
+                var component2 = item.GetComponent<ShipItemBottle>();
                 if ((bool)component2 && component2.GetCapacity() > 10f)
                 {
                     return;
                 }
 
                 // insert into swap slot
-                logger.LogDebug($"Inserting {component.name} into swap slot.");
-                slot.currentItem = component;
+                LogDebug($"Inserting {component.name} into swap slot.");
+                Slot.currentItem = component;
                 item.held = null;
                 component.GetComponent<Collider>().enabled = false;
-                slot.currentItem.gameObject.layer = 5;
-                Transform[] componentsInChildren = slot.currentItem.GetComponentsInChildren<Transform>(true);
+                Slot.currentItem.gameObject.layer = 5;
+                Transform[] componentsInChildren = Slot.currentItem.GetComponentsInChildren<Transform>(true);
                 for (int i = 0; i < componentsInChildren.Length; i++)
                 {
                     componentsInChildren[i].gameObject.layer = 5;
@@ -55,20 +52,20 @@ namespace RadRefinements
 
                 // withdraw from inventory slot                
                 var storedItem = invSlot.currentItem;
-                logger.LogDebug($"Withdrawing {storedItem.name} from inventory slot.");
-                goPntr.PickUpItem(storedItem);
+                LogDebug($"Withdrawing {storedItem.name} from inventory slot.");
+                GoPntr.PickUpItem(storedItem);
                 StartCoroutine(GrabItem(storedItem));
 
                 // move from swap slot to inventory slot
-                logger.LogDebug($"Moving {slot.currentItem.name} from swap slot to inventory slot.");
+                LogDebug($"Moving {Slot.currentItem.name} from swap slot to inventory slot.");
                 Debug.Log("Inserting item.");
-                slot.currentItem.GetItemRigidbody().EnterInventorySlot(invSlot.transform);
-                invSlot.currentItem = slot.currentItem;
+                Slot.currentItem.GetItemRigidbody().EnterInventorySlot(invSlot.transform);
+                invSlot.currentItem = Slot.currentItem;
                 UISoundPlayer.instance.PlayUISound(UISounds.itemInventoryIn, 0.2f, 1.36f);
                 //invSlot.InsertItem(slot.currentItem); // used internals above to lower sound effect volume
-                slot.currentItem = null;
+                Slot.currentItem = null;
 
-                logger.LogDebug("Items Swapped");
+                LogDebug("Items Swapped");
             }
         }
 
@@ -76,35 +73,35 @@ namespace RadRefinements
         {
             yield return new WaitForEndOfFrame();
             
-            goPntr.SetPrivateField("heldItem",item);
+            GoPntr.SetPrivateField("heldItem",item);
             item.gameObject.layer = 2;
-            goPntr.GetPrivateField<PickupableItem>("heldItem").held = goPntr;
-            goPntr.SetPrivateField("heldItemRot", Vector3.zero);
-            goPntr.SetPrivateField("timerAfterPickup", 0f);
+            GoPntr.GetPrivateField<PickupableItem>("heldItem").held = GoPntr;
+            GoPntr.SetPrivateField("heldItemRot", Vector3.zero);
+            GoPntr.SetPrivateField("timerAfterPickup", 0f);
             item.OnPickup();
             //goPntr.PickUpItem(item); // used internals above to remove sound effect
-            goPntr.transform.parent.GetComponent<LookUI>().SetPrivateField("currentButton", item.gameObject); 
+            GoPntr.transform.parent.GetComponent<LookUI>().SetPrivateField("currentButton", item.gameObject); 
         }
 
         internal static bool IsItemHeld()
         {
-            return goPntr.GetHeldItem() != null;
+            return GoPntr.GetHeldItem() != null;
         }
 
         internal void WithdrawFromSwapSlot()
         {
-            var storedItem = slot.currentItem;
-            logger.LogDebug($"Withdrawing {storedItem.name} from inventory slot.");
-            goPntr.PickUpItem(storedItem);
+            var storedItem = Slot.currentItem;
+            LogDebug($"Withdrawing {storedItem.name} from inventory slot.");
+            GoPntr.PickUpItem(storedItem);
             StartCoroutine(GrabItem(storedItem));
         }
 
         internal void SwapSlotToOpenInvSlot()
         {
             var openInvSlot = GPButtonInventorySlot.inventorySlots.FirstOrDefault(s => s.currentItem == null);
-            slot.currentItem.GetItemRigidbody().EnterInventorySlot(openInvSlot.transform);
-            openInvSlot.currentItem = slot.currentItem;
-            slot.currentItem = null;
+            Slot.currentItem.GetItemRigidbody().EnterInventorySlot(openInvSlot.transform);
+            openInvSlot.currentItem = Slot.currentItem;
+            Slot.currentItem = null;
         }
     }
 }

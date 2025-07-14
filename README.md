@@ -21,11 +21,11 @@ QOL refinements for Sailwind.
 * When looking at an item in a crate, see that item's description.
 * Remove hint text for the knife and fishing hook. This is disabled by default and must be turned on in the config.
 * Fish move when caught instead of remaining motionless. Their speed will depend on their species, faster fish will have more tension on the line.
+* Distinct colors for Energy Elixir and Snake Oil.
 
 ## Configurable
 
-* Enable or disable: inventory swap, quick map, quick slots, crate item description, clock global time text, clock local time text, compass reading while held, compass cardinal direction text, compass degrees text, quadrant text, crate inventory count text, containers into firewood, hint texts for common items, fish movement.
-All but clock local time text and removing the hint texts are defaulted to true.
+* All features can be enabled/disabled.
 * Quick map/slots keys. Defaults to 'M' for map and 1, 2, 3, 4, 5 for inventory quick slots.
 * Distance at which the compass and clock texts are viewable. Defaults to 3 for the compass and 7 for the clock.
 * Number of cardinal directions to give compass reading in (4, 8, 16, or 32). Defaults to 16.

@@ -7,7 +7,7 @@ namespace RadRefinements
 {
     internal class RR_KnifeWood : MonoBehaviour
     {
-        private RR_KnifeWoodCollider knifeWoodCol;
+        private RR_KnifeWoodCollider _knifeWoodCol;
 
         internal static Dictionary<string, int> woodPiecesPerContainer =
             new Dictionary<string, int>
@@ -29,7 +29,7 @@ namespace RadRefinements
 
         public void RegisterKnifeWoodCol(RR_KnifeWoodCollider col)
         {
-            knifeWoodCol = col;
+            _knifeWoodCol = col;
         }
 
         internal void CutContainer(ShipItem container)
@@ -46,10 +46,10 @@ namespace RadRefinements
 
             var key = container.gameObject.GetComponent<Good>()?.sizeDescription ?? container.name;
             var numPieces = woodPiecesPerContainer[key];
-            float num = -0.01f * numPieces;
+            var num = -0.01f * numPieces;
             for (int i = 0; i < numPieces; i++)
             {
-                GameObject obj = Instantiate(PrefabsDirectory.instance.directory[71]);
+                var obj = Instantiate(PrefabsDirectory.instance.directory[71]);
                 obj.transform.position = container.transform.position + container.transform.right * num;
                 obj.transform.rotation = container.transform.rotation * Quaternion.Euler(0f, 90f, 0f);
                 num += 0.02f;
