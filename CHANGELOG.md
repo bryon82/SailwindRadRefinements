@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.1.0] - 2025-07-28
+
+### Added
+- Log book will now remember the last section you were in when you closed it and reopen to it.
+- Configuration option to enable/disable new feature.
+
+### Removed
+- All fishing related items as they were not a QOL feature. They have been moved to their own mod Better Fishing!
+
 ## [v1.0.14] - 2025-07-14
 
 ### Added
