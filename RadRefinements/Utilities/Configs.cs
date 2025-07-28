@@ -28,8 +28,6 @@ namespace RadRefinements
         internal static ConfigEntry<bool> enableCrateInvCountText;
         internal static ConfigEntry<KeyCode> crateInvCountTextKey;
         internal static ConfigEntry<bool> removeItemHints;
-        internal static ConfigEntry<bool> enableFishMovement;
-        internal static ConfigEntry<bool> enableFishTension;
         internal static ConfigEntry<bool> enableElixirColors;
 
         internal static void InitializeConfigs()
@@ -58,9 +56,7 @@ namespace RadRefinements
             enableWoodFromContainers = config.Bind("Other Settings", "Enable wood from breaking containers", true, "Allows you to get firewood by breaking containers with a knife.");
             enableCrateInvCountText = config.Bind("Other Settings", "Enable crate total count text", true, "Enables the look text that shows the number of items in a crate.");
             crateInvCountTextKey = config.Bind("Other Settings", "Crate inventory count text key", KeyCode.E, "Crate inventory count text will show when holding this key.");
-            removeItemHints = config.Bind("Other Settings", "Remove item hints", false, "Removes the hint text that appears when you look at a common items (e.g., knife, fishing hook).");
-            enableFishMovement = config.Bind("Other Settings", "Enable fish movement", true, "Enables fish movement when fish caught. Fish will move around instead of just sitting still.");
-            enableFishTension = config.Bind("Other Settings", "Enable fish tension", true, "Enables fish tension based on fish speed. Faster fish will cause more tension on the rod when reeling in.");
+            removeItemHints = config.Bind("Other Settings", "Remove item hints", false, "Removes the hint text that appears when you look at a common items (e.g., knife, fishing hook).");            
             enableElixirColors = config.Bind("Other Settings", "Enable elixir colors", true, "Makes the bottles for Energy Elixir blue and Snake Oil brown.");
         }
     }

@@ -79,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Logic\Crate.cs" />
-    <Compile Include="Logic\RR_FishMovement.cs" />
+    <Compile Include="Logic\RR_BulkEconomyUI.cs" />
     <Compile Include="Logic\RR_KnifeWood.cs" />
     <Compile Include="Logic\RR_KnifeWoodCollider.cs" />
     <Compile Include="Logic\QuickSlots.cs" />
@@ -88,11 +88,13 @@
     <Compile Include="Patches\ClockPatches.cs" />
     <Compile Include="Patches\CompassPatches.cs" />
     <Compile Include="Patches\CratePatches.cs" />
+    <Compile Include="Patches\EconomyPatches.cs" />
     <Compile Include="Patches\ElixirPatches.cs" />
-    <Compile Include="Patches\FishingPatches.cs" />
+    <Compile Include="Patches\FishingHookPatches.cs" />
     <Compile Include="Patches\HeldItemPatches.cs" />
     <Compile Include="Patches\InventoryPatches.cs" />
     <Compile Include="Patches\KnifePatches.cs" />
+    <Compile Include="Patches\LogBookPatches.cs" />
     <Compile Include="Patches\QuadrantPatches.cs" />
     <Compile Include="Patches\SaveLoadPatches.cs" />
     <Compile Include="Patches\SpyglassPatches.cs" />
