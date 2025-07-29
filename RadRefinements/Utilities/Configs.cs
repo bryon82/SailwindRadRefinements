@@ -29,6 +29,7 @@ namespace RadRefinements
         internal static ConfigEntry<KeyCode> crateInvCountTextKey;
         internal static ConfigEntry<bool> removeItemHints;
         internal static ConfigEntry<bool> enableElixirColors;
+        internal static ConfigEntry<bool> enableLogbookLastSection;
 
         internal static void InitializeConfigs()
         {
@@ -58,6 +59,7 @@ namespace RadRefinements
             crateInvCountTextKey = config.Bind("Other Settings", "Crate inventory count text key", KeyCode.E, "Crate inventory count text will show when holding this key.");
             removeItemHints = config.Bind("Other Settings", "Remove item hints", false, "Removes the hint text that appears when you look at a common items (e.g., knife, fishing hook).");            
             enableElixirColors = config.Bind("Other Settings", "Enable elixir colors", true, "Makes the bottles for Energy Elixir blue and Snake Oil brown.");
+            enableLogbookLastSection = config.Bind("Other Settings", "Logbook remembers last section", true, "Makes the logbook remember the last section you had open so when you reopen it, it opens to that section.");
         }
     }
 }

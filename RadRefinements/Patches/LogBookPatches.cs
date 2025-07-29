@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using static RadRefinements.Configs;
 
 namespace RadRefinements
 {
@@ -13,6 +14,9 @@ namespace RadRefinements
             [HarmonyPatch("ToggleMenu")]
             public static void OpenLastOpenBookmark(MissionListUI __instance, bool ___UIActive)
             {
+                if (!enableLogbookLastSection.Value)
+                    return;
+
                 if (___UIActive)                
                     __instance.SwitchMode((MissionListMode)_currentPage);                
             }
@@ -25,6 +29,9 @@ namespace RadRefinements
             [HarmonyPatch("OnActivate")]
             public static void GetLastActivatedBookmark(MissionListMode ___mode)
             {
+                if (!enableLogbookLastSection.Value)
+                    return;
+
                 _currentPage = (int)___mode;
             }
         }
