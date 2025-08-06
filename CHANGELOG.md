@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.1.1] - 2025-08-06
+
+### Added
+- Empty crates and sealing nails box from BetterFishing mod can be cut by knife for firewood.
+
 ## [v1.1.0] - 2025-07-28
 
 ### Added

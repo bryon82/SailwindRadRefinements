@@ -11,13 +11,13 @@ namespace RadRefinements
     {
         public const string PLUGIN_GUID = "com.raddude82.radrefinements";
         public const string PLUGIN_NAME = "RadRefinements";
-        public const string PLUGIN_VERSION = "1.1.0";
+        public const string PLUGIN_VERSION = "1.1.1";
 
         public const string MODSAVEBACKUPS_GUID = "com.raddude82.modsavebackups";
         public const string MODSAVEBACKUPS_VERSION = "1.1.1";
 
         internal static RR_Plugin Instance { get; private set; }
-        private static ManualLogSource _logger;             
+        private static ManualLogSource _logger;
 
         internal static void LogDebug(string message) => _logger.LogDebug(message);
         internal static void LogInfo(string message) => _logger.LogInfo(message);
@@ -38,5 +38,5 @@ namespace RadRefinements
 
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PLUGIN_GUID);
         }
-    }    
+    }
 }
