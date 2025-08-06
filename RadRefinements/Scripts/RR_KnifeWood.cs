@@ -25,6 +25,8 @@ namespace RadRefinements
                 { "black tobacco", 2 },
                 { "brown tobacco", 2 },
                 { "white tobacco", 2 },
+                { "empty crate", 6 },
+                { "sealing nails", 2 },
             };
 
         public void RegisterKnifeWoodCol(RR_KnifeWoodCollider col)
@@ -39,7 +41,8 @@ namespace RadRefinements
                 container.gameObject
                     .GetComponent<ShipItemCrate>()
                     ?.GetPrivateField<CrateInventory>("crateInventory")
-                    ?.containedItems.Count() > 0))
+                    ?.containedItems.Count() > 0) ||
+                container.amount > 0)
             {
                 return;
             }

@@ -79,11 +79,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Logic\Crate.cs" />
-    <Compile Include="Logic\RR_BulkEconomyUI.cs" />
-    <Compile Include="Logic\RR_KnifeWood.cs" />
-    <Compile Include="Logic\RR_KnifeWoodCollider.cs" />
+    <Compile Include="Scripts\RR_BulkEconomyUI.cs" />
+    <Compile Include="Scripts\RR_KnifeWood.cs" />
+    <Compile Include="Scripts\RR_KnifeWoodCollider.cs" />
     <Compile Include="Logic\QuickSlots.cs" />
-    <Compile Include="Logic\RR_SwapSlot.cs" />
+    <Compile Include="Scripts\RR_SwapSlot.cs" />
     <Compile Include="Logic\ViewMap.cs" />
     <Compile Include="Patches\ClockPatches.cs" />
     <Compile Include="Patches\CompassPatches.cs" />
