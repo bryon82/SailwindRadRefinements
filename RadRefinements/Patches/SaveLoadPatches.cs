@@ -16,7 +16,7 @@ namespace RadRefinements
             {
                 var saveContainer = new RadRefinementsSaveContainer
                 {
-                    swapSlotHasItem = RR_SwapSlot.Slot.currentItem != null,
+                    swapSlotHasItem = SwapSlot.Slot.currentItem != null,
                     mapSlotIndex = ViewMap.MapSlotIndex
                 };
 
@@ -38,13 +38,13 @@ namespace RadRefinements
                 if (saveContainer.swapSlotHasItem)
                 {
                     LogWarning("Loaded game with item in swap slot, moving it to held or open inventory slot");
-                    if (RR_SwapSlot.IsItemHeld())
+                    if (SwapSlot.IsItemHeld())
                     {
-                        RR_SwapSlot.Instance.SwapSlotToOpenInvSlot();
+                        SwapSlot.Instance.SwapSlotToOpenInvSlot();
                     }
                     else
                     {
-                        RR_SwapSlot.Instance.WithdrawFromSwapSlot();
+                        SwapSlot.Instance.WithdrawFromSwapSlot();
                     }
                 }
             }

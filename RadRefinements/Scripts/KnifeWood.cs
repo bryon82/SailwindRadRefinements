@@ -1,35 +1,14 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace RadRefinements
 {
-    internal class RR_KnifeWood : MonoBehaviour
+    internal class KnifeWood : MonoBehaviour
     {
-        private RR_KnifeWoodCollider _knifeWoodCol;
-
-        internal static Dictionary<string, int> woodPiecesPerContainer =
-            new Dictionary<string, int>
-            {
-                { "small crate", 4 },
-                { "standard crate", 6 },
-                { "large crate", 8 },
-                { "very large crate", 10 },
-                { "standard barrel", 6 },
-                { "firewood", 4 },
-                { "fishing hooks", 4 },
-                { "lantern candles", 2 },
-                { "green tobacco", 2 },
-                { "blue tobacco", 2 },
-                { "black tobacco", 2 },
-                { "brown tobacco", 2 },
-                { "white tobacco", 2 },
-                { "empty crate", 6 },
-                { "sealing nails", 2 },
-            };
-
-        public void RegisterKnifeWoodCol(RR_KnifeWoodCollider col)
+        private KnifeWoodCollider _knifeWoodCol;
+        
+        public void RegisterKnifeWoodCol(KnifeWoodCollider col)
         {
             _knifeWoodCol = col;
         }
@@ -48,7 +27,7 @@ namespace RadRefinements
             }
 
             var key = container.gameObject.GetComponent<Good>()?.sizeDescription ?? container.name;
-            var numPieces = woodPiecesPerContainer[key];
+            var numPieces = Knife.WoodPiecesPerContainer[key];
             var num = -0.01f * numPieces;
             for (int i = 0; i < numPieces; i++)
             {

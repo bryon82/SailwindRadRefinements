@@ -31,7 +31,7 @@ namespace RadRefinements
 
         public static void ToggleInventoryItem(int slotIndex)
         {
-            var goPointer = RR_SwapSlot.GoPntr;
+            var goPointer = SwapSlot.GoPntr;
             var heldItem = goPointer.GetHeldItem();
 
             if (heldItem)

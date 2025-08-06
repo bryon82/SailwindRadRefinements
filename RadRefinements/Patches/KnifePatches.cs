@@ -2,7 +2,7 @@
 using UnityEngine;
 using static RadRefinements.Configs;
 
-namespace RadRefinements.Patches
+namespace RadRefinements
 {
     internal class KnifePatches
     {
@@ -24,15 +24,15 @@ namespace RadRefinements.Patches
                 var good = pointedAtItem.gameObject.GetComponent<Good>();
                 var canCut = (bool)pointedAtItem &&
                     pointedAtItem.sold &&
-                    (RR_KnifeWood.woodPiecesPerContainer.ContainsKey(pointedAtItem.name) ||
-                    (good != null && RR_KnifeWood.woodPiecesPerContainer.ContainsKey(good.sizeDescription)));
+                    (Knife.WoodPiecesPerContainer.ContainsKey(pointedAtItem.name) ||
+                    (good != null && Knife.WoodPiecesPerContainer.ContainsKey(good.sizeDescription)));
 
                 if (canCut)
                 {
                     ___animating = true;
                     ___heldRotationOffset = 0f;
                     ___cutTimer = 0.25f;
-                    var knifeWood = __instance.GetComponent<RR_KnifeWood>();
+                    var knifeWood = __instance.GetComponent<KnifeWood>();
                     knifeWood.CutContainer(pointedAtItem.GetComponent<ShipItem>());
                 }
             }
@@ -44,7 +44,7 @@ namespace RadRefinements.Patches
                 if (removeItemHints.Value && __instance.sold)
                     __instance.description = "";
 
-                __instance.gameObject.AddComponent<RR_KnifeWood>();
+                __instance.gameObject.AddComponent<KnifeWood>();
             }
         }
 
@@ -77,8 +77,8 @@ namespace RadRefinements.Patches
                 var shipItem = button.gameObject.GetComponent<ShipItem>();
                 var canCut = (bool)___pointer.GetHeldItem() &&
                     (bool)___pointer.GetHeldItem().GetComponent<ShipItemKnife>() &&
-                    ((shipItem != null && RR_KnifeWood.woodPiecesPerContainer.ContainsKey(shipItem.name)) ||
-                    (good != null && RR_KnifeWood.woodPiecesPerContainer.ContainsKey(good.sizeDescription)));
+                    ((shipItem != null && Knife.WoodPiecesPerContainer.ContainsKey(shipItem.name)) ||
+                    (good != null && Knife.WoodPiecesPerContainer.ContainsKey(good.sizeDescription)));
 
                 if (canCut)
                 {

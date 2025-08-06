@@ -78,13 +78,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logic\Crate.cs" />
-    <Compile Include="Scripts\RR_BulkEconomyUI.cs" />
-    <Compile Include="Scripts\RR_KnifeWood.cs" />
-    <Compile Include="Scripts\RR_KnifeWoodCollider.cs" />
-    <Compile Include="Logic\QuickSlots.cs" />
-    <Compile Include="Scripts\RR_SwapSlot.cs" />
-    <Compile Include="Logic\ViewMap.cs" />
+    <Compile Include="Utilities\Crate.cs" />
+    <Compile Include="Scripts\BulkEconomyUI.cs" />
+    <Compile Include="Scripts\KnifeWood.cs" />
+    <Compile Include="Scripts\KnifeWoodCollider.cs" />
+    <Compile Include="Utilities\Knife.cs" />
+    <Compile Include="Utilities\QuickSlots.cs" />
+    <Compile Include="Scripts\SwapSlot.cs" />
+    <Compile Include="Utilities\ViewMap.cs" />
     <Compile Include="Patches\ClockPatches.cs" />
     <Compile Include="Patches\CompassPatches.cs" />
     <Compile Include="Patches\CratePatches.cs" />

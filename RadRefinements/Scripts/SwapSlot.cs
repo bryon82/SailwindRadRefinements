@@ -5,9 +5,9 @@ using static RadRefinements.RR_Plugin;
 
 namespace RadRefinements
 {
-    internal class RR_SwapSlot : MonoBehaviour
+    internal class SwapSlot : MonoBehaviour
     {
-        public static RR_SwapSlot Instance { get; private set; }
+        public static SwapSlot Instance { get; private set; }
         internal static GPButtonInventorySlot Slot { get; private set; }
         internal static GoPointer GoPntr { get; set; }        
 

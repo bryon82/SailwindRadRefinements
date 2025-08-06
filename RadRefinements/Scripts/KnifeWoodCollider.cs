@@ -4,13 +4,13 @@ using static RadRefinements.RR_Plugin;
 
 namespace RadRefinements
 {
-    internal class RR_KnifeWoodCollider : MonoBehaviour
+    internal class KnifeWoodCollider : MonoBehaviour
     {
         public ShipItem CurrentWood { get; private set; }
 
         private void Awake()
         {
-            base.transform.parent.GetComponent<RR_KnifeWood>().RegisterKnifeWoodCol(this);
+            base.transform.parent.GetComponent<KnifeWood>().RegisterKnifeWoodCol(this);
         }
 
         public void OnTriggerEnter(Collider other)

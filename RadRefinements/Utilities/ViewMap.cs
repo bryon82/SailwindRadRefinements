@@ -38,7 +38,7 @@ namespace RadRefinements
 
         public static void ToggleMap()
         {
-            var goPointer = RR_SwapSlot.GoPntr;
+            var goPointer = SwapSlot.GoPntr;
             var heldItem = goPointer.GetHeldItem();
 
             var mapName = heldItem?.GetComponent<ShipItem>()?.name;
