@@ -14,7 +14,7 @@ namespace RadRefinements
             [HarmonyPatch("RegisterPointer")]
             public static void GetPointer(GoPointer goPointer)
             {
-                RR_SwapSlot.GoPntr = goPointer;
+                SwapSlot.GoPntr = goPointer;
             }
 
             [HarmonyPostfix]
@@ -80,7 +80,7 @@ namespace RadRefinements
                     Object.Destroy(swapSlot.GetComponent<SphereCollider>());
                     Object.Destroy(swapSlot.GetComponent<GPButtonInventorySlot>());
                     Object.Destroy(swapSlot.GetComponent<Outline>());
-                    swapSlot.gameObject.AddComponent<RR_SwapSlot>();
+                    swapSlot.gameObject.AddComponent<SwapSlot>();
                 }
             }
 
@@ -91,7 +91,7 @@ namespace RadRefinements
                 if (!enableInventorySwap.Value || !(bool)___currentItem)
                     return;
 
-                RR_SwapSlot.Instance.SwapItems(heldItem, __instance);
+                SwapSlot.Instance.SwapItems(heldItem, __instance);
             }
         }
 
