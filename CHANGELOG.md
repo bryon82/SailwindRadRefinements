@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.1.2] - 2025-08-06
+
+### Added
+- Smoke the pipe with one activate click/press instead of holding it down. Will continue to smoke until another activate click/press or the bowl is empty. Default disabled.
+
 ## [v1.1.1] - 2025-08-06
 
 ### Added

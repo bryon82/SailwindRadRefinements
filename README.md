@@ -21,6 +21,7 @@ QOL refinements for Sailwind.
 * When looking at an item in a crate, see that item's description.
 * Remove hint text for the knife and fishing hook. This is disabled by default and must be turned on in the config.
 * Distinct colors for Energy Elixir and Snake Oil.
+* Smoke the pipe with one activate click/press instead of holding it down. Will continue to smoke until another activate click/press or the bowl is empty. Default disabled.
 
 ## Configurable
 

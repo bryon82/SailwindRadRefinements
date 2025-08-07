@@ -30,6 +30,7 @@ namespace RadRefinements
         internal static ConfigEntry<bool> removeItemHints;
         internal static ConfigEntry<bool> enableElixirColors;
         internal static ConfigEntry<bool> enableLogbookLastSection;
+        internal static ConfigEntry<bool> enableSingleClickSmoking;
 
         internal static void InitializeConfigs()
         {
@@ -60,6 +61,7 @@ namespace RadRefinements
             removeItemHints = config.Bind("Other Settings", "Remove item hints", false, "Removes the hint text that appears when you look at a common items (e.g., knife, fishing hook).");            
             enableElixirColors = config.Bind("Other Settings", "Enable elixir colors", true, "Makes the bottles for Energy Elixir blue and Snake Oil brown.");
             enableLogbookLastSection = config.Bind("Other Settings", "Logbook remembers last section", true, "Makes the logbook remember the last section you had open so when you reopen it, it opens to that section.");
+            enableSingleClickSmoking = config.Bind("Other Settings", "Enable single click smoking", false, "Allows you to smoke a pipe with a single click instead of having to hold the button down.");
         }
     }
 }
