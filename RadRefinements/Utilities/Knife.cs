@@ -2,13 +2,10 @@
 
 namespace RadRefinements
 {
-    internal class Knife
+    public class Knife
     {
-        internal static Dictionary<string, int> WoodPiecesPerContainer
-        {
-            get
-            {
-                return new Dictionary<string, int>
+        private static readonly Dictionary<string, int> _woodPiecesPerContainer =
+            new Dictionary<string, int>
                 {
                     { "small crate", 4 },
                     { "standard crate", 6 },
@@ -25,8 +22,11 @@ namespace RadRefinements
                     { "white tobacco", 2 },
                     { "empty crate", 6 },
                     { "sealing nails", 2 },
+                    { "spoon lures", 2 },
+                    { "swimbait lures", 2 },
+                    { "topwater lures", 2 },
                 };
-            }
-        }
+
+        public static Dictionary<string, int> WoodPiecesPerContainer => _woodPiecesPerContainer;
     }
 }

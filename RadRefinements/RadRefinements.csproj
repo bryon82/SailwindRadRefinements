@@ -93,7 +93,6 @@
     <Compile Include="Patches\EconomyPatches.cs" />
     <Compile Include="Patches\ElixirPatches.cs" />
     <Compile Include="Patches\FishingHookPatches.cs" />
-    <Compile Include="Patches\HeldItemPatches.cs" />
     <Compile Include="Patches\InventoryPatches.cs" />
     <Compile Include="Patches\KnifePatches.cs" />
     <Compile Include="Patches\LogBookPatches.cs" />

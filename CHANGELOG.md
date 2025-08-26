@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.1.3] - 2025-08-26
+
+### Added
+- Ability to cut new BetterFishing lure crates.
+
+### Fixed
+- Bug that can occur with water barrels that makes them not able to be cut even though they are empty.
+
 ## [v1.1.2] - 2025-08-06
 
 ### Added
