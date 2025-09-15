@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.1.4] - 2025-09-15
+
+### Added
+- Ability to cut coffee and tea boxes.
+
 ## [v1.1.3] - 2025-08-26
 
 ### Added

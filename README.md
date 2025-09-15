@@ -16,7 +16,7 @@ QOL refinements for Sailwind.
 
 ## Other Refinements
 
-* You can break an empty crate, tobacco box, candle box, or standard size barrel into firewood with a knife.
+* You can break an empty crate, tobacco box, candle box, tea box, coffee box, or standard size barrel into firewood with a knife.
 * When looking at a crate that has been opened, you can see how many items are in the crate or hold down assigned key (default E) to see all items and how many there are.
 * When looking at an item in a crate, see that item's description.
 * Remove hint text for the knife and fishing hook. This is disabled by default and must be turned on in the config.
