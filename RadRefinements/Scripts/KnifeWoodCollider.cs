@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using static RadRefinements.RR_Plugin;
 
 namespace RadRefinements
@@ -25,7 +24,7 @@ namespace RadRefinements
             component.gameObject
                 .GetComponent<ShipItemCrate>()
                 ?.GetPrivateField<CrateInventory>("crateInventory")
-                ?.containedItems.Count() <= 0))
+                ?.containedItems.Count <= 0))
             {
                 CurrentWood = component;
             }

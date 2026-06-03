@@ -1,6 +1,5 @@
 ﻿using BepInEx;
 using HarmonyLib;
-using System.Linq;
 using UnityEngine;
 using static RadRefinements.Configs;
 
@@ -31,7 +30,7 @@ namespace RadRefinements.Patches
 
                 __instance.lookText = 
                     inventoryText.IsNullOrWhiteSpace() ?
-                    $"{__instance.lookText}\n{___crateInventory.containedItems.Count()} items" : 
+                    $"{__instance.lookText}\n{___crateInventory.containedItems.Count} items" : 
                     inventoryText;
             }
         }

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Linq;
 using UnityEngine;
 
 namespace RadRefinements
@@ -19,7 +18,7 @@ namespace RadRefinements
                 (container is ShipItemBottle && container.health > 0) ||
                 !(container is ShipItemBottle) && container.amount > 0 ||
                 (container is ShipItemCrate crate &&
-                crate.GetPrivateField<CrateInventory>("crateInventory").containedItems.Count() > 0);
+                crate.GetPrivateField<CrateInventory>("crateInventory").containedItems.Count > 0);
             if (containerIsNotEmpty)
                 return;
 

@@ -13,18 +13,13 @@ namespace RadRefinements
             if (crateInventory == null)
                 return string.Empty;
             var containedItems = crateInventory.containedItems;
-            if (containedItems == null || containedItems.Count() == 0)
+            if (containedItems == null || containedItems.Count == 0)
                 return string.Empty;
 
             var invDict = new Dictionary<string, int>();
             foreach (var item in containedItems)
             {
-                var key = item.description;
-                key = key.Contains('<') ? key.Substring(0, key.IndexOf('<')) : key;
-                key = key.Contains('%') ? item.name : key;
-                key = item.name.Equals("fishing hook") ? item.name : key;
-                key = item.name.Equals("knife") ? item.name : key;
-                key = key.IsNullOrWhiteSpace() ? item.name : key;
+                var key = NormalizeKey(item);
                 if (!invDict.ContainsKey(key))
                 {
                     invDict[key] = 1;
@@ -41,6 +36,23 @@ namespace RadRefinements
                 sb.AppendLine($"{pair.Key}: {pair.Value}");
             }
             return sb.ToString();
+        }
+
+        private static string NormalizeKey(ShipItem item)
+        {
+            var name = item.name;
+            var key = item.description;
+            var tagIndex = key.IndexOf('<');
+            if (tagIndex >= 0)
+                key = key.Substring(0, tagIndex);
+
+            if (key.IndexOf('%') >= 0)
+                return name;
+
+            if (name.Equals("fishing hook") || name.Equals("knife"))
+                return name;
+
+            return key.IsNullOrWhiteSpace() ? name : key;
         }
     }
 }

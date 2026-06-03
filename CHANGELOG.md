@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.2.0] - 2026-06-03
+
+### Updated
+- Changed the release process so hopefully some linux users will no longer have issues when unzipping the release file.
+
+### Performance Improvements
+- Changed the way the compass direction reading text is being made so they are allocating arrays each time it is called.
+- Removal of various LINQ usages when not necessary.
+- Remove multiple string operations on same item, instead use quick returns.
+- Caching of game transform instead of finding it at every call.
+
 ## [v1.1.4] - 2025-09-15
 
 ### Added

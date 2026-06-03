@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 using static RadRefinements.Configs;
 
@@ -8,6 +8,8 @@ namespace RadRefinements
 {
     internal class ClockPatches
     {
+        internal static Dictionary<ShipItemClock, Transform> ClockTexts { get; } = new Dictionary<ShipItemClock, Transform>();
+
         [HarmonyPatch(typeof(ShipItem))]
         private class ShipItemPatches
         {
@@ -29,6 +31,7 @@ namespace RadRefinements
                 textObject.GetComponent<TextMesh>().anchor = TextAnchor.UpperCenter;
 
                 textObject.gameObject.SetActive(false);
+                ClockTexts.Add((ShipItemClock)__instance, textObject);
             }
         }
 
@@ -45,17 +48,26 @@ namespace RadRefinements
                     GameState.loadingBoatLocalItems) 
                     return;
 
-                var text = __instance.transform.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "clock_reading_text");
-                if (text == null)
+                if (!ClockTexts.TryGetValue(__instance, out var text))
                     return;
+
+                var observerPosition = Refs.observerMirror.transform.position;
+                var clockPosition = __instance.transform.position;
+                //var textRenderer = text.GetComponent<Renderer>();
+                //var textPosition = textRenderer != null ? textRenderer.bounds.center : text.position;
+                //var directionToText = textPosition - observerPosition;
+                //var distanceToText = directionToText.magnitude;
 
                 if (__instance.held != null ||
                     !__instance.sold ||
                     __instance.gameObject.layer == 5 ||
                     __instance.currentActualBoat == null ||
-                    Vector3.Distance(Refs.observerMirror.transform.position, __instance.transform.position) > clockViewableDistance.Value ||
-                    Vector3.Angle(-__instance.transform.forward, Refs.observerMirror.transform.position - __instance.transform.position) > 85f ||
-                    SpyglassPatches.HeldAndUp)
+                    Vector3.Distance(observerPosition, clockPosition) > clockViewableDistance.Value ||
+                    Vector3.Angle(-__instance.transform.forward, observerPosition - clockPosition) > 85f ||
+                    SpyglassPatches.HeldAndUp)// ||
+                    //(distanceToText > 0.1f &&
+                    //Physics.Raycast(observerPosition, directionToText.normalized, out var hit, distanceToText, ~0, QueryTriggerInteraction.Collide) &&
+                    //!hit.transform.IsChildOf(__instance.transform)))
                 {
                     text.gameObject.SetActive(false);
                     return;
