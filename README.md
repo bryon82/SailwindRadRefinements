@@ -6,13 +6,13 @@ QOL refinements for Sailwind.
 
 * The ability to swap the item held with the one in the selected inventory slot.
 * A quick map button which withdraws and stows the leftmost map in your inventory slots.
-* Quick slot buttons which withdraws from and stows to the selected inventory slot.
 
 ## Instrument Reading Refinements
 
 * On clocks, text that shows the time on clocks in global, local, or both global and local times. Only viewable when the clock face is visible. 
 * On compasses, text that shows the direction the compass is facing in cardinal directions and/or degrees.
 * On quadrants when inspecting, text that shows the angle read.
+* On sun compasses, text that shows the latitude. Only works between the local hours 1100 and 1300 and when in the sunlight.
 
 ## Other Refinements
 
@@ -26,7 +26,7 @@ QOL refinements for Sailwind.
 ## Configurable
 
 * All features can be enabled/disabled.
-* Quick map/slots keys. Defaults to 'M' for map and 1, 2, 3, 4, 5 for inventory quick slots.
+* Quick map key. Defaults to 'M'.
 * Distance at which the compass and clock texts are viewable. Defaults to 3 for the compass and 7 for the clock.
 * Number of cardinal directions to give compass reading in (4, 8, 16, or 32). Defaults to 16.
 * Crate inventory item count Key. Defaulted to E.

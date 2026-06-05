@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.3.0] - 2026-06-05
+
+### Removed
+- QuickSlots as they are now part of the base game.
+
+### Added
+- When holding suncompasses, not in shadow, and between local time 1100 and 1300, text that shows the latitude.
+- Config option to enable/disable sun compass reading text.
+
+### Fixed
+- Error thrown on startup because of the function that was patched change from Update to LateUpdate in LookUI in 0.37. 
+
 ## [v1.2.0] - 2026-06-03
 
 ### Updated

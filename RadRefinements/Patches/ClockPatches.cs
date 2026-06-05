@@ -8,7 +8,7 @@ namespace RadRefinements
 {
     internal class ClockPatches
     {
-        internal static Dictionary<ShipItemClock, Transform> ClockTexts { get; } = new Dictionary<ShipItemClock, Transform>();
+        internal static Dictionary<ShipItemClock, TextMesh> ClockTextMeshes { get; } = new Dictionary<ShipItemClock, TextMesh>();
 
         [HarmonyPatch(typeof(ShipItem))]
         private class ShipItemPatches
@@ -17,7 +17,8 @@ namespace RadRefinements
             [HarmonyPatch("Awake")]
             public static void AddTextMesh(ShipItem __instance)
             {
-                if (__instance.name != "chronometer") return;
+                if (__instance.name != "chronometer")
+                    return;
 
                 var textObject = GameObject.Instantiate(DayLogs.instance.transform.parent.GetChild(0).GetChild(1));
                 textObject.name = "clock_reading_text";
@@ -25,13 +26,14 @@ namespace RadRefinements
                 textObject.gameObject.layer = 0;
                 textObject.localEulerAngles = new Vector3(0, 0, 0);
                 textObject.localPosition = new Vector3(0f, 0.3f, -0.2f);
-                textObject.GetComponent<TextMesh>().color = new Color32(0xDB, 0xD6, 0xC9, 0x88);
-                textObject.GetComponent<TextMesh>().fontSize = 55;
-                textObject.GetComponent<TextMesh>().fontStyle = FontStyle.Bold;
-                textObject.GetComponent<TextMesh>().anchor = TextAnchor.UpperCenter;
+                var textMesh = textObject.GetComponent<TextMesh>();
+                textMesh.color = new Color32(0xDB, 0xD6, 0xC9, 0x88);
+                textMesh.fontSize = 55;
+                textMesh.fontStyle = FontStyle.Bold;
+                textMesh.anchor = TextAnchor.UpperCenter;
 
                 textObject.gameObject.SetActive(false);
-                ClockTexts.Add((ShipItemClock)__instance, textObject);
+                ClockTextMeshes.Add((ShipItemClock)__instance, textMesh);
             }
         }
 
@@ -48,12 +50,12 @@ namespace RadRefinements
                     GameState.loadingBoatLocalItems) 
                     return;
 
-                if (!ClockTexts.TryGetValue(__instance, out var text))
+                if (!ClockTextMeshes.TryGetValue(__instance, out var textMesh))
                     return;
 
                 var observerPosition = Refs.observerMirror.transform.position;
                 var clockPosition = __instance.transform.position;
-                //var textRenderer = text.GetComponent<Renderer>();
+                //var textRenderer = textMesh.GetComponent<Renderer>();
                 //var textPosition = textRenderer != null ? textRenderer.bounds.center : text.position;
                 //var directionToText = textPosition - observerPosition;
                 //var distanceToText = directionToText.magnitude;
@@ -69,12 +71,12 @@ namespace RadRefinements
                     //Physics.Raycast(observerPosition, directionToText.normalized, out var hit, distanceToText, ~0, QueryTriggerInteraction.Collide) &&
                     //!hit.transform.IsChildOf(__instance.transform)))
                 {
-                    text.gameObject.SetActive(false);
+                    textMesh.gameObject.SetActive(false);
                     return;
                 }
 
-                text.GetComponent<TextMesh>().text = GetReading();
-                text.gameObject.SetActive(true);
+                textMesh.text = GetReading();
+                textMesh.gameObject.SetActive(true);
             }
         }
 

@@ -30,34 +30,34 @@ namespace RadRefinements
                 }
             }
 
-            [HarmonyPostfix]
-            [HarmonyPatch("LateUpdate")]
-            public static void ToggleQuickSlot()
-            {
-                if (!enableQuickSlots.Value || GameState.wasInSettingsMenu)
-                    return;
+            //[HarmonyPostfix]
+            //[HarmonyPatch("LateUpdate")]
+            //public static void ToggleQuickSlot()
+            //{
+            //    if (!enableQuickSlots.Value || GameState.wasInSettingsMenu)
+            //        return;
 
-                if (Input.GetKeyDown(quickSlot1Key.Value))
-                {
-                    QuickSlots.ToggleInventoryItem(0);
-                }
-                if (Input.GetKeyDown(quickSlot2Key.Value))
-                {
-                    QuickSlots.ToggleInventoryItem(1);
-                }
-                if (Input.GetKeyDown(quickSlot3Key.Value))
-                {
-                    QuickSlots.ToggleInventoryItem(2);
-                }
-                if (Input.GetKeyDown(quickSlot4Key.Value))
-                {
-                    QuickSlots.ToggleInventoryItem(3);
-                }
-                if (Input.GetKeyDown(quickSlot5Key.Value))
-                {
-                    QuickSlots.ToggleInventoryItem(4);
-                }
-            }
+            //    if (Input.GetKeyDown(quickSlot1Key.Value))
+            //    {
+            //        QuickSlots.ToggleInventoryItem(0);
+            //    }
+            //    if (Input.GetKeyDown(quickSlot2Key.Value))
+            //    {
+            //        QuickSlots.ToggleInventoryItem(1);
+            //    }
+            //    if (Input.GetKeyDown(quickSlot3Key.Value))
+            //    {
+            //        QuickSlots.ToggleInventoryItem(2);
+            //    }
+            //    if (Input.GetKeyDown(quickSlot4Key.Value))
+            //    {
+            //        QuickSlots.ToggleInventoryItem(3);
+            //    }
+            //    if (Input.GetKeyDown(quickSlot5Key.Value))
+            //    {
+            //        QuickSlots.ToggleInventoryItem(4);
+            //    }
+            //}
         }
 
         [HarmonyPatch(typeof(GPButtonInventorySlot))]
@@ -99,7 +99,7 @@ namespace RadRefinements
         public class CrateInventoryUIPatches
         {
             [HarmonyPostfix]
-            [HarmonyPatch("Update")]
+            [HarmonyPatch("LateUpdate")]
             public static void AddItemDescription(CrateInventoryButton[] ___buttons)
             {
                 if (!enableCrateItemDescription.Value)

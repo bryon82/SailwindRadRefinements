@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Patches\PipePatches.cs" />
+    <Compile Include="Patches\SunCompassPatches.cs" />
     <Compile Include="Utilities\Crate.cs" />
     <Compile Include="Scripts\BulkEconomyUI.cs" />
     <Compile Include="Scripts\KnifeWood.cs" />

@@ -49,7 +49,7 @@ namespace RadRefinements
             if (key.IndexOf('%') >= 0)
                 return name;
 
-            if (name.Equals("fishing hook") || name.Equals("knife"))
+            if (name.Equals("fishing hook") || name.Equals("knife") || name.Equals("hammer"))
                 return name;
 
             return key.IsNullOrWhiteSpace() ? name : key;
