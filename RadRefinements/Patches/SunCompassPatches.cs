@@ -2,7 +2,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using static RadRefinements.Configs;
 using static RadRefinements.RR_Plugin;
@@ -57,15 +56,6 @@ namespace RadRefinements
                     !__instance.sold)
                     return;
 
-                if (Input.GetKeyDown(KeyCode.P))
-                {
-                    for (int i = 0; i < Refs.islands.Count(); i++)
-                    {
-                        var island = Refs.islands[i];
-                        LogDebug($"{island.name} index {i}");
-                    }
-                }
-
                 if (!SunCompassTextMeshes.TryGetValue(__instance, out var textMesh))
                     return;
 
@@ -99,7 +89,6 @@ namespace RadRefinements
                 QueryTriggerInteraction.Collide
             );
 
-            //LogDebug($"Checking {Sun.sun.name} sunlight for {t.name}: Ray origin {rayOrigin}, direction {directionToSun}, blocked: {blocked}");
             return !blocked;
         }
 

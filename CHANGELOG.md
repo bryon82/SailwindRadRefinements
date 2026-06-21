@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.4.0] - 2026-06-21
+
+### Added
+- Removal of hint text from purchased hammers.
+
+### Removed
+- Dependency on ModSaveBackups
+- Testing code left in suncompass
+
 ## [v1.3.0] - 2026-06-05
 
 ### Removed

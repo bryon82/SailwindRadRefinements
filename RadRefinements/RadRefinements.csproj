@@ -78,6 +78,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Patches\ItemPatches.cs" />
+    <Compile Include="Patches\OarPatches.cs" />
     <Compile Include="Patches\PipePatches.cs" />
     <Compile Include="Patches\SunCompassPatches.cs" />
     <Compile Include="Utilities\Crate.cs" />
@@ -98,7 +100,6 @@
     <Compile Include="Patches\KnifePatches.cs" />
     <Compile Include="Patches\LogBookPatches.cs" />
     <Compile Include="Patches\QuadrantPatches.cs" />
-    <Compile Include="Patches\SaveLoadPatches.cs" />
     <Compile Include="Patches\SpyglassPatches.cs" />
     <Compile Include="RR_Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

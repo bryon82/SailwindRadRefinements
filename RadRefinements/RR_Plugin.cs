@@ -5,16 +5,12 @@ using System.Reflection;
 
 namespace RadRefinements
 {
-    [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)]
-    [BepInDependency(MODSAVEBACKUPS_GUID, MODSAVEBACKUPS_VERSION)]    
+    [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)] 
     public class RR_Plugin : BaseUnityPlugin
     {
-        public const string PLUGIN_GUID = "com.raddude82.radrefinements";
+        public const string PLUGIN_GUID = "com.raddude.radrefinements";
         public const string PLUGIN_NAME = "RadRefinements";
-        public const string PLUGIN_VERSION = "1.3.0";
-
-        public const string MODSAVEBACKUPS_GUID = "com.raddude82.modsavebackups";
-        public const string MODSAVEBACKUPS_VERSION = "1.1.1";
+        public const string PLUGIN_VERSION = "1.4.0";
 
         internal static RR_Plugin Instance { get; private set; }
         private static ManualLogSource _logger;
