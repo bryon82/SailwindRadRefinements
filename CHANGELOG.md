@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.5.2] - 2026-07-20
+
+### Fixed
+- Climate instrument field names mismatch causing continual NREs
+
 ## [v1.5.1] - 2026-07-20
 
 ### Added

@@ -9,6 +9,7 @@ namespace RadRefinements
         internal static ConfigEntry<bool> enableQuickMap;
         internal static ConfigEntry<KeyCode> quickMapKey;
         internal static ConfigEntry<bool> enableCrateItemDescription;
+
         internal static ConfigEntry<bool> enableQuadrantText;
         internal static ConfigEntry<bool> enableCompassReadingHeld;
         internal static ConfigEntry<bool> enableCompassDegreesText;
@@ -29,6 +30,7 @@ namespace RadRefinements
         internal static ConfigEntry<float> hygrometerViewDist;
         internal static ConfigEntry<bool> enableInclinometerText;
         internal static ConfigEntry<float> inclinometerViewDist;
+
         internal static ConfigEntry<bool> enableWoodFromContainers;
         internal static ConfigEntry<bool> enableCrateInvCountText;
         internal static ConfigEntry<KeyCode> crateInvCountTextKey;

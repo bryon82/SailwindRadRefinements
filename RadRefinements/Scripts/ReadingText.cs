@@ -156,7 +156,7 @@ namespace RadRefinements
                     return;
                 }
 
-                var reading = shipItem.GetPrivateField<float>("pressure");
+                var reading = shipItem.GetPrivateField<float>("_pressure");
                 readingTextMesh.text = $"{Mathf.Lerp(26f, 31.9f, reading):F1}inHg";
                 readingTextMesh.gameObject.SetActive(true);
             }
@@ -172,7 +172,7 @@ namespace RadRefinements
                     return;
                 }
 
-                var reading = shipItem.GetPrivateField<float>("temperature");
+                var reading = shipItem.GetPrivateField<float>("_temperature");
                 readingTextMesh.text = $"{Mathf.Lerp(10f, 115f, reading):F1}°F";
                 readingTextMesh.gameObject.SetActive(true);
             }
@@ -188,7 +188,7 @@ namespace RadRefinements
                     return;
                 }
 
-                var reading = shipItem.GetPrivateField<float>("humidity");
+                var reading = shipItem.GetPrivateField<float>("_humidity");
                 readingTextMesh.text = $"{reading * 100:F1}%";
                 readingTextMesh.gameObject.SetActive(true);
             }
