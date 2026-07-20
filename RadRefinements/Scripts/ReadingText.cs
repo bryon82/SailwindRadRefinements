@@ -78,10 +78,10 @@ namespace RadRefinements
 
             else if (isChipLog)
             {
-                if (!enableClockGlobalText.Value || pointer == null)
+                if (!enableChipLogText.Value || pointer == null)
                     return;
 
-                if (canNotShowReading || distToItem > clockViewDist.Value || !shipItem.GetPrivateField<bool>("thrown"))
+                if (canNotShowReading || distToItem > chipLogViewDist.Value || !shipItem.GetPrivateField<bool>("thrown"))
                 {
                     readingTextMesh.gameObject.SetActive(false);
                     return;
