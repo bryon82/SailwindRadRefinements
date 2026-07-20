@@ -2,10 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.5.3] - 2026-07-20
+
+### Fixed
+- Using clock config settings for chip log instead of chip log's.
+
 ## [v1.5.2] - 2026-07-20
 
 ### Fixed
-- Climate instrument field names mismatch causing continual NREs
+- Climate instrument field names mismatch causing continual NREs.
 
 ## [v1.5.1] - 2026-07-20
 
