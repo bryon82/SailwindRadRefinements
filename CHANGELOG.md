@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v1.5.0] - 2026-07-20
+## [v1.5.1] - 2026-07-20
 
 ### Added
 - Text that shows the speed read from the chip log. Only viewable when the bobber has been thrown, chip log is not held, and the instrument dial is visible.
