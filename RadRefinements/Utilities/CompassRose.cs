@@ -61,7 +61,7 @@ namespace RadRefinements
                 .Replace(" by ", "b");
         }
 
-        public static string GetCardinalDirection(float degrees, int precision)
+        public static string GetCardinalDir(float degrees, int precision)
         {
             if (precision == 4)
             {
@@ -85,9 +85,9 @@ namespace RadRefinements
             }
         }
 
-        public static string GetAbbreviatedDirection(float degrees, int precision)
+        public static string GetAbbreviatedDir(float degrees, int precision)
         {
-            string direction = GetCardinalDirection(degrees, precision);
+            string direction = GetCardinalDir(degrees, precision);
 
             return Abbreviations.TryGetValue(direction, out var abbreviated)
                 ? abbreviated

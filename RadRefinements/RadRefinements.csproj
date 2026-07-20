@@ -78,10 +78,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Patches\AddReadingTextsPatches.cs" />
     <Compile Include="Patches\ItemPatches.cs" />
     <Compile Include="Patches\OarPatches.cs" />
     <Compile Include="Patches\PipePatches.cs" />
-    <Compile Include="Patches\SunCompassPatches.cs" />
+    <Compile Include="Scripts\ReadingText.cs" />
     <Compile Include="Utilities\Crate.cs" />
     <Compile Include="Scripts\BulkEconomyUI.cs" />
     <Compile Include="Scripts\KnifeWood.cs" />
@@ -90,8 +91,6 @@
     <Compile Include="Utilities\QuickSlots.cs" />
     <Compile Include="Scripts\SwapSlot.cs" />
     <Compile Include="Utilities\ViewMap.cs" />
-    <Compile Include="Patches\ClockPatches.cs" />
-    <Compile Include="Patches\CompassPatches.cs" />
     <Compile Include="Patches\CratePatches.cs" />
     <Compile Include="Patches\EconomyPatches.cs" />
     <Compile Include="Patches\ElixirPatches.cs" />

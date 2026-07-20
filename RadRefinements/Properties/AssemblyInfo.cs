@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("RadRefinements")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("https://github.com/bryon82/SailwindRadRefinements")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("raddude")]
 [assembly: AssemblyProduct("RadRefinements")]
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.4.0.0")]
-[assembly: AssemblyFileVersion("1.4.0.0")]
+[assembly: AssemblyVersion("1.5.0.0")]
+[assembly: AssemblyFileVersion("1.5.0.0")]

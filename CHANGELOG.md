@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.5.0] - 2026-07-20
+
+### Added
+- Text that shows the speed read from the chip log. Only viewable when the bobber has been thrown, chip log is not held, and the instrument dial is visible.
+- Text that shows the readings of the barometers, thermometers, and hygrometers from the Climate mod. Only viewable when the instrument dial is visible.
+- Text that shows the readings of the inclinometer and bearing compass from the Kemy's Navigation Tools mod. Only viewable when the instrument dial is visible.
+
+### Updated
+- Complete rework of how reading texts are added and readings are managed. Uses a new component on the instrument prefabs.
+
 ## [v1.4.0] - 2026-06-21
 
 ### Added

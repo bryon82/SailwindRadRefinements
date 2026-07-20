@@ -13,12 +13,22 @@ namespace RadRefinements
         internal static ConfigEntry<bool> enableCompassReadingHeld;
         internal static ConfigEntry<bool> enableCompassDegreesText;
         internal static ConfigEntry<bool> enableCompassCardinalText;
-        internal static ConfigEntry<int> compassCardinalPrecisionLevel;
-        internal static ConfigEntry<float> compassViewableDistance;
+        internal static ConfigEntry<int> compassCardinalPrecision;
+        internal static ConfigEntry<float> compassViewDist;
         internal static ConfigEntry<bool> enableSunCompassText;
         internal static ConfigEntry<bool> enableClockGlobalText;
         internal static ConfigEntry<bool> enableClockLocalText;
-        internal static ConfigEntry<float> clockViewableDistance;
+        internal static ConfigEntry<float> clockViewDist;
+        internal static ConfigEntry<bool> enableChipLogText;
+        internal static ConfigEntry<float> chipLogViewDist;
+        internal static ConfigEntry<bool> enableBarometerText;
+        internal static ConfigEntry<float> barometerViewDist;
+        internal static ConfigEntry<bool> enableThermometerText;
+        internal static ConfigEntry<float> thermometerViewDist;
+        internal static ConfigEntry<bool> enableHygrometerText;
+        internal static ConfigEntry<float> hygrometerViewDist;
+        internal static ConfigEntry<bool> enableInclinometerText;
+        internal static ConfigEntry<float> inclinometerViewDist;
         internal static ConfigEntry<bool> enableWoodFromContainers;
         internal static ConfigEntry<bool> enableCrateInvCountText;
         internal static ConfigEntry<KeyCode> crateInvCountTextKey;
@@ -51,50 +61,88 @@ namespace RadRefinements
                 "Enable item description in crates",
                 true);
             enableQuadrantText = config.Bind(
-                "Item Text Settings",
-                "Enable quadrant reading text",
+                "Enable Item Texts",
+                "Quadrant reading text",
                 true);
             enableCompassReadingHeld = config.Bind(
                 "Item Text Settings",
-                "Enable compass reading while held",
+                "Compass reading text while held",
                 false);
             enableCompassDegreesText = config.Bind(
-                "Item Text Settings",
-                "Enable compass reading degrees text",
+                "Enable Item Texts",
+                "Compass reading degrees text",
                 true);
             enableCompassCardinalText = config.Bind(
-                "Item Text Settings",
-                "Enable compass reading cardinal text",
+                "Enable Item Texts",
+                "Compass reading cardinal text",
                 true);
-            compassCardinalPrecisionLevel = config.Bind(
+            compassCardinalPrecision = config.Bind(
                 "Item Text Settings",
                 "Number of compass ordinal directions",
                 16,
                 new ConfigDescription(
                     "Number of ordinal directions given in the compass reading.",
                     new AcceptableValueList<int>(4, 8, 16, 32)));
-            compassViewableDistance = config.Bind(
+            compassViewDist = config.Bind(
                 "Item Text Settings",
                 "Compass viewable distance",
-                3f,
-                "Sets the how close player needs to be to see compass reading text");
+                3f);
             enableSunCompassText = config.Bind(
-                "Item Text Settings",
-                "Enable sun compass reading text",
+                "Enable Item Texts",
+                "Sun compass reading text",
                 true);
             enableClockGlobalText = config.Bind(
-                "Item Text Settings",
-                "Enable clock global time text",
+                "Enable Item Texts",
+                "Clock global time text",
                 true);
             enableClockLocalText = config.Bind(
-                "Item Text Settings",
-                "Enable clock local time text",
+                "Enable Item Texts",
+                "Clock local time text",
                 true);
-            clockViewableDistance = config.Bind(
+            clockViewDist = config.Bind(
                 "Item Text Settings",
                 "Clock viewable distance",
-                7f,
-                "Sets the how close player needs to be to see clock time text");
+                5f);
+            enableChipLogText = config.Bind(
+                "Enable Item Texts",
+                "Chip log reading text",
+                true);
+            chipLogViewDist = config.Bind(
+                "Item Text Settings",
+                "Chip log viewable distance",
+                5f);
+            enableBarometerText = config.Bind(
+                "Enable Item Texts",
+                "Barometer reading text",
+                true);
+            barometerViewDist = config.Bind(
+                "Item Text Settings",
+                "Barometer viewable distance",
+                5f);
+            enableThermometerText = config.Bind(
+                "Enable Item Texts",
+                "Thermometer reading text",
+                true);
+            thermometerViewDist = config.Bind(
+                "Item Text Settings",
+                "Thermometer viewable distance",
+                5f);
+            enableHygrometerText = config.Bind(
+                "Enable Item Texts",
+                "Hygrometer reading text",
+                true);
+            hygrometerViewDist = config.Bind(
+                "Item Text Settings",
+                "Hygrometer viewable distance",
+                5f);
+            enableInclinometerText = config.Bind(
+                "Enable Item Texts",
+                "Inclinometer reading text",
+                true);
+            inclinometerViewDist = config.Bind(
+                "Item Text Settings",
+                "Inclinometer viewable distance",
+                5f);
             enableWoodFromContainers = config.Bind(
                 "Other Settings",
                 "Enable firewood from breaking containers",
