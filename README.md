@@ -44,6 +44,7 @@ QOL refinements for Sailwind.
 * Distance at which the compass and clock texts are viewable. Defaults to 3 for the compass and 7 for the clock.
 * Number of cardinal directions to give compass reading in (4, 8, 16, or 32). Defaults to 16.
 * Crate inventory item count Key. Defaulted to E.
+* Enable/disable negative angle readings on inclinometer.
 
 ### Requires
 

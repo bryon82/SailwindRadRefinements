@@ -30,6 +30,7 @@ namespace RadRefinements
         internal static ConfigEntry<float> hygrometerViewDist;
         internal static ConfigEntry<bool> enableInclinometerText;
         internal static ConfigEntry<float> inclinometerViewDist;
+        internal static ConfigEntry<bool> negativeInclinometerAngles;
 
         internal static ConfigEntry<bool> enableWoodFromContainers;
         internal static ConfigEntry<bool> enableCrateInvCountText;
@@ -145,6 +146,10 @@ namespace RadRefinements
                 "Item Text Settings",
                 "Inclinometer viewable distance",
                 5f);
+            negativeInclinometerAngles = config.Bind(
+                "Item Text Settings",
+                "Inclinometer shows negative angles",
+                false);
             enableWoodFromContainers = config.Bind(
                 "Other Settings",
                 "Enable firewood from breaking containers",

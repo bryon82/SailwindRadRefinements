@@ -206,7 +206,7 @@ namespace RadRefinements
 
                 var reading = pointer.localEulerAngles.z;
                 if (reading > 180f)
-                    reading -= 360f;
+                    reading = negativeInclinometerAngles.Value ? reading - 360f : 360f - reading;
                 readingTextMesh.text = $"{reading:F1}°";
                 readingTextMesh.gameObject.SetActive(true);
             }
