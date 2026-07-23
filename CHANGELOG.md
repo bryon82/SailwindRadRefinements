@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.5.4] - 2026-07-20
+
+### Added
+- Config to enable/disable negative angle readings on inclinometer.
+
 ## [v1.5.3] - 2026-07-20
 
 ### Fixed
