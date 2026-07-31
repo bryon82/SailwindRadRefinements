@@ -27,6 +27,11 @@ QOL refinements for Sailwind.
 
 * On inclinometers, text that shows the degrees of inclination. Only viewable when the instrument dial is visible.
 * On bearing compasses, text that shows the direction the compass is facing in cardinal directions and/or degrees.
+* On Binnacles, separate texts that shows the compass reading and the inclinometer reading.
+
+#### [Windicators](https://github.com/NANDbrew/Windicators)
+
+* On wind compasses, text that shows the direction of the wind indicated on the compass in cardinal directions and/or degrees.
 
 ## Other Refinements
 

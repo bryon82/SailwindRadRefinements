@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.6.0] - 2026-07-31
+
+### Added
+- Text that shows the readings of the binnacle from the Kemy's Navigation Tools mod. The inclination reading text is only viewable when the inclinometer on the binnacle is visible. The compass and inclinomter on the binnacle follow the same configuration settings as their individual components.
+- Text that shows the readings of the wind compass from the Windicators mod.
+- Configurations for the wind compass.
+
+### Updated
+- The reading texts from compasses now follow the lag that the compass has instead of giving instantaneous readings.
+
+### Fixed
+- Reading texts not hiding when disabling them while in game.
+
 ## [v1.5.4] - 2026-07-20
 
 ### Added

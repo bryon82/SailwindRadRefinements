@@ -31,6 +31,9 @@ namespace RadRefinements
         internal static ConfigEntry<bool> enableInclinometerText;
         internal static ConfigEntry<float> inclinometerViewDist;
         internal static ConfigEntry<bool> negativeInclinometerAngles;
+        internal static ConfigEntry<bool> enableWindCompassDegreesText;
+        internal static ConfigEntry<bool> enableWindCompassCardinalText;
+        internal static ConfigEntry<int> windCompassCardinalPrecision;
 
         internal static ConfigEntry<bool> enableWoodFromContainers;
         internal static ConfigEntry<bool> enableCrateInvCountText;
@@ -150,6 +153,21 @@ namespace RadRefinements
                 "Item Text Settings",
                 "Inclinometer shows negative angles",
                 false);
+            enableWindCompassDegreesText = config.Bind(
+                "Enable Item Texts",
+                "Wind compass reading degrees text",
+                true);
+            enableWindCompassCardinalText = config.Bind(
+                "Enable Item Texts",
+                "Wind compass reading cardinal text",
+                true);
+            windCompassCardinalPrecision = config.Bind(
+                "Item Text Settings",
+                "Number of wind compass ordinal directions",
+                16,
+                new ConfigDescription(
+                    "Number of ordinal directions given in the wind compass reading.",
+                    new AcceptableValueList<int>(4, 8, 16, 32)));
             enableWoodFromContainers = config.Bind(
                 "Other Settings",
                 "Enable firewood from breaking containers",
