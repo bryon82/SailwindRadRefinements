@@ -176,8 +176,15 @@ namespace RadRefinements
                     return;
                 }
 
-                var reading = shipItem.GetPrivateField<float>("_pressure");
-                readingTextMesh.text = $"{Mathf.Lerp(26f, 31.9f, reading):F1}inHg";
+                var normalizedReading = shipItem.GetPrivateField<float>("_pressure");
+
+                var reading = Mathf.Lerp(26f, 31.9f, normalizedReading);
+                if (barometerUnits.Value == "hPa" || barometerUnits.Value == "mbar")
+                    reading *= 33.86389f;
+                else if (barometerUnits.Value == "atm")
+                    reading *= 0.03342f;
+
+                readingTextMesh.text = $"{reading:F1}{barometerUnits.Value}";
                 readingTextMesh.gameObject.SetActive(true);
             }
 
@@ -189,8 +196,15 @@ namespace RadRefinements
                     return;
                 }
 
-                var reading = shipItem.GetPrivateField<float>("_temperature");
-                readingTextMesh.text = $"{Mathf.Lerp(10f, 115f, reading):F1}°F";
+                var normalizedReading = shipItem.GetPrivateField<float>("_temperature");
+
+                var reading = Mathf.Lerp(10f, 115f, normalizedReading);
+                if (thermometerUnits.Value == "°C")
+                    reading = (reading - 32) * 5 / 9;
+                else if (thermometerUnits.Value == "K")
+                    reading = (reading - 32) * 5 / 9 + 273.15f;
+                
+                readingTextMesh.text = $"{reading:F1}{thermometerUnits.Value}";
                 readingTextMesh.gameObject.SetActive(true);
             }
 

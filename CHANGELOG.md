@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.6.1] - 2026-08-05
+
+### Added
+- Config options to change the units for the thermometer and barometer.
+
 ## [v1.6.0] - 2026-07-31
 
 ### Added

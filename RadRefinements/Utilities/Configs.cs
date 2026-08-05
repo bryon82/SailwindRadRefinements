@@ -42,6 +42,8 @@ namespace RadRefinements
         internal static ConfigEntry<bool> enableElixirColors;
         internal static ConfigEntry<bool> enableLogbookLastSection;
         internal static ConfigEntry<bool> enableSingleClickSmoking;
+        internal static ConfigEntry<string> barometerUnits;
+        internal static ConfigEntry<string> thermometerUnits;
 
         internal static void InitializeConfigs()
         {
@@ -203,6 +205,20 @@ namespace RadRefinements
                 "Enable single click smoking",
                 false,
                 "Allows you to smoke a pipe with a single click instead of having to hold the button down.");
+            barometerUnits = config.Bind(
+                "Item Text Settings",
+                "Barometer units",
+                "inHg",
+                new ConfigDescription(
+                    "The units used in the barometer readings.",
+                    new AcceptableValueList<string>("inHg", "hPa", "mbar", "atm")));
+            thermometerUnits = config.Bind(
+                "Item Text Settings",
+                "Thermometer units",
+                "°F",
+                new ConfigDescription(
+                    "The units used in the thermometer readings.",
+                    new AcceptableValueList<string>("°F", "°C", "K")));
         }
     }
 }
