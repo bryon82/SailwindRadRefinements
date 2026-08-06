@@ -10,7 +10,7 @@ namespace RadRefinements
     {
         public const string PLUGIN_GUID = "com.raddude.radrefinements";
         public const string PLUGIN_NAME = "RadRefinements";
-        public const string PLUGIN_VERSION = "1.6.1";
+        public const string PLUGIN_VERSION = "1.6.2";
 
         internal static RR_Plugin Instance { get; private set; }
         private static ManualLogSource _logger;

@@ -11,29 +11,38 @@ namespace RadRefinements
         internal static ConfigEntry<bool> enableCrateItemDescription;
 
         internal static ConfigEntry<bool> enableQuadrantText;
+        internal static ConfigEntry<int> quadrantDecimalPlaces;
         internal static ConfigEntry<bool> enableCompassReadingHeld;
         internal static ConfigEntry<bool> enableCompassDegreesText;
         internal static ConfigEntry<bool> enableCompassCardinalText;
         internal static ConfigEntry<int> compassCardinalPrecision;
         internal static ConfigEntry<float> compassViewDist;
+        internal static ConfigEntry<int> compassDecimalPlaces;
         internal static ConfigEntry<bool> enableSunCompassText;
+        internal static ConfigEntry<int> sunCompassDecimalPlaces;
         internal static ConfigEntry<bool> enableClockGlobalText;
         internal static ConfigEntry<bool> enableClockLocalText;
         internal static ConfigEntry<float> clockViewDist;
         internal static ConfigEntry<bool> enableChipLogText;
         internal static ConfigEntry<float> chipLogViewDist;
+        internal static ConfigEntry<int> chipLogDecimalPlaces;
         internal static ConfigEntry<bool> enableBarometerText;
         internal static ConfigEntry<float> barometerViewDist;
+        internal static ConfigEntry<int> barometerDecimalPlaces;
         internal static ConfigEntry<bool> enableThermometerText;
         internal static ConfigEntry<float> thermometerViewDist;
+        internal static ConfigEntry<int> thermometerDecimalPlaces;
         internal static ConfigEntry<bool> enableHygrometerText;
         internal static ConfigEntry<float> hygrometerViewDist;
+        internal static ConfigEntry<int> hygrometerDecimalPlaces;
         internal static ConfigEntry<bool> enableInclinometerText;
         internal static ConfigEntry<float> inclinometerViewDist;
         internal static ConfigEntry<bool> negativeInclinometerAngles;
+        internal static ConfigEntry<int> inclinometerDecimalPlaces;
         internal static ConfigEntry<bool> enableWindCompassDegreesText;
         internal static ConfigEntry<bool> enableWindCompassCardinalText;
         internal static ConfigEntry<int> windCompassCardinalPrecision;
+        internal static ConfigEntry<int> windCompassDecimalPlaces;
 
         internal static ConfigEntry<bool> enableWoodFromContainers;
         internal static ConfigEntry<bool> enableCrateInvCountText;
@@ -72,6 +81,13 @@ namespace RadRefinements
                 "Enable Item Texts",
                 "Quadrant reading text",
                 true);
+            quadrantDecimalPlaces = config.Bind(
+                "Item Text Settings",
+                "Number of decimal places for quadrant",
+                2,
+                new ConfigDescription(
+                    "Number of digits after the decimal.",
+                    new AcceptableValueRange<int>(0, 3)));
             enableCompassReadingHeld = config.Bind(
                 "Item Text Settings",
                 "Compass reading text while held",
@@ -95,10 +111,24 @@ namespace RadRefinements
                 "Item Text Settings",
                 "Compass viewable distance",
                 3f);
+            compassDecimalPlaces = config.Bind(
+                "Item Text Settings",
+                "Number of decimal places for compass",
+                1,
+                new ConfigDescription(
+                    "Number of digits after the decimal.",
+                    new AcceptableValueRange<int>(0, 3)));
             enableSunCompassText = config.Bind(
                 "Enable Item Texts",
                 "Sun compass reading text",
                 true);
+            sunCompassDecimalPlaces = config.Bind(
+                "Item Text Settings",
+                "Number of decimal places for sun compass",
+                1,
+                new ConfigDescription(
+                    "Number of digits after the decimal.",
+                    new AcceptableValueRange<int>(0, 3)));
             enableClockGlobalText = config.Bind(
                 "Enable Item Texts",
                 "Clock global time text",
@@ -119,6 +149,13 @@ namespace RadRefinements
                 "Item Text Settings",
                 "Chip log viewable distance",
                 5f);
+            chipLogDecimalPlaces = config.Bind(
+                "Item Text Settings",
+                "Number of decimal places for chip log",
+                1,
+                new ConfigDescription(
+                    "Number of digits after the decimal.",
+                    new AcceptableValueRange<int>(0, 3)));
             enableBarometerText = config.Bind(
                 "Enable Item Texts",
                 "Barometer reading text",
@@ -127,6 +164,13 @@ namespace RadRefinements
                 "Item Text Settings",
                 "Barometer viewable distance",
                 5f);
+            barometerDecimalPlaces = config.Bind(
+                "Item Text Settings",
+                "Number of decimal places for barometer",
+                1,
+                new ConfigDescription(
+                    "Number of digits after the decimal.",
+                    new AcceptableValueRange<int>(0, 3)));
             enableThermometerText = config.Bind(
                 "Enable Item Texts",
                 "Thermometer reading text",
@@ -135,6 +179,13 @@ namespace RadRefinements
                 "Item Text Settings",
                 "Thermometer viewable distance",
                 5f);
+            thermometerDecimalPlaces = config.Bind(
+                "Item Text Settings",
+                "Number of decimal places for thermometer",
+                1,
+                new ConfigDescription(
+                    "Number of digits after the decimal.",
+                    new AcceptableValueRange<int>(0, 3)));
             enableHygrometerText = config.Bind(
                 "Enable Item Texts",
                 "Hygrometer reading text",
@@ -143,6 +194,13 @@ namespace RadRefinements
                 "Item Text Settings",
                 "Hygrometer viewable distance",
                 5f);
+            hygrometerDecimalPlaces = config.Bind(
+                "Item Text Settings",
+                "Number of decimal places for hygrometer",
+                1,
+                new ConfigDescription(
+                    "Number of digits after the decimal.",
+                    new AcceptableValueRange<int>(0, 3)));
             enableInclinometerText = config.Bind(
                 "Enable Item Texts",
                 "Inclinometer reading text",
@@ -155,6 +213,13 @@ namespace RadRefinements
                 "Item Text Settings",
                 "Inclinometer shows negative angles",
                 false);
+            inclinometerDecimalPlaces = config.Bind(
+                "Item Text Settings",
+                "Number of decimal places for inclinometer",
+                1,
+                new ConfigDescription(
+                    "Number of digits after the decimal.",
+                    new AcceptableValueRange<int>(0, 3)));
             enableWindCompassDegreesText = config.Bind(
                 "Enable Item Texts",
                 "Wind compass reading degrees text",
@@ -170,6 +235,13 @@ namespace RadRefinements
                 new ConfigDescription(
                     "Number of ordinal directions given in the wind compass reading.",
                     new AcceptableValueList<int>(4, 8, 16, 32)));
+            windCompassDecimalPlaces = config.Bind(
+                "Item Text Settings",
+                "Number of decimal places for wind compass",
+                1,
+                new ConfigDescription(
+                    "Number of digits after the decimal.",
+                    new AcceptableValueRange<int>(0, 3)));
             enableWoodFromContainers = config.Bind(
                 "Other Settings",
                 "Enable firewood from breaking containers",
