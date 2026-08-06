@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [v1.6.2] - 2026-08-06
 
 ### Added
-- Config options to change the number of decimal places by reading text type.
+- Config options to change the number of decimal places to show in reading texts by instrument type.
 
 ## [v1.6.1] - 2026-08-05
 

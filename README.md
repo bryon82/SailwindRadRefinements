@@ -51,7 +51,7 @@ QOL refinements for Sailwind.
 * Crate inventory item count Key. Defaulted to E.
 * Enable/disable negative angle readings on inclinometer.
 * Units of measurement used for thermometer and barometer readings.
-* Number of decimal places to show for reading texts by type.
+* Number of decimal places to show in reading texts by instrument type.
 
 ### Requires
 
