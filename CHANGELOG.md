@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.6.3] - 2026-08-07
+
+### Added
+- Text that shows the wind speed readings of the standing anemometers from the Windicators mod.
+
 ## [v1.6.2] - 2026-08-06
 
 ### Added

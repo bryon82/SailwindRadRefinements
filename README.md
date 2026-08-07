@@ -32,7 +32,7 @@ QOL refinements for Sailwind.
 #### [Windicators](https://github.com/NANDbrew/Windicators)
 
 * On wind compasses, text that shows the direction of the wind indicated on the compass in cardinal directions and/or degrees.
-* On anenometers, text that shows the wind speed indicated. Only viewable when the instrument dial is visible.
+* On standing anenometers, text that shows the wind speed indicated. Only viewable when the instrument dial is visible.
 
 ## Other Refinements
 
