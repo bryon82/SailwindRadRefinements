@@ -21,7 +21,8 @@ namespace RadRefinements
 
                 if (__instance.name == "chronometer")
                 {
-                    var textMesh = AddTextMesh(__instance.transform, new Vector3(0f, -0.3f, -0.2f), Vector3.zero);
+                    var zPos = __instance.transform.name == "172 clock M(Clone)" ? -0.075f : -0.2f;
+                    var textMesh = AddTextMesh(__instance.transform, new Vector3(0f, -0.3f, zPos), Vector3.zero);
 
                     var readingText = __instance.gameObject.AddComponent<ReadingText>();
                     readingText.readingTextMesh = textMesh;
@@ -41,12 +42,12 @@ namespace RadRefinements
                     if (__instance.name == "bearing compass")
                     { 
                         readingText.isCompassFlipped = true;
-                        readingText.pointer = __instance.GetComponentsInChildren<Transform>(true)
+                        readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                             .FirstOrDefault(t => t.name == "CompassCard");
                     }
                         
                     else
-                        readingText.pointer = __instance.GetComponentsInChildren<Transform>(true)
+                        readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                             .FirstOrDefault(t => t.name == "compass_base");
                 }
 
@@ -88,7 +89,7 @@ namespace RadRefinements
                     readingText.readingTextMesh = textMesh;
                     readingText.shipItem = __instance;
                     readingText.isChipLog = true;
-                    readingText.pointer = __instance.GetComponentsInChildren<Transform>(true)
+                    readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == pointerName);
                 }
 
@@ -130,7 +131,7 @@ namespace RadRefinements
                     readingText.readingTextMesh = textMesh;
                     readingText.shipItem = __instance;
                     readingText.isInclinometer = true;
-                    readingText.pointer = __instance.GetComponentsInChildren<Transform>(true)
+                    readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == "Arm");
                 }
 
@@ -144,7 +145,7 @@ namespace RadRefinements
                     readingTextComp.shipItem = __instance;
                     readingTextComp.isCompass = true;
                     readingTextComp.isCompassFlipped = true;
-                    readingTextComp.pointer = __instance.GetComponentsInChildren<Transform>(true)
+                    readingTextComp.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == "CompassFace");
 
                     var textMeshInc = AddTextMesh(__instance.transform, new Vector3(0f, 0.9f, -0.201f), Vector3.zero);
@@ -153,7 +154,7 @@ namespace RadRefinements
                     readingTextInc.readingTextMesh = textMeshInc;
                     readingTextInc.shipItem = __instance;
                     readingTextInc.isInclinometer = true;
-                    readingTextInc.pointer = __instance.GetComponentsInChildren<Transform>(true)
+                    readingTextInc.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == "InclinometerArm");
                 }
 
@@ -166,20 +167,22 @@ namespace RadRefinements
                     readingText.readingTextMesh = textMesh;
                     readingText.shipItem = __instance;
                     readingText.isWindCompass = true;
-                    readingText.pointer = __instance.GetComponentsInChildren<Transform>(true)
+                    readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == "indicator");
                 }
 
-                //else if( __instance.name == "anemometer")
-                //{
-                //    var textMesh = AddTextMesh(__instance.transform, new Vector3(0f, 0.12f, -0.075f), Vector3.zero);
-                //    var readingText = __instance.gameObject.AddComponent<ReadingText>();
-                //    readingText.readingTextMesh = textMesh;
-                //    readingText.shipItem = __instance;
-                //    readingText.isAnemometer = true;
-                //    readingText.pointer = __instance.GetComponentsInChildren<Transform>(true)
-                //        .FirstOrDefault(t => t.name == "pointer_001");
-                //}
+                else if (__instance.name == "anemometer" && __instance.transform.name == "514 anemometer B(Clone)")
+                {
+                    var textMesh = AddTextMesh(__instance.transform, new Vector3(0f, 0.13f, -0.075f), Vector3.zero);
+                    var readingText = __instance.gameObject.AddComponent<ReadingText>();
+                    readingText.readingTextMesh = textMesh;
+                    readingText.shipItem = __instance;
+                    readingText.isAnemometer = true;
+                    readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
+                        .FirstOrDefault(t => t.name == "pointer_001 (1)");
+                    readingText.indicator2 = __instance.GetComponentsInChildren<Transform>(true)
+                        .FirstOrDefault(t => t.name == "plus_tumbler_3");
+                }
             }
 
             private static TextMesh AddTextMesh(Transform parent, Vector3 position, Vector3 rotation)

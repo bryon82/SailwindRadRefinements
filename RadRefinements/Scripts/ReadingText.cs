@@ -9,10 +9,11 @@ namespace RadRefinements
     {
         internal TextMesh readingTextMesh;
         internal ShipItem shipItem;
-        internal Transform pointer;
+        internal Transform indicator1;
+        internal Transform indicator2;
         private bool _isInSunlight;
         private float _sunlightTimer;
-        internal bool isCompass;        
+        internal bool isCompass;
         internal bool isChipLog;
         internal bool isClock;
         internal bool isQuadrant;
@@ -22,11 +23,13 @@ namespace RadRefinements
         internal bool isThermometer;
         internal bool isHygrometer;
         internal bool isWindCompass;
-        //internal bool isAnemometer;
+        internal bool isAnemometer;
 
         internal bool isCompassFlipped = false;
 
-        const float ANGLE_TO_KNOTS = 1f / 15f;
+        const float CHIPLOG_ANGLE_TO_KNOTS = 1f / 15f;
+        const float ANEMOMETER_ANGLE_TO_KNOTS = 1f / 7.2f;
+
         private static readonly Vector3 NOT_HELD_SIZE = new Vector3(0.0114f, 0.0127f, 0.0127f);
         private static readonly Vector3 HELD_SIZE = new Vector3(0.0044f, 0.0057f, 0.0057f);
 
@@ -60,7 +63,7 @@ namespace RadRefinements
 
             if (isCompass)
             {
-                if (pointer == null)
+                if (indicator1 == null)
                     return;
 
                 var canNotShow =
@@ -81,14 +84,14 @@ namespace RadRefinements
                 readingTextMesh.transform.localScale = isHeld ? HELD_SIZE : NOT_HELD_SIZE;
 
                 var offset = isCompassFlipped ? 180f : 360f;
-                var reading = (180f - pointer.transform.localEulerAngles.y + offset) % 360f;
+                var reading = (180f - indicator1.transform.localEulerAngles.y + offset) % 360f;
                 readingTextMesh.text = GetCompassReading(reading, compassCardinalPrecision.Value, compassDecimalPlaces.Value);
                 readingTextMesh.gameObject.SetActive(true);
             }
 
             else if (isChipLog)
             {
-                if ( pointer == null)
+                if ( indicator1 == null)
                     return;
 
                 var canNotShow =
@@ -103,7 +106,7 @@ namespace RadRefinements
                     return;
                 }
 
-                var reading = (360f - pointer.localEulerAngles.z) * ANGLE_TO_KNOTS;
+                var reading = ((360f - indicator1.localEulerAngles.z) % 360f) * CHIPLOG_ANGLE_TO_KNOTS;
                 readingTextMesh.text = $"{reading.ToString("F" + chipLogDecimalPlaces.Value)} kts";
                 readingTextMesh.gameObject.SetActive(true);
             }
@@ -204,7 +207,7 @@ namespace RadRefinements
                     reading = (reading - 32) * 5 / 9;
                 else if (thermometerUnits.Value == "K")
                     reading = (reading - 32) * 5 / 9 + 273.15f;
-                
+
                 readingTextMesh.text = $"{reading.ToString("F" + thermometerDecimalPlaces.Value)}{thermometerUnits.Value}";
                 readingTextMesh.gameObject.SetActive(true);
             }
@@ -224,7 +227,7 @@ namespace RadRefinements
 
             else if (isInclinometer)
             {
-                if (pointer == null)
+                if (indicator1 == null)
                     return;
 
                 if (!enableInclinometerText.Value || canNotShowReading || distToItem > inclinometerViewDist.Value)
@@ -233,7 +236,7 @@ namespace RadRefinements
                     return;
                 }
 
-                var reading = pointer.localEulerAngles.z;
+                var reading = indicator1.localEulerAngles.z;
                 if (reading > 180f)
                     reading = negativeInclinometerAngles.Value ? reading - 360f : 360f - reading;
                 readingTextMesh.text = $"{reading.ToString("F" + inclinometerDecimalPlaces.Value)}°";
@@ -242,7 +245,7 @@ namespace RadRefinements
 
             else if (isWindCompass)
             {
-                if (pointer == null)
+                if (indicator1 == null)
                     return;
 
                 var canNotShow =
@@ -262,25 +265,27 @@ namespace RadRefinements
                 readingTextMesh.transform.localEulerAngles = new Vector3(0, angleToPlayer, 0);
                 readingTextMesh.transform.localScale = isHeld ? HELD_SIZE : NOT_HELD_SIZE;
 
-                var reading = (pointer.transform.localEulerAngles.y + 180f + transform.eulerAngles.y) % 360f;
+                var reading = (indicator1.transform.localEulerAngles.y + 180f + transform.eulerAngles.y) % 360f;
                 readingTextMesh.text = GetCompassReading(reading, windCompassCardinalPrecision.Value, windCompassDecimalPlaces.Value);
                 readingTextMesh.gameObject.SetActive(true);
             }
 
-            //else if (isAnemometer)
-            //{
-            //    if (!enableChipLogText.Value || pointer == null)
-            //        return;
+            else if (isAnemometer)
+            {
+                if (!enableAnemometerText.Value || indicator1 == null || indicator2 == null)
+                    return;
 
-            //    if (canNotShowReading || distToItem > chipLogViewDist.Value)
-            //    {
-            //        readingTextMesh.gameObject.SetActive(false);
-            //        return;
-            //    }
+                if (canNotShowReading || distToItem > anemometerViewDist.Value)
+                {
+                    readingTextMesh.gameObject.SetActive(false);
+                    return;
+                }
 
-            //    readingTextMesh.text = $"{(360f - pointer.localEulerAngles.z) * ANGLE_TO_KNOTS:F1} kts";
-            //    readingTextMesh.gameObject.SetActive(true);
-            //}
+                var reading = ((360f - indicator1.localEulerAngles.z) % 360f) * ANEMOMETER_ANGLE_TO_KNOTS;
+                var reading2 = indicator2.localEulerAngles.z / 120f;
+                readingTextMesh.text = $"{(reading + reading2 * 50).ToString("F" + anemometerDecimalPlaces.Value)} kts";
+                readingTextMesh.gameObject.SetActive(true);
+            }
         }
 
         private static string GetCompassReading(float reading, int cardinalPrecision, int decimalPlaces)

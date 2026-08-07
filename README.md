@@ -10,28 +10,29 @@ QOL refinements for Sailwind.
 ## Instrument Reading Refinements
 
 * On clocks, text that shows the time on clocks in global, local, or both global and local times. Only viewable when the clock face is visible.
-* On compasses, text that shows the direction the compass is facing in cardinal directions and/or degrees.
-* On quadrants when inspecting, text that shows the angle read.
-* On sun compasses, text that shows the latitude. Only works between the local hours 1100 and 1300 and when in the sunlight.
-* On chip logs, text that shows the speed read. Only viewable when the bobber has been thrown, chip log is not held, and the instrument dial is visible.
+* On compasses, text that shows the direction indicated on the compass in cardinal directions and/or degrees.
+* On quadrants when inspecting, text that shows the angle indicated.
+* On sun compasses, text that shows the latitude indicated. Only works between the local hours 1100 and 1300 and when in the sunlight.
+* On chip logs, text that shows the speed indicated. Only viewable when the bobber has been thrown, chip log is not held, and the instrument dial is visible.
 
 ### Compatible items from other mods
 
 #### [Climate](https://github.com/bryon82/SailwindClimate)
 
-* On barometers, text that shows the pressure in inHg. Only viewable when the instrument dial is visible.
-* On thermometers, text that shows the temperature in Fahrenheit. Only viewable when the instrument dial is visible.
-* On hygrometers, text that shows the relative humidity. Only viewable when the instrument dial is visible.
+* On barometers, text that shows the pressure indicated. Only viewable when the instrument dial is visible.
+* On thermometers, text that shows the temperature indicated. Only viewable when the instrument dial is visible.
+* On hygrometers, text that shows the relative humidity indicated. Only viewable when the instrument dial is visible.
 
 #### [Kemy's Navigation Tools](https://github.com/Kemylar/KemyNavigationTools)
 
-* On inclinometers, text that shows the degrees of inclination. Only viewable when the instrument dial is visible.
-* On bearing compasses, text that shows the direction the compass is facing in cardinal directions and/or degrees.
+* On inclinometers, text that shows the degrees of inclination indicated. Only viewable when the instrument dial is visible.
+* On bearing compasses, text that shows the direction indicated on the compass in cardinal directions and/or degrees.
 * On Binnacles, separate texts that shows the compass reading and the inclinometer reading.
 
 #### [Windicators](https://github.com/NANDbrew/Windicators)
 
 * On wind compasses, text that shows the direction of the wind indicated on the compass in cardinal directions and/or degrees.
+* On anenometers, text that shows the wind speed indicated. Only viewable when the instrument dial is visible.
 
 ## Other Refinements
 

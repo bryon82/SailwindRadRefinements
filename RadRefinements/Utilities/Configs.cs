@@ -43,6 +43,9 @@ namespace RadRefinements
         internal static ConfigEntry<bool> enableWindCompassCardinalText;
         internal static ConfigEntry<int> windCompassCardinalPrecision;
         internal static ConfigEntry<int> windCompassDecimalPlaces;
+        internal static ConfigEntry<bool> enableAnemometerText;
+        internal static ConfigEntry<float> anemometerViewDist;
+        internal static ConfigEntry<int> anemometerDecimalPlaces;
 
         internal static ConfigEntry<bool> enableWoodFromContainers;
         internal static ConfigEntry<bool> enableCrateInvCountText;
@@ -242,6 +245,22 @@ namespace RadRefinements
                 new ConfigDescription(
                     "Number of digits after the decimal.",
                     new AcceptableValueRange<int>(0, 3)));
+            enableAnemometerText = config.Bind(
+                "Enable Item Texts",
+                "Anemometer reading text",
+                true);
+            anemometerViewDist = config.Bind(
+                "Item Text Settings",
+                "Anemometer viewable distance",
+                5f);
+            anemometerDecimalPlaces = config.Bind(
+                "Item Text Settings",
+                "Number of decimal places for anemometer",
+                1,
+                new ConfigDescription(
+                    "Number of digits after the decimal.",
+                    new AcceptableValueRange<int>(0, 3)));
+
             enableWoodFromContainers = config.Bind(
                 "Other Settings",
                 "Enable firewood from breaking containers",
