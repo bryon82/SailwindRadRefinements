@@ -46,7 +46,7 @@ QOL refinements for Sailwind.
 
 ## Configurable
 
-Install [Configuration Manager](https://github.com/BepInEx/BepInEx.ConfigurationManager) to easily change configs.  
+Install [Configuration Manager](https://github.com/BepInEx/BepInEx.ConfigurationManager) to easily change configs. With this installed, press F1 while in game to pull up configuration menu.  
 
 * All features can be enabled/disabled.
 * Quick map key. Defaults to 'M'.
