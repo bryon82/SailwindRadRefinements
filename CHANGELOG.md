@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.7.0] - 2026-08-13
+
+### Added
+- Text to rolled maps so you can see what the map is when you look at it while it is rolled.
+- Text that shows the point of sail in words and/or degrees to weathervanes from the Windicators mod.
+- Config to change the color of the reading texts.
+
 ## [v1.6.3] - 2026-08-07
 
 ### Added
