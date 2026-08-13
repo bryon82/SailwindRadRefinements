@@ -46,6 +46,8 @@ QOL refinements for Sailwind.
 
 ## Configurable
 
+Install [Configuration Manager](https://github.com/BepInEx/BepInEx.ConfigurationManager) to easily change configs.  
+
 * All features can be enabled/disabled.
 * Quick map key. Defaults to 'M'.
 * Distance at which the compass and clock texts are viewable. Defaults to 3 for the compass and 7 for the clock.
