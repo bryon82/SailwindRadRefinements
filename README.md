@@ -33,6 +33,7 @@ QOL refinements for Sailwind.
 
 * On wind compasses, text that shows the direction of the wind indicated on the compass in cardinal directions and/or degrees.
 * On standing anenometers, text that shows the wind speed indicated. Only viewable when the instrument dial is visible.
+* On weathervanes, text that shows the point of sail in words and/or degrees.
 
 ## Other Refinements
 
@@ -53,6 +54,7 @@ QOL refinements for Sailwind.
 * Enable/disable negative angle readings on inclinometer.
 * Units of measurement used for thermometer and barometer readings.
 * Number of decimal places to show in reading texts by instrument type.
+* Color for reading texts.
 
 ### Requires
 

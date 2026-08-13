@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using System.Linq;
 using UnityEngine;
+using static RadRefinements.Configs;
 using static RadRefinements.RR_Plugin;
 
 namespace RadRefinements
@@ -22,30 +23,21 @@ namespace RadRefinements
                 if (__instance.name == "chronometer")
                 {
                     var zPos = __instance.transform.name == "172 clock M(Clone)" ? -0.075f : -0.2f;
-                    var textMesh = AddTextMesh(__instance.transform, new Vector3(0f, -0.3f, zPos), Vector3.zero);
-
-                    var readingText = __instance.gameObject.AddComponent<ReadingText>();
-                    readingText.readingTextMesh = textMesh;
-                    readingText.shipItem = __instance;
+                    var readingText = AddReadingText(__instance, new Vector3(0f, -0.3f, zPos));
                     readingText.isClock = true;
                 }
 
                 else if (__instance.name == "compass" || __instance.name == "bearing compass")
                 {
-                    var textMesh = AddTextMesh(__instance.transform, new Vector3(0f, 0.03f, 0f), Vector3.zero);
-                    textMesh.lineSpacing = 0.6f;
-
-                    var readingText = __instance.gameObject.AddComponent<ReadingText>();
-                    readingText.readingTextMesh = textMesh;
-                    readingText.shipItem = __instance;
+                    var readingText = AddReadingText(__instance, new Vector3(0f, 0.03f, 0f));
+                    readingText.textMesh.lineSpacing = 0.6f;
                     readingText.isCompass = true;
                     if (__instance.name == "bearing compass")
-                    { 
+                    {
                         readingText.isCompassFlipped = true;
                         readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                             .FirstOrDefault(t => t.name == "CompassCard");
                     }
-                        
                     else
                         readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                             .FirstOrDefault(t => t.name == "compass_base");
@@ -53,41 +45,26 @@ namespace RadRefinements
 
                 else if (__instance.name == "sun compass")
                 {
-                    var textMesh = AddTextMesh(__instance.transform, new Vector3(0f, 0f, 0.18f), new Vector3(45f, 0f, 0f));
-                    textMesh.fontSize = 20;
-
-                    var readingText = __instance.gameObject.AddComponent<ReadingText>();
-                    readingText.readingTextMesh = textMesh;
-                    readingText.shipItem = __instance;
+                    var readingText = AddReadingText(__instance, new Vector3(0f, 0f, 0.18f), new Vector3(45f, 0f, 0f));
+                    readingText.textMesh.fontSize = 20;
                     readingText.isSunCompass = true;
                 }
 
                 else if (__instance.name == "quadrant")
                 {
-                    var textMesh = AddTextMesh(
-                        __instance.transform.GetComponentsInChildren<Transform>(true)
-                            .FirstOrDefault(t => t.name == "dial"),
-                        new Vector3(-0.025f, -0.19f, -0.03f),
-                        new Vector3(0, 90f, 270f));
-                    textMesh.fontSize = 40;
-
-                    var readingText = __instance.gameObject.AddComponent<ReadingText>();
-                    readingText.readingTextMesh = textMesh;
-                    readingText.shipItem = __instance;
+                    var parent = __instance.transform.GetComponentsInChildren<Transform>(true)
+                            .FirstOrDefault(t => t.name == "dial");
+                    var readingText = AddReadingText(
+                        __instance, new Vector3(-0.025f, -0.19f, -0.03f), new Vector3(0, 90f, 270f), parent);                        
+                    readingText.textMesh.fontSize = 40;
                     readingText.isQuadrant = true;
                 }
 
                 else if (__instance.name == "chip log")
                 {
-                    var textMesh = AddTextMesh(__instance.transform, new Vector3(0f, 0.21f, -0.02f), Vector3.zero);
-
-                    var pointerName = "pointer_002";
-                    if (__instance.transform.name == "93 chip log E(Clone)")
-                        pointerName = "pointer_001";
-
-                    var readingText = __instance.gameObject.AddComponent<ReadingText>();
-                    readingText.readingTextMesh = textMesh;
-                    readingText.shipItem = __instance;
+                    var readingText = AddReadingText(__instance, new Vector3(0f, 0.21f, -0.02f));
+                    var pointerName = 
+                        __instance.transform.name == "93 chip log E(Clone)" ? "pointer_001" : "pointer_002";
                     readingText.isChipLog = true;
                     readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == pointerName);
@@ -95,41 +72,25 @@ namespace RadRefinements
 
                 else if (__instance.name == "barometer")
                 {
-                    var textMesh = AddTextMesh(__instance.transform, new Vector3(0f, 0.12f, -0.075f), Vector3.zero);
-
-                    var readingText = __instance.gameObject.AddComponent<ReadingText>();
-                    readingText.readingTextMesh = textMesh;
-                    readingText.shipItem = __instance;
+                    var readingText = AddReadingText(__instance, new Vector3(0f, 0.12f, -0.075f));
                     readingText.isBarometer = true;
                 }
 
                 else if (__instance.name == "thermometer")
                 {
-                    var textMesh = AddTextMesh(__instance.transform, new Vector3(0f, 0.12f, -0.075f), Vector3.zero);
-
-                    var readingText = __instance.gameObject.AddComponent<ReadingText>();
-                    readingText.readingTextMesh = textMesh;
-                    readingText.shipItem = __instance;
+                    var readingText = AddReadingText(__instance, new Vector3(0f, 0.12f, -0.075f));
                     readingText.isThermometer = true;
                 }
 
                 else if (__instance.name == "hygrometer")
                 {
-                    var textMesh = AddTextMesh(__instance.transform, new Vector3(0f, 0.12f, -0.075f), Vector3.zero);
-
-                    var readingText = __instance.gameObject.AddComponent<ReadingText>();
-                    readingText.readingTextMesh = textMesh;
-                    readingText.shipItem = __instance;
+                    var readingText = AddReadingText(__instance, new Vector3(0f, 0.12f, -0.075f));
                     readingText.isHygrometer = true;
                 }
 
                 else if (__instance.name == "inclinometer")
                 {
-                    var textMesh = AddTextMesh(__instance.transform, new Vector3(0f, 0.12f, -0.05f), Vector3.zero);
-
-                    var readingText = __instance.gameObject.AddComponent<ReadingText>();
-                    readingText.readingTextMesh = textMesh;
-                    readingText.shipItem = __instance;
+                    var readingText = AddReadingText(__instance, new Vector3(0f, 0.12f, -0.05f));
                     readingText.isInclinometer = true;
                     readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == "Arm");
@@ -137,35 +98,23 @@ namespace RadRefinements
 
                 else if (__instance.name == "binnacle")
                 {
-                    var textMeshComp = AddTextMesh(__instance.transform, new Vector3(0f, 1.26f, 0f), Vector3.zero);
-                    textMeshComp.lineSpacing = 0.6f;
-
-                    var readingTextComp = __instance.gameObject.AddComponent<ReadingText>();
-                    readingTextComp.readingTextMesh = textMeshComp;
-                    readingTextComp.shipItem = __instance;
+                    var readingTextComp = AddReadingText(__instance, new Vector3(0f, 1.26f, 0f));
+                    readingTextComp.textMesh.lineSpacing = 0.6f;
                     readingTextComp.isCompass = true;
                     readingTextComp.isCompassFlipped = true;
                     readingTextComp.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == "CompassFace");
 
-                    var textMeshInc = AddTextMesh(__instance.transform, new Vector3(0f, 0.9f, -0.201f), Vector3.zero);
-
-                    var readingTextInc = __instance.gameObject.AddComponent<ReadingText>();
-                    readingTextInc.readingTextMesh = textMeshInc;
-                    readingTextInc.shipItem = __instance;
+                    var readingTextInc = AddReadingText(__instance, new Vector3(0f, 0.9f, -0.201f));
                     readingTextInc.isInclinometer = true;
                     readingTextInc.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == "InclinometerArm");
                 }
 
-                else if ( __instance.name == "wind compass")
+                else if (__instance.name == "wind compass")
                 {
-                    var textMesh = AddTextMesh(__instance.transform, new Vector3(0f, 0.12f, -0.075f), Vector3.zero);
-                    textMesh.lineSpacing = 0.6f;
-
-                    var readingText = __instance.gameObject.AddComponent<ReadingText>();
-                    readingText.readingTextMesh = textMesh;
-                    readingText.shipItem = __instance;
+                    var readingText = AddReadingText(__instance, new Vector3(0f, 0.12f, -0.075f));
+                    readingText.textMesh.lineSpacing = 0.6f;
                     readingText.isWindCompass = true;
                     readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == "indicator");
@@ -173,20 +122,43 @@ namespace RadRefinements
 
                 else if (__instance.name == "anemometer" && __instance.transform.name == "514 anemometer B(Clone)")
                 {
-                    var textMesh = AddTextMesh(__instance.transform, new Vector3(0f, 0.13f, -0.075f), Vector3.zero);
-                    var readingText = __instance.gameObject.AddComponent<ReadingText>();
-                    readingText.readingTextMesh = textMesh;
-                    readingText.shipItem = __instance;
+                    var readingText = AddReadingText(__instance, new Vector3(0f, 0.13f, -0.075f));
                     readingText.isAnemometer = true;
                     readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == "pointer_001 (1)");
                     readingText.indicator2 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == "plus_tumbler_3");
                 }
+
+                else if (__instance.name == "weathervane")
+                {
+                    Transform parent;
+                    Vector3 pos;
+                    if (__instance.transform.name.Contains("large"))
+                    {
+                        parent = __instance.transform.GetComponentsInChildren<Transform>(true)
+                            .FirstOrDefault(t => t.name == "extension");
+                        pos = new Vector3(0f, 0.4f, 0f);
+                    }
+                    else
+                    {
+                        parent = __instance.transform.GetComponentsInChildren<Transform>(true)
+                            .FirstOrDefault(t => t.name == "pivot parent");
+                        pos = new Vector3(0f, 0.5f, 0f);
+                    }
+                        
+                    var readingText = AddReadingText(__instance, pos, parent: parent);
+                    readingText.textMesh.lineSpacing = 0.6f;
+                    readingText.isWeathervane = true;
+                    readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
+                        .FirstOrDefault(t => t.name == "wind_vane_arrow");
+                }
             }
 
-            private static TextMesh AddTextMesh(Transform parent, Vector3 position, Vector3 rotation)
+            private static ReadingText AddReadingText(ShipItem shipItem, Vector3 position, Vector3 rotation = default, Transform parent = null)
             {
+                if (parent == null)
+                    parent = shipItem.transform;
                 var textObject = GameObject.Instantiate(textMeshTemplate);
                 textObject.name = "reading_text";
                 textObject.SetParent(parent);
@@ -195,14 +167,17 @@ namespace RadRefinements
                 textObject.localEulerAngles = rotation;
                 textObject.localScale = new Vector3(0.0114f, 0.0127f, 0.0127f);
                 var textMesh = textObject.GetComponent<TextMesh>();
-                textMesh.color = new Color32(0xDB, 0xD6, 0xC9, 0x88);
+                textMesh.color = readingTextColor.Value;
                 textMesh.fontSize = 55;
                 textMesh.fontStyle = FontStyle.Normal;
                 textMesh.anchor = TextAnchor.LowerCenter;
                 textMesh.richText = true;
                 textObject.gameObject.SetActive(false);
 
-                return textMesh;
+                var readingText = shipItem.gameObject.AddComponent<ReadingText>();
+                readingText.textMesh = textMesh;
+                readingText.shipItem = shipItem;
+                return readingText;
             }
         }
     }

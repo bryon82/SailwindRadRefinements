@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Patches\AddReadingTextsPatches.cs" />
     <Compile Include="Patches\ItemPatches.cs" />
+    <Compile Include="Patches\MapPatches.cs" />
     <Compile Include="Patches\OarPatches.cs" />
     <Compile Include="Patches\PipePatches.cs" />
     <Compile Include="Scripts\ReadingText.cs" />

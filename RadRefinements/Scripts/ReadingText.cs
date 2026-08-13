@@ -7,7 +7,7 @@ namespace RadRefinements
 {
     internal class ReadingText : MonoBehaviour
     {
-        internal TextMesh readingTextMesh;
+        internal TextMesh textMesh;
         internal ShipItem shipItem;
         internal Transform indicator1;
         internal Transform indicator2;
@@ -24,6 +24,7 @@ namespace RadRefinements
         internal bool isHygrometer;
         internal bool isWindCompass;
         internal bool isAnemometer;
+        internal bool isWeathervane;
 
         internal bool isCompassFlipped = false;
 
@@ -38,14 +39,17 @@ namespace RadRefinements
             if (!GameState.playing || GameState.currentlyLoading || GameState.loadingBoatLocalItems)
                 return;
 
-            if (readingTextMesh == null)
+            if (textMesh == null)
                 return;
 
             if (BoatCamera.on)
             {
-                readingTextMesh.gameObject.SetActive(false);
+                textMesh.gameObject.SetActive(false);
                 return;
             }
+
+            if (textMesh.color != readingTextColor.Value)
+                textMesh.color = readingTextColor.Value;
 
             var isHeld = shipItem.held != null;
             var observerPos = Refs.observerMirror.transform.position;
@@ -75,18 +79,18 @@ namespace RadRefinements
 
                 if (canNotShow)
                 {
-                    readingTextMesh.gameObject.SetActive(false);
+                    textMesh.gameObject.SetActive(false);
                     return;
                 }
 
                 var angleToPlayer = isHeld ? 0f : Vector3.SignedAngle(-transform.forward, observerPos - itemPos, Vector3.up);
-                readingTextMesh.transform.localEulerAngles = new Vector3(0, angleToPlayer, 0);
-                readingTextMesh.transform.localScale = isHeld ? HELD_SIZE : NOT_HELD_SIZE;
+                textMesh.transform.localEulerAngles = new Vector3(0, angleToPlayer, 0);
+                textMesh.transform.localScale = isHeld ? HELD_SIZE : NOT_HELD_SIZE;
 
                 var offset = isCompassFlipped ? 180f : 360f;
                 var reading = (180f - indicator1.transform.localEulerAngles.y + offset) % 360f;
-                readingTextMesh.text = GetCompassReading(reading, compassCardinalPrecision.Value, compassDecimalPlaces.Value);
-                readingTextMesh.gameObject.SetActive(true);
+                textMesh.text = GetCompassReading(reading, compassCardinalPrecision.Value, compassDecimalPlaces.Value);
+                textMesh.gameObject.SetActive(true);
             }
 
             else if (isChipLog)
@@ -102,13 +106,13 @@ namespace RadRefinements
 
                 if (canNotShow)
                 {
-                    readingTextMesh.gameObject.SetActive(false);
+                    textMesh.gameObject.SetActive(false);
                     return;
                 }
 
                 var reading = ((360f - indicator1.localEulerAngles.z) % 360f) * CHIPLOG_ANGLE_TO_KNOTS;
-                readingTextMesh.text = $"{reading.ToString("F" + chipLogDecimalPlaces.Value)} kts";
-                readingTextMesh.gameObject.SetActive(true);
+                textMesh.text = $"{reading.ToString("F" + chipLogDecimalPlaces.Value)} kts";
+                textMesh.gameObject.SetActive(true);
             }
 
             else if (isClock)
@@ -120,12 +124,12 @@ namespace RadRefinements
 
                 if (canNotShow )
                 {
-                    readingTextMesh.gameObject.SetActive(false);
+                    textMesh.gameObject.SetActive(false);
                     return;
                 }
 
-                readingTextMesh.text = GetClockReading();
-                readingTextMesh.gameObject.SetActive(true);
+                textMesh.text = GetClockReading();
+                textMesh.gameObject.SetActive(true);
             }
 
             else if (isQuadrant)
@@ -137,20 +141,20 @@ namespace RadRefinements
 
                 if (canNotShow)
                 {
-                    readingTextMesh.gameObject.SetActive(false);
+                    textMesh.gameObject.SetActive(false);
                     return;
                 }
                 var dial = ((ShipItemQuadrant)shipItem).GetPrivateField<Transform>("dial");
                 var reading = dial.localEulerAngles.x;
-                readingTextMesh.text = $"{reading.ToString("F" + quadrantDecimalPlaces.Value)}°";
-                readingTextMesh.gameObject.SetActive(true);
+                textMesh.text = $"{reading.ToString("F" + quadrantDecimalPlaces.Value)}°";
+                textMesh.gameObject.SetActive(true);
             }
 
             else if (isSunCompass)
             {
                 if (!enableSunCompassText.Value || shipItem.held == null || gameObject.layer == 5)
                 {
-                    readingTextMesh.gameObject.SetActive(false);
+                    textMesh.gameObject.SetActive(false);
                     return;
                 }
 
@@ -163,20 +167,20 @@ namespace RadRefinements
 
                 if (!_isInSunlight)
                 {
-                    readingTextMesh.gameObject.SetActive(false);
+                    textMesh.gameObject.SetActive(false);
                     return;
                 }
 
                 var lat = FloatingOriginManager.instance.GetGlobeCoords(transform).z;
-                readingTextMesh.text = $"{lat.ToString("F" + sunCompassDecimalPlaces.Value)}°";
-                readingTextMesh.gameObject.SetActive(true);
+                textMesh.text = $"{lat.ToString("F" + sunCompassDecimalPlaces.Value)}°";
+                textMesh.gameObject.SetActive(true);
             }
 
             else if (isBarometer)
             {
                 if (!enableBarometerText.Value || canNotShowReading || distToItem > barometerViewDist.Value)
                 {
-                    readingTextMesh.gameObject.SetActive(false);
+                    textMesh.gameObject.SetActive(false);
                     return;
                 }
 
@@ -188,15 +192,15 @@ namespace RadRefinements
                 else if (barometerUnits.Value == "atm")
                     reading *= 0.03342f;
 
-                readingTextMesh.text = $"{reading.ToString("F" + barometerDecimalPlaces.Value)}{barometerUnits.Value}";
-                readingTextMesh.gameObject.SetActive(true);
+                textMesh.text = $"{reading.ToString("F" + barometerDecimalPlaces.Value)}{barometerUnits.Value}";
+                textMesh.gameObject.SetActive(true);
             }
 
             else if (isThermometer)
             {
                 if (!enableThermometerText.Value || canNotShowReading || distToItem > thermometerViewDist.Value)
                 {
-                    readingTextMesh.gameObject.SetActive(false);
+                    textMesh.gameObject.SetActive(false);
                     return;
                 }
 
@@ -208,21 +212,21 @@ namespace RadRefinements
                 else if (thermometerUnits.Value == "K")
                     reading = (reading - 32) * 5 / 9 + 273.15f;
 
-                readingTextMesh.text = $"{reading.ToString("F" + thermometerDecimalPlaces.Value)}{thermometerUnits.Value}";
-                readingTextMesh.gameObject.SetActive(true);
+                textMesh.text = $"{reading.ToString("F" + thermometerDecimalPlaces.Value)}{thermometerUnits.Value}";
+                textMesh.gameObject.SetActive(true);
             }
 
             else if (isHygrometer)
             {
                 if (!enableHygrometerText.Value || canNotShowReading || distToItem > hygrometerViewDist.Value)
                 {
-                    readingTextMesh.gameObject.SetActive(false);
+                    textMesh.gameObject.SetActive(false);
                     return;
                 }
 
                 var reading = shipItem.GetPrivateField<float>("_humidity");
-                readingTextMesh.text = $"{(reading * 100).ToString("F" + hygrometerDecimalPlaces.Value)}%";
-                readingTextMesh.gameObject.SetActive(true);
+                textMesh.text = $"{(reading * 100).ToString("F" + hygrometerDecimalPlaces.Value)}%";
+                textMesh.gameObject.SetActive(true);
             }
 
             else if (isInclinometer)
@@ -232,15 +236,15 @@ namespace RadRefinements
 
                 if (!enableInclinometerText.Value || canNotShowReading || distToItem > inclinometerViewDist.Value)
                 {
-                    readingTextMesh.gameObject.SetActive(false);
+                    textMesh.gameObject.SetActive(false);
                     return;
                 }
 
                 var reading = indicator1.localEulerAngles.z;
                 if (reading > 180f)
                     reading = negativeInclinometerAngles.Value ? reading - 360f : 360f - reading;
-                readingTextMesh.text = $"{reading.ToString("F" + inclinometerDecimalPlaces.Value)}°";
-                readingTextMesh.gameObject.SetActive(true);
+                textMesh.text = $"{reading.ToString("F" + inclinometerDecimalPlaces.Value)}°";
+                textMesh.gameObject.SetActive(true);
             }
 
             else if (isWindCompass)
@@ -257,17 +261,17 @@ namespace RadRefinements
 
                 if (canNotShow)
                 {
-                    readingTextMesh.gameObject.SetActive(false);
+                    textMesh.gameObject.SetActive(false);
                     return;
                 }
 
                 var angleToPlayer = isHeld ? 0f : Vector3.SignedAngle(-transform.forward, observerPos - itemPos, Vector3.up);
-                readingTextMesh.transform.localEulerAngles = new Vector3(0, angleToPlayer, 0);
-                readingTextMesh.transform.localScale = isHeld ? HELD_SIZE : NOT_HELD_SIZE;
+                textMesh.transform.localEulerAngles = new Vector3(0, angleToPlayer, 0);
+                textMesh.transform.localScale = isHeld ? HELD_SIZE : NOT_HELD_SIZE;
 
                 var reading = (indicator1.transform.localEulerAngles.y + 180f + transform.eulerAngles.y) % 360f;
-                readingTextMesh.text = GetCompassReading(reading, windCompassCardinalPrecision.Value, windCompassDecimalPlaces.Value);
-                readingTextMesh.gameObject.SetActive(true);
+                textMesh.text = GetCompassReading(reading, windCompassCardinalPrecision.Value, windCompassDecimalPlaces.Value);
+                textMesh.gameObject.SetActive(true);
             }
 
             else if (isAnemometer)
@@ -277,15 +281,75 @@ namespace RadRefinements
 
                 if (canNotShowReading || distToItem > anemometerViewDist.Value)
                 {
-                    readingTextMesh.gameObject.SetActive(false);
+                    textMesh.gameObject.SetActive(false);
                     return;
                 }
 
                 var reading = ((360f - indicator1.localEulerAngles.z) % 360f) * ANEMOMETER_ANGLE_TO_KNOTS;
                 var reading2 = indicator2.localEulerAngles.z / 120f;
-                readingTextMesh.text = $"{(reading + reading2 * 50).ToString("F" + anemometerDecimalPlaces.Value)} kts";
-                readingTextMesh.gameObject.SetActive(true);
+                textMesh.text = $"{(reading + reading2 * 50).ToString("F" + anemometerDecimalPlaces.Value)} kts";
+                textMesh.gameObject.SetActive(true);
             }
+
+            else if (isWeathervane)
+            {
+                if ((!enableWeathervaneDegreesText.Value && !enableWeathervanePointOfSailText.Value) || indicator1 == null)
+                    return;
+
+                var canNotShow =
+                    notSoldInInvOrNotOnBoat
+                    || distToItem > weathervaneViewDist.Value
+                    || SpyglassPatches.HeldAndUp;
+
+                if (canNotShow)
+                {
+                    textMesh.gameObject.SetActive(false);
+                    return;
+                }
+
+                var tmParent = textMesh.transform.parent;
+                var angleToPlayer = Vector3.SignedAngle(-tmParent.forward, observerPos - itemPos, Vector3.up);
+                textMesh.transform.localEulerAngles = new Vector3(0, angleToPlayer, 0);
+
+                var weatherVaneAngle = (indicator1.eulerAngles.y + 180f) % 360f;
+                var boatHeading = shipItem.currentActualBoat.parent.eulerAngles.y;
+                var reading = (weatherVaneAngle - boatHeading + 540f) % 360f - 180f;
+
+                textMesh.text = GetWeatherVaneReading(reading);
+                textMesh.gameObject.SetActive(true);
+            }
+        }
+
+        private static string GetWeatherVaneReading(float reading)
+        {
+            var text = string.Empty;
+
+            if (enableWeathervanePointOfSailText.Value)
+            {
+                if (reading > 0f)
+                    text = "starboard ";
+                else
+                    text = "port ";
+
+                var absReading = Mathf.Abs(reading);
+                if (absReading <= 30f)
+                    text = "in irons";
+                else if (absReading <= 50f)
+                    text += "close-hauled";
+                else if (absReading <= 80f)
+                    text += "close reach";
+                else if (absReading <= 120f)
+                    text += "beam reach";
+                else if (absReading <= 160f)
+                    text += "broad reach";
+                else
+                    text = "running downwind";
+            }
+
+            if (enableWeathervaneDegreesText.Value) 
+                text += $"\n{reading.ToString("F" + weathervaneDecimalPlaces.Value)}°";
+
+            return text;
         }
 
         private static string GetCompassReading(float reading, int cardinalPrecision, int decimalPlaces)

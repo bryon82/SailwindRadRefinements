@@ -10,6 +10,7 @@ namespace RadRefinements
         internal static ConfigEntry<KeyCode> quickMapKey;
         internal static ConfigEntry<bool> enableCrateItemDescription;
 
+        internal static ConfigEntry<Color> readingTextColor;
         internal static ConfigEntry<bool> enableQuadrantText;
         internal static ConfigEntry<int> quadrantDecimalPlaces;
         internal static ConfigEntry<bool> enableCompassReadingHeld;
@@ -46,6 +47,11 @@ namespace RadRefinements
         internal static ConfigEntry<bool> enableAnemometerText;
         internal static ConfigEntry<float> anemometerViewDist;
         internal static ConfigEntry<int> anemometerDecimalPlaces;
+        internal static ConfigEntry<bool> enableWeathervaneDegreesText;
+        internal static ConfigEntry<bool> enableWeathervanePointOfSailText;
+        internal static ConfigEntry<float> weathervaneViewDist;
+        internal static ConfigEntry<int> weathervaneDecimalPlaces;
+        internal static ConfigEntry<bool> weatherVaneColorCoded;
 
         internal static ConfigEntry<bool> enableWoodFromContainers;
         internal static ConfigEntry<bool> enableCrateInvCountText;
@@ -80,6 +86,13 @@ namespace RadRefinements
                 "Inventory Settings",
                 "Enable item description in crates",
                 true);
+
+            readingTextColor = config.Bind(
+                "Item Text Settings",
+                "Reading text color",
+                new Color(0.859f, 0.839f, 0.788f, 0.533f));
+                
+
             enableQuadrantText = config.Bind(
                 "Enable Item Texts",
                 "Quadrant reading text",
@@ -117,7 +130,7 @@ namespace RadRefinements
             compassDecimalPlaces = config.Bind(
                 "Item Text Settings",
                 "Number of decimal places for compass",
-                1,
+                0,
                 new ConfigDescription(
                     "Number of digits after the decimal.",
                     new AcceptableValueRange<int>(0, 3)));
@@ -185,7 +198,7 @@ namespace RadRefinements
             thermometerDecimalPlaces = config.Bind(
                 "Item Text Settings",
                 "Number of decimal places for thermometer",
-                1,
+                0,
                 new ConfigDescription(
                     "Number of digits after the decimal.",
                     new AcceptableValueRange<int>(0, 3)));
@@ -200,7 +213,7 @@ namespace RadRefinements
             hygrometerDecimalPlaces = config.Bind(
                 "Item Text Settings",
                 "Number of decimal places for hygrometer",
-                1,
+                0,
                 new ConfigDescription(
                     "Number of digits after the decimal.",
                     new AcceptableValueRange<int>(0, 3)));
@@ -219,7 +232,7 @@ namespace RadRefinements
             inclinometerDecimalPlaces = config.Bind(
                 "Item Text Settings",
                 "Number of decimal places for inclinometer",
-                1,
+                0,
                 new ConfigDescription(
                     "Number of digits after the decimal.",
                     new AcceptableValueRange<int>(0, 3)));
@@ -241,7 +254,7 @@ namespace RadRefinements
             windCompassDecimalPlaces = config.Bind(
                 "Item Text Settings",
                 "Number of decimal places for wind compass",
-                1,
+                0,
                 new ConfigDescription(
                     "Number of digits after the decimal.",
                     new AcceptableValueRange<int>(0, 3)));
@@ -256,10 +269,34 @@ namespace RadRefinements
             anemometerDecimalPlaces = config.Bind(
                 "Item Text Settings",
                 "Number of decimal places for anemometer",
-                1,
+                0,
                 new ConfigDescription(
                     "Number of digits after the decimal.",
                     new AcceptableValueRange<int>(0, 3)));
+            enableWeathervaneDegreesText = config.Bind(
+                "Enable Item Texts",
+                "Weathervane degrees reading text",
+                true);
+            enableWeathervanePointOfSailText = config.Bind(
+                "Enable Item Texts",
+                "Weathervane point of sail reading text",
+                true);
+            weathervaneViewDist = config.Bind(
+                "Item Text Settings",
+                "Weathervane viewable distance",
+                5f);
+            weathervaneDecimalPlaces = config.Bind(
+                "Item Text Settings",
+                "Number of decimal places for weathervane",
+                0,
+                new ConfigDescription(
+                    "Number of digits after the decimal.",
+                    new AcceptableValueRange<int>(0, 3)));
+            weatherVaneColorCoded = config.Bind(
+                "Item Text Settings",
+                "Weathervane color coded",
+                true,
+                "Makes the weathervane text color coded based on the wind coming from port or starboard.");
 
             enableWoodFromContainers = config.Bind(
                 "Other Settings",
