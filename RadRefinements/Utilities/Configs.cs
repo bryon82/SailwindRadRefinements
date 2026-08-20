@@ -11,6 +11,19 @@ namespace RadRefinements
         internal static ConfigEntry<bool> enableCrateItemDescription;
 
         internal static ConfigEntry<Color> readingTextColor;
+        internal static ConfigEntry<Color> compassTextColor;
+        internal static ConfigEntry<Color> chipLogTextColor;
+        internal static ConfigEntry<Color> clockTextColor;
+        internal static ConfigEntry<Color> quadrantTextColor;
+        internal static ConfigEntry<Color> sunCompassTextColor;
+        internal static ConfigEntry<Color> barometerTextColor;
+        internal static ConfigEntry<Color> thermometerTextColor;
+        internal static ConfigEntry<Color> hygrometerTextColor;
+        internal static ConfigEntry<Color> inclinometerTextColor;
+        internal static ConfigEntry<Color> windCompassTextColor;
+        internal static ConfigEntry<Color> anemometerTextColor;
+        internal static ConfigEntry<Color> weathervaneTextColor;
+
         internal static ConfigEntry<bool> enableQuadrantText;
         internal static ConfigEntry<int> quadrantDecimalPlaces;
         internal static ConfigEntry<bool> enableCompassReadingHeld;
@@ -44,6 +57,9 @@ namespace RadRefinements
         internal static ConfigEntry<bool> enableWindCompassCardinalText;
         internal static ConfigEntry<int> windCompassCardinalPrecision;
         internal static ConfigEntry<int> windCompassDecimalPlaces;
+        internal static ConfigEntry<bool> enableWindCompassPointOfSailText;
+        internal static ConfigEntry<bool> enableWindCompassPointOfSailDegrees;
+        internal static ConfigEntry<int> windCompassPointOfSailDecimalPlaces;
         internal static ConfigEntry<bool> enableAnemometerText;
         internal static ConfigEntry<float> anemometerViewDist;
         internal static ConfigEntry<int> anemometerDecimalPlaces;
@@ -51,7 +67,8 @@ namespace RadRefinements
         internal static ConfigEntry<bool> enableWeathervanePointOfSailText;
         internal static ConfigEntry<float> weathervaneViewDist;
         internal static ConfigEntry<int> weathervaneDecimalPlaces;
-        internal static ConfigEntry<bool> weatherVaneColorCoded;
+        internal static ConfigEntry<string> barometerUnits;
+        internal static ConfigEntry<string> thermometerUnits;
 
         internal static ConfigEntry<bool> enableWoodFromContainers;
         internal static ConfigEntry<bool> enableCrateInvCountText;
@@ -60,8 +77,8 @@ namespace RadRefinements
         internal static ConfigEntry<bool> enableElixirColors;
         internal static ConfigEntry<bool> enableLogbookLastSection;
         internal static ConfigEntry<bool> enableSingleClickSmoking;
-        internal static ConfigEntry<string> barometerUnits;
-        internal static ConfigEntry<string> thermometerUnits;
+        internal static ConfigEntry<bool> enableBlueTobacco;
+        internal static ConfigEntry<int> bluePotencyMult;
 
         internal static void InitializeConfigs()
         {
@@ -87,11 +104,43 @@ namespace RadRefinements
                 "Enable item description in crates",
                 true);
 
+
             readingTextColor = config.Bind(
                 "Item Text Settings",
                 "Reading text color",
-                new Color(0.859f, 0.839f, 0.788f, 0.533f));
-                
+                new Color(0.859f, 0.839f, 0.788f, 0.533f),
+                "Changing this sets all individual instrument colors. Adjust them individually afterward as you like.");
+
+            compassTextColor = config.Bind("Item Text Colors", "Compass text color", readingTextColor.Value);
+            chipLogTextColor = config.Bind("Item Text Colors", "Chip log text color", readingTextColor.Value);
+            clockTextColor = config.Bind("Item Text Colors", "Clock text color", readingTextColor.Value);
+            quadrantTextColor = config.Bind("Item Text Colors", "Quadrant text color", readingTextColor.Value);
+            sunCompassTextColor = config.Bind("Item Text Colors", "Sun compass text color", readingTextColor.Value);
+            barometerTextColor = config.Bind("Item Text Colors", "Barometer text color", readingTextColor.Value);
+            thermometerTextColor = config.Bind("Item Text Colors", "Thermometer text color", readingTextColor.Value);
+            hygrometerTextColor = config.Bind("Item Text Colors", "Hygrometer text color", readingTextColor.Value);
+            inclinometerTextColor = config.Bind("Item Text Colors", "Inclinometer text color", readingTextColor.Value);
+            windCompassTextColor = config.Bind("Item Text Colors", "Wind compass text color", readingTextColor.Value);
+            anemometerTextColor = config.Bind("Item Text Colors", "Anemometer text color", readingTextColor.Value);
+            weathervaneTextColor = config.Bind("Item Text Colors", "Weathervane text color", readingTextColor.Value);
+
+            readingTextColor.SettingChanged += (sender, args) =>
+            {
+                var newColor = readingTextColor.Value;
+                compassTextColor.Value = newColor;
+                chipLogTextColor.Value = newColor;
+                clockTextColor.Value = newColor;
+                quadrantTextColor.Value = newColor;
+                sunCompassTextColor.Value = newColor;
+                barometerTextColor.Value = newColor;
+                thermometerTextColor.Value = newColor;
+                hygrometerTextColor.Value = newColor;
+                inclinometerTextColor.Value = newColor;
+                windCompassTextColor.Value = newColor;
+                anemometerTextColor.Value = newColor;
+                weathervaneTextColor.Value = newColor;
+            };
+
 
             enableQuadrantText = config.Bind(
                 "Enable Item Texts",
@@ -258,6 +307,21 @@ namespace RadRefinements
                 new ConfigDescription(
                     "Number of digits after the decimal.",
                     new AcceptableValueRange<int>(0, 3)));
+            enableWindCompassPointOfSailText = config.Bind(
+                "Enable Item Texts",
+                "Wind compass point of sail reading text",
+                false);
+            enableWindCompassPointOfSailDegrees = config.Bind(
+                "Enable Item Texts",
+                "Wind compass point of sail degrees reading text",
+                false);
+            windCompassPointOfSailDecimalPlaces = config.Bind(
+                "Item Text Settings",
+                "Number of decimal places for wind compass point of sail",
+                0,
+                new ConfigDescription(
+                    "Number of digits after the decimal.",
+                    new AcceptableValueRange<int>(0, 3)));
             enableAnemometerText = config.Bind(
                 "Enable Item Texts",
                 "Anemometer reading text",
@@ -292,11 +356,20 @@ namespace RadRefinements
                 new ConfigDescription(
                     "Number of digits after the decimal.",
                     new AcceptableValueRange<int>(0, 3)));
-            weatherVaneColorCoded = config.Bind(
+            barometerUnits = config.Bind(
+               "Item Text Settings",
+               "Barometer units",
+               "inHg",
+               new ConfigDescription(
+                   "The units used in the barometer readings.",
+                   new AcceptableValueList<string>("inHg", "hPa", "mbar", "atm")));
+            thermometerUnits = config.Bind(
                 "Item Text Settings",
-                "Weathervane color coded",
-                true,
-                "Makes the weathervane text color coded based on the wind coming from port or starboard.");
+                "Thermometer units",
+                "°F",
+                new ConfigDescription(
+                    "The units used in the thermometer readings.",
+                    new AcceptableValueList<string>("°F", "°C", "K")));
 
             enableWoodFromContainers = config.Bind(
                 "Other Settings",
@@ -333,20 +406,15 @@ namespace RadRefinements
                 "Enable single click smoking",
                 false,
                 "Allows you to smoke a pipe with a single click instead of having to hold the button down.");
-            barometerUnits = config.Bind(
-                "Item Text Settings",
-                "Barometer units",
-                "inHg",
-                new ConfigDescription(
-                    "The units used in the barometer readings.",
-                    new AcceptableValueList<string>("inHg", "hPa", "mbar", "atm")));
-            thermometerUnits = config.Bind(
-                "Item Text Settings",
-                "Thermometer units",
-                "°F",
-                new ConfigDescription(
-                    "The units used in the thermometer readings.",
-                    new AcceptableValueList<string>("°F", "°C", "K")));
+            enableBlueTobacco = config.Bind(
+                "Other Settings",
+                "Increase Blue Tobacco Potency",
+                true);
+            bluePotencyMult = config.Bind(
+                "Other Settings",
+                "Blue Tobacco Potency Multiplier",
+                6,
+                "The potency multiplier of blue tobacco as compared to green tobacco.");
         }
     }
 }

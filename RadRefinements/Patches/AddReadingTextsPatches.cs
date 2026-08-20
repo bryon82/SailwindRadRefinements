@@ -24,14 +24,14 @@ namespace RadRefinements
                 {
                     var zPos = __instance.transform.name == "172 clock M(Clone)" ? -0.075f : -0.2f;
                     var readingText = AddReadingText(__instance, new Vector3(0f, -0.3f, zPos));
-                    readingText.isClock = true;
+                    readingText.instrumentType = InstrumentType.Clock;
                 }
 
                 else if (__instance.name == "compass" || __instance.name == "bearing compass")
                 {
                     var readingText = AddReadingText(__instance, new Vector3(0f, 0.03f, 0f));
                     readingText.textMesh.lineSpacing = 0.6f;
-                    readingText.isCompass = true;
+                    readingText.instrumentType = InstrumentType.Compass;
                     if (__instance.name == "bearing compass")
                     {
                         readingText.isCompassFlipped = true;
@@ -47,7 +47,7 @@ namespace RadRefinements
                 {
                     var readingText = AddReadingText(__instance, new Vector3(0f, 0f, 0.18f), new Vector3(45f, 0f, 0f));
                     readingText.textMesh.fontSize = 20;
-                    readingText.isSunCompass = true;
+                    readingText.instrumentType = InstrumentType.SunCompass;
                 }
 
                 else if (__instance.name == "quadrant")
@@ -57,7 +57,7 @@ namespace RadRefinements
                     var readingText = AddReadingText(
                         __instance, new Vector3(-0.025f, -0.19f, -0.03f), new Vector3(0, 90f, 270f), parent);                        
                     readingText.textMesh.fontSize = 40;
-                    readingText.isQuadrant = true;
+                    readingText.instrumentType = InstrumentType.Quadrant;
                 }
 
                 else if (__instance.name == "chip log")
@@ -65,7 +65,7 @@ namespace RadRefinements
                     var readingText = AddReadingText(__instance, new Vector3(0f, 0.21f, -0.02f));
                     var pointerName = 
                         __instance.transform.name == "93 chip log E(Clone)" ? "pointer_001" : "pointer_002";
-                    readingText.isChipLog = true;
+                    readingText.instrumentType = InstrumentType.ChipLog;
                     readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == pointerName);
                 }
@@ -73,25 +73,25 @@ namespace RadRefinements
                 else if (__instance.name == "barometer")
                 {
                     var readingText = AddReadingText(__instance, new Vector3(0f, 0.12f, -0.075f));
-                    readingText.isBarometer = true;
+                    readingText.instrumentType = InstrumentType.Barometer;
                 }
 
                 else if (__instance.name == "thermometer")
                 {
                     var readingText = AddReadingText(__instance, new Vector3(0f, 0.12f, -0.075f));
-                    readingText.isThermometer = true;
+                    readingText.instrumentType = InstrumentType.Thermometer;
                 }
 
                 else if (__instance.name == "hygrometer")
                 {
                     var readingText = AddReadingText(__instance, new Vector3(0f, 0.12f, -0.075f));
-                    readingText.isHygrometer = true;
+                    readingText.instrumentType = InstrumentType.Hygrometer;
                 }
 
                 else if (__instance.name == "inclinometer")
                 {
                     var readingText = AddReadingText(__instance, new Vector3(0f, 0.12f, -0.05f));
-                    readingText.isInclinometer = true;
+                    readingText.instrumentType = InstrumentType.Inclinometer;
                     readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == "Arm");
                 }
@@ -100,13 +100,13 @@ namespace RadRefinements
                 {
                     var readingTextComp = AddReadingText(__instance, new Vector3(0f, 1.26f, 0f));
                     readingTextComp.textMesh.lineSpacing = 0.6f;
-                    readingTextComp.isCompass = true;
+                    readingTextComp.instrumentType = InstrumentType.Compass;
                     readingTextComp.isCompassFlipped = true;
                     readingTextComp.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == "CompassFace");
 
                     var readingTextInc = AddReadingText(__instance, new Vector3(0f, 0.9f, -0.201f));
-                    readingTextInc.isInclinometer = true;
+                    readingTextInc.instrumentType = InstrumentType.Inclinometer;
                     readingTextInc.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == "InclinometerArm");
                 }
@@ -115,7 +115,7 @@ namespace RadRefinements
                 {
                     var readingText = AddReadingText(__instance, new Vector3(0f, 0.12f, -0.075f));
                     readingText.textMesh.lineSpacing = 0.6f;
-                    readingText.isWindCompass = true;
+                    readingText.instrumentType = InstrumentType.WindCompass;
                     readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == "indicator");
                 }
@@ -123,7 +123,7 @@ namespace RadRefinements
                 else if (__instance.name == "anemometer" && __instance.transform.name == "514 anemometer B(Clone)")
                 {
                     var readingText = AddReadingText(__instance, new Vector3(0f, 0.13f, -0.075f));
-                    readingText.isAnemometer = true;
+                    readingText.instrumentType = InstrumentType.Anemometer;
                     readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == "pointer_001 (1)");
                     readingText.indicator2 = __instance.GetComponentsInChildren<Transform>(true)
@@ -149,7 +149,7 @@ namespace RadRefinements
                         
                     var readingText = AddReadingText(__instance, pos, parent: parent);
                     readingText.textMesh.lineSpacing = 0.6f;
-                    readingText.isWeathervane = true;
+                    readingText.instrumentType = InstrumentType.Weathervane;
                     readingText.indicator1 = __instance.GetComponentsInChildren<Transform>(true)
                         .FirstOrDefault(t => t.name == "wind_vane_arrow");
                 }

@@ -5,12 +5,12 @@ using System.Reflection;
 
 namespace RadRefinements
 {
-    [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)] 
+    [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)]
     public class RR_Plugin : BaseUnityPlugin
     {
         public const string PLUGIN_GUID = "com.raddude.radrefinements";
         public const string PLUGIN_NAME = "RadRefinements";
-        public const string PLUGIN_VERSION = "1.7.0";
+        public const string PLUGIN_VERSION = "1.8.0";
 
         internal static RR_Plugin Instance { get; private set; }
         private static ManualLogSource _logger;
@@ -31,7 +31,6 @@ namespace RadRefinements
             _logger = Logger;
 
             Configs.InitializeConfigs();
-
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PLUGIN_GUID);
         }
     }

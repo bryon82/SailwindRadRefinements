@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Patches\AddReadingTextsPatches.cs" />
+    <Compile Include="Patches\BlueTobaccoPatches.cs" />
     <Compile Include="Patches\ItemPatches.cs" />
     <Compile Include="Patches\MapPatches.cs" />
     <Compile Include="Patches\OarPatches.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Scripts\BulkEconomyUI.cs" />
     <Compile Include="Scripts\KnifeWood.cs" />
     <Compile Include="Scripts\KnifeWoodCollider.cs" />
+    <Compile Include="Utilities\InstrumentType.cs" />
     <Compile Include="Utilities\Knife.cs" />
     <Compile Include="Utilities\QuickSlots.cs" />
     <Compile Include="Scripts\SwapSlot.cs" />

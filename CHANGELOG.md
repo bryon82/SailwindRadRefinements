@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.8.0] - 2026-08-20
+
+### Added
+- The ability to change individual instrument type reading text color.
+- Optional point of sail reading on wind compasses.
+- Blue tobacco potency adjustment. Moved from BitsAndBobsRadRedux.
+
 ## [v1.7.0] - 2026-08-13
 
 ### Added

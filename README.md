@@ -31,7 +31,7 @@ QOL refinements for Sailwind.
 
 #### [Windicators](https://github.com/NANDbrew/Windicators)
 
-* On wind compasses, text that shows the direction of the wind indicated on the compass in cardinal directions and/or degrees.
+* On wind compasses, text that shows the direction of the wind indicated on the compass in cardinal directions and/or degrees. Optionally the point of sail as well.
 * On standing anenometers, text that shows the wind speed indicated. Only viewable when the instrument dial is visible.
 * On weathervanes, text that shows the point of sail in words and/or degrees.
 
@@ -43,6 +43,7 @@ QOL refinements for Sailwind.
 * Remove hint text for the knife and fishing hook. This is disabled by default and must be turned on in the config.
 * Distinct colors for Energy Elixir and Snake Oil.
 * Smoke the pipe with one activate click/press instead of holding it down. Will continue to smoke until another activate click/press or the bowl is empty. Default disabled.
+* Potency adjustment for blue tobacco
 
 ## Configurable
 
@@ -57,6 +58,7 @@ Install [Configuration Manager](https://github.com/BepInEx/BepInEx.Configuration
 * Units of measurement used for thermometer and barometer readings.
 * Number of decimal places to show in reading texts by instrument type.
 * Color for reading texts.
+* Potency multiplier for blue tobacco.
 
 ### Requires
 

@@ -13,18 +13,7 @@ namespace RadRefinements
         internal Transform indicator2;
         private bool _isInSunlight;
         private float _sunlightTimer;
-        internal bool isCompass;
-        internal bool isChipLog;
-        internal bool isClock;
-        internal bool isQuadrant;
-        internal bool isSunCompass;
-        internal bool isInclinometer;
-        internal bool isBarometer;
-        internal bool isThermometer;
-        internal bool isHygrometer;
-        internal bool isWindCompass;
-        internal bool isAnemometer;
-        internal bool isWeathervane;
+        internal InstrumentType instrumentType = InstrumentType.None;
 
         internal bool isCompassFlipped = false;
 
@@ -48,8 +37,9 @@ namespace RadRefinements
                 return;
             }
 
-            if (textMesh.color != readingTextColor.Value)
-                textMesh.color = readingTextColor.Value;
+            var targetColor = GetTargetColor();
+            if (textMesh.color != targetColor)
+                textMesh.color = targetColor;
 
             var isHeld = shipItem.held != null;
             var observerPos = Refs.observerMirror.transform.position;
@@ -65,7 +55,7 @@ namespace RadRefinements
                 || Vector3.Angle(-transform.forward, observerPos - itemPos) > 85f
                 || SpyglassPatches.HeldAndUp;
 
-            if (isCompass)
+            if (instrumentType == InstrumentType.Compass)
             {
                 if (indicator1 == null)
                     return;
@@ -89,11 +79,17 @@ namespace RadRefinements
 
                 var offset = isCompassFlipped ? 180f : 360f;
                 var reading = (180f - indicator1.transform.localEulerAngles.y + offset) % 360f;
-                textMesh.text = GetCompassReading(reading, compassCardinalPrecision.Value, compassDecimalPlaces.Value);
+                textMesh.text =
+                    GetCompassReading(
+                        reading,
+                        enableCompassCardinalText.Value,
+                        enableCompassDegreesText.Value,
+                        compassCardinalPrecision.Value,
+                        compassDecimalPlaces.Value);
                 textMesh.gameObject.SetActive(true);
             }
 
-            else if (isChipLog)
+            else if (instrumentType == InstrumentType.ChipLog)
             {
                 if ( indicator1 == null)
                     return;
@@ -115,7 +111,7 @@ namespace RadRefinements
                 textMesh.gameObject.SetActive(true);
             }
 
-            else if (isClock)
+            else if (instrumentType == InstrumentType.Clock)
             {
                 var canNotShow =
                     (!enableClockGlobalText.Value && !enableClockLocalText.Value)
@@ -132,7 +128,7 @@ namespace RadRefinements
                 textMesh.gameObject.SetActive(true);
             }
 
-            else if (isQuadrant)
+            else if (instrumentType == InstrumentType.Quadrant)
             {
                 var canNotShow =
                     !enableQuadrantText.Value ||
@@ -150,7 +146,7 @@ namespace RadRefinements
                 textMesh.gameObject.SetActive(true);
             }
 
-            else if (isSunCompass)
+            else if (instrumentType == InstrumentType.SunCompass)
             {
                 if (!enableSunCompassText.Value || shipItem.held == null || gameObject.layer == 5)
                 {
@@ -176,7 +172,7 @@ namespace RadRefinements
                 textMesh.gameObject.SetActive(true);
             }
 
-            else if (isBarometer)
+            else if (instrumentType == InstrumentType.Barometer)
             {
                 if (!enableBarometerText.Value || canNotShowReading || distToItem > barometerViewDist.Value)
                 {
@@ -196,7 +192,7 @@ namespace RadRefinements
                 textMesh.gameObject.SetActive(true);
             }
 
-            else if (isThermometer)
+            else if (instrumentType == InstrumentType.Thermometer)
             {
                 if (!enableThermometerText.Value || canNotShowReading || distToItem > thermometerViewDist.Value)
                 {
@@ -216,7 +212,7 @@ namespace RadRefinements
                 textMesh.gameObject.SetActive(true);
             }
 
-            else if (isHygrometer)
+            else if (instrumentType == InstrumentType.Hygrometer)
             {
                 if (!enableHygrometerText.Value || canNotShowReading || distToItem > hygrometerViewDist.Value)
                 {
@@ -229,7 +225,7 @@ namespace RadRefinements
                 textMesh.gameObject.SetActive(true);
             }
 
-            else if (isInclinometer)
+            else if (instrumentType == InstrumentType.Inclinometer)
             {
                 if (indicator1 == null)
                     return;
@@ -247,13 +243,16 @@ namespace RadRefinements
                 textMesh.gameObject.SetActive(true);
             }
 
-            else if (isWindCompass)
+            else if (instrumentType == InstrumentType.WindCompass)
             {
                 if (indicator1 == null)
                     return;
 
                 var canNotShow =
-                    (!enableWindCompassDegreesText.Value && !enableWindCompassCardinalText.Value)
+                    (!enableWindCompassDegreesText.Value
+                    && !enableWindCompassCardinalText.Value
+                    && !enableWindCompassPointOfSailText.Value
+                    && !enableWindCompassPointOfSailDegrees.Value)
                     || isHeld 
                     || notSoldInInvOrNotOnBoat
                     || distToItem > compassViewDist.Value
@@ -269,12 +268,30 @@ namespace RadRefinements
                 textMesh.transform.localEulerAngles = new Vector3(0, angleToPlayer, 0);
                 textMesh.transform.localScale = isHeld ? HELD_SIZE : NOT_HELD_SIZE;
 
-                var reading = (indicator1.transform.localEulerAngles.y + 180f + transform.eulerAngles.y) % 360f;
-                textMesh.text = GetCompassReading(reading, windCompassCardinalPrecision.Value, windCompassDecimalPlaces.Value);
+                var reading = (indicator1.localEulerAngles.y + 180f + transform.eulerAngles.y) % 360f;
+                var compassReading = 
+                    GetCompassReading(
+                        reading,
+                        enableWindCompassCardinalText.Value,
+                        enableWindCompassDegreesText.Value,
+                        windCompassCardinalPrecision.Value,
+                        windCompassDecimalPlaces.Value);
+                
+                var indicatorAngle = (indicator1.eulerAngles.y + 180f) % 360f;
+                var boatHeading = shipItem.currentActualBoat.parent.eulerAngles.y;
+                var pointOfSailAngle = (indicatorAngle - boatHeading + 540f) % 360f - 180f;
+                var pointOfSailReading =
+                    GetPointOfSailReading(
+                        pointOfSailAngle,
+                        enableWindCompassPointOfSailText.Value,
+                        enableWindCompassPointOfSailDegrees.Value,
+                        windCompassPointOfSailDecimalPlaces.Value);
+
+                textMesh.text = ($"{compassReading}\n{pointOfSailReading}").Trim();
                 textMesh.gameObject.SetActive(true);
             }
 
-            else if (isAnemometer)
+            else if (instrumentType == InstrumentType.Anemometer)
             {
                 if (!enableAnemometerText.Value || indicator1 == null || indicator2 == null)
                     return;
@@ -291,7 +308,7 @@ namespace RadRefinements
                 textMesh.gameObject.SetActive(true);
             }
 
-            else if (isWeathervane)
+            else if (instrumentType == InstrumentType.Weathervane)
             {
                 if ((!enableWeathervaneDegreesText.Value && !enableWeathervanePointOfSailText.Value) || indicator1 == null)
                     return;
@@ -315,16 +332,21 @@ namespace RadRefinements
                 var boatHeading = shipItem.currentActualBoat.parent.eulerAngles.y;
                 var reading = (weatherVaneAngle - boatHeading + 540f) % 360f - 180f;
 
-                textMesh.text = GetWeatherVaneReading(reading);
+                textMesh.text = 
+                    GetPointOfSailReading(
+                        reading,
+                        enableWeathervanePointOfSailText.Value,
+                        enableWeathervaneDegreesText.Value,
+                        weathervaneDecimalPlaces.Value);
                 textMesh.gameObject.SetActive(true);
             }
         }
 
-        private static string GetWeatherVaneReading(float reading)
+        private static string GetPointOfSailReading(float reading, bool enableText, bool enableDegrees, int decimalPlaces)
         {
             var text = string.Empty;
 
-            if (enableWeathervanePointOfSailText.Value)
+            if (enableText)
             {
                 if (reading > 0f)
                     text = "starboard ";
@@ -346,21 +368,25 @@ namespace RadRefinements
                     text = "running downwind";
             }
 
-            if (enableWeathervaneDegreesText.Value) 
-                text += $"\n{reading.ToString("F" + weathervaneDecimalPlaces.Value)}°";
+            if (enableDegrees) 
+                text += $"\n{reading.ToString("F" + decimalPlaces)}°";
 
             return text;
         }
 
-        private static string GetCompassReading(float reading, int cardinalPrecision, int decimalPlaces)
+        private static string GetCompassReading(float reading, bool enableText, bool enableDegrees, int cardinalPrecision, int decimalPlaces)
         {
-            if (!enableCompassCardinalText.Value)
+            if (!enableText && !enableDegrees)
+                return string.Empty;
+
+            else if (!enableText)
                 return $"{reading.ToString("F" + decimalPlaces)}°";
 
-            if (!enableCompassDegreesText.Value)
+            else if (!enableDegrees)
                 return CompassRose.GetAbbreviatedDir(reading, cardinalPrecision);
 
-            return $"{CompassRose.GetAbbreviatedDir(reading, cardinalPrecision)}\n{reading.ToString("F" + decimalPlaces)}°";
+            else
+                return $"{CompassRose.GetAbbreviatedDir(reading, cardinalPrecision)}\n{reading.ToString("F" + decimalPlaces)}°";
         }
 
         private static string GetClockReading()
@@ -403,6 +429,41 @@ namespace RadRefinements
 
             return !blocked;
         }
+
+        private Color GetTargetColor()
+        {
+            switch (instrumentType)
+            {
+                case InstrumentType.Compass:
+                    return compassTextColor.Value;
+                case InstrumentType.ChipLog:
+                    return chipLogTextColor.Value;
+                case InstrumentType.Clock:
+                    return clockTextColor.Value;
+                case InstrumentType.Quadrant:
+                    return quadrantTextColor.Value;
+                case InstrumentType.SunCompass:
+                    return sunCompassTextColor.Value;
+                case InstrumentType.Barometer:
+                    return barometerTextColor.Value;
+                case InstrumentType.Thermometer:
+                    return thermometerTextColor.Value;
+                case InstrumentType.Hygrometer:
+                    return hygrometerTextColor.Value;
+                case InstrumentType.Inclinometer:
+                    return inclinometerTextColor.Value;
+                case InstrumentType.WindCompass:
+                    return windCompassTextColor.Value;
+                case InstrumentType.Anemometer:
+                    return anemometerTextColor.Value;
+                case InstrumentType.Weathervane:
+                    return weathervaneTextColor.Value;
+                default:
+                    return readingTextColor.Value;
+            }
+        }
+
+
     }
 }
 
