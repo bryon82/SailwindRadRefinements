@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.9.0] - 2026-08-21
+
+### Added
+- The ability to row continually instead of having to click each time you want to row.
+- A configurable multiplier of how much to reduce the food and water consumption when rowing.
+
+### Fixed
+- Removed the sculling oar testing code which was affecting the regular oar.
+
 ## [v1.8.0] - 2026-08-20
 
 ### Added

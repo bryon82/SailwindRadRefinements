@@ -79,6 +79,8 @@ namespace RadRefinements
         internal static ConfigEntry<bool> enableSingleClickSmoking;
         internal static ConfigEntry<bool> enableBlueTobacco;
         internal static ConfigEntry<int> bluePotencyMult;
+        internal static ConfigEntry<bool> continualRow;
+        internal static ConfigEntry<float> rowingNeedsMult;
 
         internal static void InitializeConfigs()
         {
@@ -357,12 +359,12 @@ namespace RadRefinements
                     "Number of digits after the decimal.",
                     new AcceptableValueRange<int>(0, 3)));
             barometerUnits = config.Bind(
-               "Item Text Settings",
-               "Barometer units",
-               "inHg",
-               new ConfigDescription(
-                   "The units used in the barometer readings.",
-                   new AcceptableValueList<string>("inHg", "hPa", "mbar", "atm")));
+                "Item Text Settings",
+                "Barometer units",
+                "inHg",
+                new ConfigDescription(
+                    "The units used in the barometer readings.",
+                    new AcceptableValueList<string>("inHg", "hPa", "mbar", "atm")));
             thermometerUnits = config.Bind(
                 "Item Text Settings",
                 "Thermometer units",
@@ -408,13 +410,24 @@ namespace RadRefinements
                 "Allows you to smoke a pipe with a single click instead of having to hold the button down.");
             enableBlueTobacco = config.Bind(
                 "Other Settings",
-                "Increase Blue Tobacco Potency",
+                "Increase blue tobacco potency",
                 true);
             bluePotencyMult = config.Bind(
                 "Other Settings",
-                "Blue Tobacco Potency Multiplier",
+                "Blue tobacco potency multiplier",
                 6,
                 "The potency multiplier of blue tobacco as compared to green tobacco.");
+            continualRow = config.Bind(
+                "Other Settings",
+                "Row continually",
+                true);
+            rowingNeedsMult = config.Bind(
+                "Other Settings",
+                "Rowing needs reduction",
+                0f,
+                new ConfigDescription(
+                    "The multiplier for how much to reduce the food and water consumption while rowing.",
+                    new AcceptableValueRange<float>(0f, 1f)));
         }
     }
 }

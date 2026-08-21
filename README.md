@@ -43,7 +43,9 @@ QOL refinements for Sailwind.
 * Remove hint text for the knife and fishing hook. This is disabled by default and must be turned on in the config.
 * Distinct colors for Energy Elixir and Snake Oil.
 * Smoke the pipe with one activate click/press instead of holding it down. Will continue to smoke until another activate click/press or the bowl is empty. Default disabled.
-* Potency adjustment for blue tobacco
+* Potency adjustment for blue tobacco.
+* The ability to row continually instead of having to click each time you want to row.
+* A configurable multiplier of how much to reduce the food and water consumption when rowing.
 
 ## Configurable
 
